@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(
-               AssetImage("assets/images/icons/happy_2.png"),
+               AssetImage("assets/images/icons/Task.png"),
                ),
               label: 'Task',
             ),
