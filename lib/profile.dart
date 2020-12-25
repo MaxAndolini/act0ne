@@ -24,37 +24,47 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).accentColor),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage("assets/images/icons/Home.png"),
+        appBar: AppBar(backgroundColor: Theme.of(context).accentColor),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("assets/images/icons/Home.png"),
+              ),
+              label: 'Home',
             ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage("assets/images/icons/Task.png"),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("assets/images/icons/Task.png"),
+              ),
+              label: 'Task',
             ),
-            label: 'Task',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage("assets/images/icons/Store.png"),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("assets/images/icons/Store.png"),
+              ),
+              label: 'Store',
             ),
-            label: 'Store',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage("assets/images/icons/profile.png"),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("assets/images/icons/profile.png"),
+              ),
+              label: 'Profile',
             ),
-            label: 'Profile',
+          ],
+        ),
+        body: Center(
+          child: Container(
+            margin: EdgeInsets.all(100.0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black,
+                width: 1,
+              ),
+              shape: BoxShape.circle,
+            ),
           ),
-        ],
-      ),
-      // add profile buttons
-    );
+        ));
   }
 }
