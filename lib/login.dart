@@ -1,79 +1,56 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Login Page',
-      theme: ThemeData(
-        primaryColor: Colors.green,
-        backgroundColor: Colors.cyan[50],
-        secondaryHeaderColor: Colors.cyan[300],
-        accentColor: Colors.cyan, 
-        scaffoldBackgroundColor: Colors.cyan,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Login(),
-    );
-  }
-}
-
 class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
+      backgroundColor: Colors.cyan[50],
       body: Center(
-        child: Container(        //BACKGROUND
+        child: Container(
+          //BACKGROUND
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Theme.of(context).primaryColor,Theme.of(context).accentColor ])),
+                  colors: [Colors.deepOrange[900], Colors.deepOrange[100]])),
           child: Column(
             children: [
               SizedBox(
+                height: 120,
+              ),
+              Image.asset(
+                "assets/images/egelogouc.png",
                 height: 70,
               ),
-              FlutterLogo(
-                size: 70,
-              ),
               SizedBox(
-                height: 40,
+                height: 20,
               ),
               Text(
-                "Welcome",
+                "SIGN IN",
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+                    fontSize: MediaQuery.of(context).size.height / 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               SizedBox(
-                height: 40,
+                height: 20,
               ),
-              Container(  //BOX AROUND ITEMS
+              Container(
+                //BOX AROUND ITEMS
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(colors: [
-                    Theme.of(context).backgroundColor,
-                    Theme.of(context).secondaryHeaderColor,
-                  ]),
-                  color: Theme.of(context).backgroundColor,
-                ),
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.deepOrange[100]),
                 padding: EdgeInsets.all(10.0),
                 width: MediaQuery.of(context).size.width - 50,
-                height: MediaQuery.of(context).size.height / 3,
+                height: MediaQuery.of(context).size.height / 2.2,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     Text(
-                      "Login",
+                      "Username",
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height / 30,
                           fontWeight: FontWeight.bold),
@@ -81,51 +58,50 @@ class Login extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(                   ////// USERNAME CONTAINER 
+                    Container(
+                      ////// USERNAME CONTAINER
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: [0.3, 1],
-                              colors: [Theme.of(context).backgroundColor,Theme.of(context).accentColor])),
+                          color: Colors.white),
                       height: MediaQuery.of(context).size.height / 15,
                       width: MediaQuery.of(context).size.width - 130,
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(                   ////// PASSWORD CONTAINER
-                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: [0.3, 1],
-                              colors: [Theme.of(context).backgroundColor,Theme.of(context).accentColor])),
-                      height: MediaQuery.of(context).size.height / 15,
-                      width: MediaQuery.of(context).size.width - 130,
+                    Text(
+                      "Password",
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height / 30,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    Container(      //LOGIN BUTTON
-                      alignment: Alignment.center,
-                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Theme.of(context).backgroundColor,
-                      gradient: LinearGradient(colors: [
-                        Theme.of(context).backgroundColor,
-                        Theme.of(context).secondaryHeaderColor,
-                      ]),
+                    Container(
+                      ////// PASSWORD CONTAINER
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white),
+                      height: MediaQuery.of(context).size.height / 15,
+                      width: MediaQuery.of(context).size.width - 130,
                     ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      //LOGIN BUTTON
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.deepOrange[500]),
                       height: MediaQuery.of(context).size.height / 17,
                       width: 150,
                       child: Text(
                         "LOGIN",
                         style: TextStyle(
                             fontSize: MediaQuery.of(context).size.height / 30,
-                            color: Colors.grey[800]),
+                            color: Colors.white),
                       ),
                     )
                   ],
@@ -137,45 +113,37 @@ class Login extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(         //SIGN IN
+                  Container(
+                    //SIGN IN
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Theme.of(context).backgroundColor,
-                      gradient: LinearGradient(colors: [
-                        Theme.of(context).backgroundColor,
-                        Theme.of(context).secondaryHeaderColor,
-                      ]),
-                    ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.deepOrange[500]),
                     height: MediaQuery.of(context).size.height / 17,
                     width: 150,
                     child: Text(
-                      "SIGN IN",
+                      "TERMS",
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height / 30,
-                          color: Colors.grey[800]),
+                          color: Colors.white),
                     ),
                   ),
                   SizedBox(
                     width: 5,
                   ),
-                  Container(    //SIGN UP
+                  Container(
+                    //SIGN UP
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Theme.of(context).backgroundColor,
-                      gradient: LinearGradient(colors: [
-                        Theme.of(context).secondaryHeaderColor,
-                        Theme.of(context).backgroundColor,
-                      ]),
-                    ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.deepOrange[500]),
                     height: MediaQuery.of(context).size.height / 17,
                     width: 150,
                     child: Text(
                       "SIGN UP",
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height / 30,
-                          color: Colors.grey[800]),
+                          color: Colors.white),
                     ),
                   )
                 ],
@@ -187,6 +155,3 @@ class Login extends StatelessWidget {
     );
   }
 }
-
-
-
