@@ -60,6 +60,7 @@ class Login extends StatelessWidget {
                     ),
                     Container(
                       ////// USERNAME CONTAINER
+                     child:  TextField(),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white),
