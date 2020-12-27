@@ -35,8 +35,9 @@ class Settings extends StatelessWidget {
               Text(
                 "SETTINGS",
                 style: TextStyle(
-                    color: Colors.cyan[500],
+                    color: Colors.cyan[600],
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
                     fontSize: 40),
               ),
               SizedBox(
@@ -50,7 +51,7 @@ class Settings extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "Name :",
+                      "Name:",
                     )
                   ],
                 ),
@@ -82,7 +83,7 @@ class Settings extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "Birthday :",
+                      "Birthday:",
                     )
                   ],
                 ),
