@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "524998809198",
+    "project_id": "act0ne",
+    "storage_bucket": "act0ne.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524998809198:android:73f18ee46593d9d5b9787f",
+        "android_client_info": {
+          "package_name": "com.example.act0ne"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524998809198-omgr311mkrkop6cvh1iaqq1oupamrhg3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7871fJNkhFoZa4QiYFuA4qkkQe6OV41o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524998809198-omgr311mkrkop6cvh1iaqq1oupamrhg3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
