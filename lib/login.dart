@@ -4,7 +4,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[50],
+      backgroundColor: Colors.deepOrange[900],
       body: Center(
         child: Container(
           //BACKGROUND
@@ -16,7 +16,7 @@ class Login extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: 120,
+                height: 100,
               ),
               Image.asset(
                 "assets/images/egelogouc.png",

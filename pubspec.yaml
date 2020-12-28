@@ -27,7 +27,6 @@ dependencies:
   firebase_auth: any
   cloud_firestore: any
   firebase_storage: any
-  firebase_analytics: any
   splashscreen: ^1.2.0
 
 
