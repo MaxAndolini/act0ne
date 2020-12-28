@@ -68,7 +68,15 @@ class Profile extends StatelessWidget {
           ),
         ),
       ),
-      appBar: AppBar(backgroundColor: Theme.of(context).accentColor),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
+        title: Image.asset(
+          "assets/images/egelogouc.png",
+          fit: BoxFit.cover,
+          width: 150,
+        ),
+        // actions: [ for tickets ]
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
