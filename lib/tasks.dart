@@ -27,18 +27,18 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.cyan,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Home(),
+      home: Tasks(),
     );
   }
 }
 
-class Home extends StatefulWidget {
+class Tasks extends StatefulWidget {
 
   @override
-  _HomeState createState() => _HomeState();
+  _TasksState createState() => _TasksState();
 }
 
-class _HomeState extends State<Home> {
+class _TasksState extends State<Tasks> {
   Random random = Random();
 
   List<Task> dailyTasksList = [
@@ -87,71 +87,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-
       child:Scaffold(
-
-        drawer: Drawer(
-          child: ListView(
-
-            children: <Widget>[
-              DrawerHeader(
-                child:CircleAvatar(
-
-                  backgroundImage:AssetImage("assets/images/egelogo .png" , ) ,
-                  minRadius: 30.3,
-                  backgroundColor:Colors.indigo,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.cyan,
-                ),
-              ),
-              Card(
-
-                child: ListTile(
-                  title: Text("Explore" ) ,
-                  trailing: Icon(Icons.explore_outlined) ,
-                  onTap: (){
-                    Navigator.pop(context);  // This code will point the settings page then you can reach your  needs
-                  },
-                ),
-              ),
-              Card(
-
-                child: ListTile(
-                  title: Text("Massages") ,
-                  trailing: Icon(Icons.mail_outline) ,
-                  onTap: (){
-                    Navigator.pop(context);  // This code will point the settings page then you can reach your  needs
-                  },
-                ),
-              ),
-
-              Card(
-
-                child: ListTile(
-                  title: Text("Notifications") ,
-                  trailing: Icon(Icons.notifications_active_outlined) ,
-                  onTap: (){
-                    Navigator.pop(context);  // This code will point the settings page then you can reach your  needs
-                  },
-                ),
-              ),
-
-              Card(
-                child: ListTile(
-                  trailing: Icon(Icons.settings) ,
-                  title: Text("Settings") ,
-                  onTap: (){
-                    Navigator.pop(context);  // This code will point the settings page then you can reach your  needs
-                  },
-                ),
-              )],
-
-          ),
-
-        ),
-
-
         body:Column(
           //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -286,48 +222,6 @@ class _HomeState extends State<Home> {
                 ),
               ),
             )
-          ],
-        ),
-        appBar: AppBar(backgroundColor: Theme.of(context).accentColor ,
-          title: Image.asset("assets/images/egelogo .png",
-            fit : BoxFit.cover, width: 125, ),
-          actions: [
-            Text("Ticket  =  0 " ,   // will be dinamic
-              textAlign: TextAlign.center,
-              style: TextStyle( fontStyle: FontStyle.italic),
-            )
-          ],
-          toolbarHeight: 60.0,
-        ),
-
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage("assets/images/Home.png"),
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage("assets/images/Task.png"),
-              ),
-              label: 'Task',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage("assets/images/Store.png"),
-              ),
-              label: 'Store',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage("assets/images/profile.png"),
-              ),
-              label: 'Profile',
-            ),
-
           ],
         ),
       ),
