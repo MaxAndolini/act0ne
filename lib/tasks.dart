@@ -1,12 +1,22 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'Task.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,12 +27,63 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Tasks(),
+      home: Home(),
     );
   }
 }
 
-class Tasks extends StatelessWidget {
+class Home extends StatefulWidget {
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  Random random = Random();
+
+  List<Task> dailyTasksList = [
+    Task.withdailyTasks("Give cup of water"),
+    Task.withdailyTasks("Give cup of food"),
+    Task.withdailyTasks("Give some love"),
+    Task.withdailyTasks("Play with animals"),
+  ];
+
+
+  List<Task> weeklyTasksList =[
+    Task.withweeklyTasks("Visit animal shelter"),
+    Task.withweeklyTasks("Make goods for animals"),
+    Task.withweeklyTasks("Visit animal shelter"),
+    Task.withweeklyTasks("Watch film about animals"),
+
+  ];
+
+  List<Task> monthlyTasksList =[
+    Task.withmonthlyTasks("Donate the animal foundation "),
+    Task.withmonthlyTasks("Construct a animal shelter"),
+    Task.withmonthlyTasks("Adopt a animal"),
+
+  ];
+
+  int _counter = 10  ;
+  Timer _timer ;
+
+  void _startTimer(){
+    _counter = 10  ;
+    if (_timer != null){
+      _timer.cancel();
+    }
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if(_counter > 0 ){
+          _counter-- ;
+        }else{
+          _timer.cancel();
+        }
+      });
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -119,18 +180,30 @@ class Tasks extends StatelessWidget {
                     crossAxisAlignment:CrossAxisAlignment.start,
                     children: [
                       Row(
-                        children: [
-                          Text("This is your daily task" ,
+                        children: <Widget>[
+                          Text(dailyTasksList[random.nextInt(dailyTasksList.length)].dailyTasks,
                             style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
                               fontWeight: FontWeight.bold ,
                               height: 2.1,
-
-                            ),)
+                            ),
+                          ),
                         ],
                       ),
+
                     ],
                   ),
                 ),
+              ),
+            ),
+            (_counter > 0 )? Text('') : Text('Lets try to new task', style: TextStyle(color: Colors.amber), ),
+            RaisedButton(
+              onPressed: () => _startTimer(),
+              child: Text("You have 24 hours to complete this task"),
+            ),
+            Text('$_counter' ,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30 ,
               ),
             ),
             SizedBox(width:0, height:100.0 ),
@@ -160,7 +233,7 @@ class Tasks extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text("This is your weekly task" ,
+                          Text(weeklyTasksList[random.nextInt(weeklyTasksList.length)].weeklyTasks ,
                             style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
                               fontWeight: FontWeight.bold ,
                               height: 2.1,
@@ -199,7 +272,7 @@ class Tasks extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text("This is your monthly task" ,
+                          Text(monthlyTasksList[random.nextInt(monthlyTasksList.length)].dailyTasks,
                             style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
                               fontWeight: FontWeight.bold ,
                               height: 2.1,
@@ -260,5 +333,8 @@ class Tasks extends StatelessWidget {
       ),
     );
 
+
+
   }
 }
+
