@@ -104,6 +104,7 @@ class Login extends StatelessWidget {
                             fontSize: MediaQuery.of(context).size.height / 30,
                             color: Colors.white),
                       ),
+                      
                     )
                   ],
                 ),
