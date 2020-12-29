@@ -1,8 +1,13 @@
 import 'package:act0ne/begin.dart';
 import 'package:act0ne/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:act0ne/authentication_service.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +68,9 @@ class SignIn extends StatelessWidget {
                       ),
                       Container(
                         ////// USERNAME CONTAINER
-                        child: TextField(),
+                        child: TextField(
+                          controller: emailController,
+                        ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white),
@@ -84,7 +91,9 @@ class SignIn extends StatelessWidget {
                       ),
                       Container(
                         ////// PASSWORD CONTAINER
-                        child: TextField(),
+                        child: TextField(
+                          controller: passwordController,
+                        ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white),
@@ -99,6 +108,10 @@ class SignIn extends StatelessWidget {
                         child: InkWell(
                           //LOGIN BUTTON
                           onTap: () {
+                            context.read<AuthenticationService>().signIn(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => Begin()),
@@ -148,7 +161,8 @@ class SignIn extends StatelessWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    InkWell(//SIGN UP
+                    InkWell(
+                      //SIGN UP
                       onTap: () {
                         Navigator.push(
                           context,

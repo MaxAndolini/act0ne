@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Home',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -61,16 +61,16 @@ class Home extends StatelessWidget {
                   itemExtent: 40,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
-                      color: Colors.orangeAccent,
-                      border: Border.all(width: 2.0),
-                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                    ),
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.all(5.0),
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: new Text(litems[index]),
-                  ),
+                        decoration: BoxDecoration(
+                          color: Colors.orangeAccent,
+                          border: Border.all(width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                        ),
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.all(5.0),
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: new Text(litems[index]),
+                      ),
                   itemCount: litems.length),
             ),
           ),
@@ -88,16 +88,16 @@ class Home extends StatelessWidget {
                   itemExtent: 40,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      border: Border.all(width: 2.0),
-                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                    ),
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.all(5.0),
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: new Text(litems2[index]),
-                  ),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          border: Border.all(width: 2.0),
+                          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                        ),
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.all(5.0),
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: new Text(litems2[index]),
+                      ),
                   itemCount: litems2.length),
             ),
           )

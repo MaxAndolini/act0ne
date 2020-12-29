@@ -1,5 +1,7 @@
 import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:act0ne/authentication_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,14 +69,16 @@ class Profile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              InkWell(     /// LOG OUT BUTTON TAP
+              InkWell(
+                /// LOG OUT BUTTON TAP
                 onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignIn()),
-                        );
-                      },
-                  child: Container(
+                  context.read<AuthenticationService>().signOut();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignIn()),
+                  );
+                },
+                child: Container(
                   margin: EdgeInsets.all(15.0),
                   padding: EdgeInsets.all(15.0),
                   decoration:
