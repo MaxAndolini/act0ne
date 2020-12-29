@@ -1,6 +1,8 @@
+import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'login.dart';
+import 'signin.dart';
+import 'signup.dart';
 
 
 
@@ -26,7 +28,7 @@ class _SplashState extends State<Splash> {
           "assets/images/egelogouc.png"), // Do not forget the declare the image into the pubspec.yaml
       loaderColor: Colors.black,
       photoSize: 125.0,
-      navigateAfterSeconds: Login(),
+      navigateAfterSeconds: SignIn(),
     );
   }
 }

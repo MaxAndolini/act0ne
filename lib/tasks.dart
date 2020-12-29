@@ -88,141 +88,143 @@ class _TasksState extends State<Tasks> {
   Widget build(BuildContext context) {
     return SafeArea(
       child:Scaffold(
-        body:Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(width:0, height:100.0 ),
-            Text("Daily Task" , textAlign: TextAlign.left),
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    color:Colors.cyan,
-                    borderRadius: BorderRadiusDirectional.circular(6.0),
-                    shape: BoxShape.rectangle
-                ),
-                height:50,
-                width: 275,
-                padding:EdgeInsets.all(5.00) ,
+        body:ListView(
+                  children: [Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width:0, height:100.0 ),
+              Text("Daily Task" , textAlign: TextAlign.left),
+              Center(
                 child: Container(
                   decoration: BoxDecoration(
-                      color:Colors.white,
+                      color:Colors.cyan,
                       borderRadius: BorderRadiusDirectional.circular(6.0),
                       shape: BoxShape.rectangle
                   ),
                   height:50,
                   width: 275,
-                  child: Column(
-                    crossAxisAlignment:CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: <Widget>[
-                          Text(dailyTasksList[random.nextInt(dailyTasksList.length)].dailyTasks,
-                            style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
-                              fontWeight: FontWeight.bold ,
-                              height: 2.1,
+                  padding:EdgeInsets.all(5.00) ,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color:Colors.white,
+                        borderRadius: BorderRadiusDirectional.circular(6.0),
+                        shape: BoxShape.rectangle
+                    ),
+                    height:50,
+                    width: 275,
+                    child: Column(
+                      crossAxisAlignment:CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: <Widget>[
+                            Text(dailyTasksList[random.nextInt(dailyTasksList.length)].dailyTasks,
+                              style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
+                                fontWeight: FontWeight.bold ,
+                                height: 2.1,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
 
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            (_counter > 0 )? Text('') : Text('Lets try to new task', style: TextStyle(color: Colors.amber), ),
-            RaisedButton(
-              onPressed: () => _startTimer(),
-              child: Text("You have 24 hours to complete this task"),
-            ),
-            Text('$_counter' ,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30 ,
+              (_counter > 0 )? Text('') : Text('Lets try to new task', style: TextStyle(color: Colors.amber), ),
+              RaisedButton(
+                onPressed: () => _startTimer(),
+                child: Text("You have 24 hours to complete this task"),
               ),
-            ),
-            SizedBox(width:0, height:100.0 ),
-            Text("Weekly Task" ),
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    color:Colors.cyan,
-                    borderRadius: BorderRadiusDirectional.circular(6.0),
-                    shape: BoxShape.rectangle
+              Text('$_counter' ,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30 ,
                 ),
-                height:50,
-                width: 275,
-                padding:EdgeInsets.all(5.00),
-
+              ),
+              SizedBox(width:0, height:100.0 ),
+              Text("Weekly Task" ),
+              Center(
                 child: Container(
-
-                  height: 50,
-                  width: 275,
                   decoration: BoxDecoration(
-                      color:Colors.white,
+                      color:Colors.cyan,
                       borderRadius: BorderRadiusDirectional.circular(6.0),
                       shape: BoxShape.rectangle
                   ),
-                  child:Column(
-                    crossAxisAlignment:CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(weeklyTasksList[random.nextInt(weeklyTasksList.length)].weeklyTasks ,
-                            style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
-                              fontWeight: FontWeight.bold ,
-                              height: 2.1,
+                  height:50,
+                  width: 275,
+                  padding:EdgeInsets.all(5.00),
 
-                            ),)
-                        ],
-                      ),
-                    ],
+                  child: Container(
+
+                    height: 50,
+                    width: 275,
+                    decoration: BoxDecoration(
+                        color:Colors.white,
+                        borderRadius: BorderRadiusDirectional.circular(6.0),
+                        shape: BoxShape.rectangle
+                    ),
+                    child:Column(
+                      crossAxisAlignment:CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(weeklyTasksList[random.nextInt(weeklyTasksList.length)].weeklyTasks ,
+                              style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
+                                fontWeight: FontWeight.bold ,
+                                height: 2.1,
+
+                              ),)
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(width:0, height:100.0 ),
-            Text("Monthly Tasks"),
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    color:Colors.cyan,
-                    borderRadius: BorderRadiusDirectional.circular(6.0),
-                    shape: BoxShape.rectangle
-                ),
-                height:50,
-                width: 275,
-                padding:EdgeInsets.all(5.00) ,
-
+              SizedBox(width:0, height:100.0 ),
+              Text("Monthly Tasks"),
+              Center(
                 child: Container(
-                  height: 50,
-                  width: 275,
                   decoration: BoxDecoration(
-                      color:Colors.white,
+                      color:Colors.cyan,
                       borderRadius: BorderRadiusDirectional.circular(6.0),
                       shape: BoxShape.rectangle
                   ),
-                  child:Column(
-                    crossAxisAlignment:CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(monthlyTasksList[random.nextInt(monthlyTasksList.length)].dailyTasks,
-                            style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
-                              fontWeight: FontWeight.bold ,
-                              height: 2.1,
+                  height:50,
+                  width: 275,
+                  padding:EdgeInsets.all(5.00) ,
 
+                  child: Container(
+                    height: 50,
+                    width: 275,
+                    decoration: BoxDecoration(
+                        color:Colors.white,
+                        borderRadius: BorderRadiusDirectional.circular(6.0),
+                        shape: BoxShape.rectangle
+                    ),
+                    child:Column(
+                      crossAxisAlignment:CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(monthlyTasksList[random.nextInt(monthlyTasksList.length)].dailyTasks,
+                              style: TextStyle(fontStyle: FontStyle.normal ,   // font style will change
+                                fontWeight: FontWeight.bold ,
+                                height: 2.1,
+
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),]
         ),
       ),
     );

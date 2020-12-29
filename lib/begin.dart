@@ -1,4 +1,5 @@
-import 'package:act0ne/login.dart';
+import 'package:act0ne/Market.dart';
+import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'tasks.dart';
@@ -39,7 +40,7 @@ class _BeginState extends State<Begin> {
     pages = [
       Home(),
       Tasks(),
-      Login(), //this will change to Market!!!!!!<<<<<<<<<<<<<<<
+      Market(), 
       Profile(),
     ];
   }
