@@ -1,3 +1,4 @@
+import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -62,6 +63,28 @@ class Profile extends StatelessWidget {
                       "ABOUT US",
                     )
                   ],
+                ),
+              ),
+              SizedBox(height: 10),
+              InkWell(     /// LOG OUT BUTTON TAP
+                onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignIn()),
+                        );
+                      },
+                  child: Container(
+                  margin: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(15.0),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                  child: Row(
+                    children: [
+                      Text(
+                        "LOG OUT",
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],

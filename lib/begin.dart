@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bottom Navi Connection (Working on)',
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.deepOrange[900],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Begin(),
@@ -111,7 +111,15 @@ class _BeginState extends State<Begin> {
 
       body: pages[positionNumber],
       appBar: AppBar(
-        backgroundColor: Theme.of(context).accentColor,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+              Colors.deepOrange[900],
+              Colors.white
+            ]))),
         title: Image.asset(
           "assets/images/egelogouc.png",
           fit: BoxFit.cover,
