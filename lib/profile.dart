@@ -32,6 +32,7 @@ class Profile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
+                backgroundColor: Colors.deepOrange[700],
                 radius: 100,
                 child: Icon(
                   Icons.people_alt_rounded,
