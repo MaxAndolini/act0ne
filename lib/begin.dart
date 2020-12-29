@@ -57,10 +57,10 @@ class _BeginState extends State<Begin> {
 
                   backgroundImage:AssetImage("assets/images/egelogo.png" , ) ,  // Here Profile picture comes
                   minRadius: 30.3,
-                  backgroundColor:Colors.indigo,
+                  backgroundColor:Colors.deepOrange[700],
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.cyan,
+                  color: Colors.deepOrange[700],
                 ),
               ),
               Card(
