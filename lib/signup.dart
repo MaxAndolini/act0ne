@@ -1,7 +1,12 @@
 import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
+import 'package:act0ne/authentication_service.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +68,9 @@ class SignUp extends StatelessWidget {
                         ),
                         Container(
                           ////// USERNAME CONTAINER
-                          child: TextField(),
+                          child: TextField(
+                            controller: emailController,
+                          ),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white),
@@ -81,7 +88,9 @@ class SignUp extends StatelessWidget {
                         ),
                         Container(
                           ////// PASSWORD CONTAINER
-                          child: TextField(),
+                          child: TextField(
+                            controller: passwordController,
+                          ),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white),
@@ -99,7 +108,9 @@ class SignUp extends StatelessWidget {
                         ),
                         Container(
                           ////// PASSWORD CONTAINER
-                          child: TextField(),
+                          child: TextField(
+                            controller: passwordController,
+                          ),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white),
@@ -110,7 +121,16 @@ class SignUp extends StatelessWidget {
                           height: 30,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            context.read<AuthenticationService>().signUp(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignIn()),
+                            );
+                          },
                           child: Container(
                             //LOGIN BUTTON
                             alignment: Alignment.center,
