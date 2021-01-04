@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:act0ne/authentication_service.dart';
 
 void main() {
+
   runApp(MyApp());
 }
 
@@ -42,6 +43,7 @@ class Profile extends StatelessWidget {
               ),
               SizedBox(height: 30),
               Container(
+                
                 margin: EdgeInsets.all(15.0),
                 padding: EdgeInsets.all(15.0),
                 decoration:
@@ -53,6 +55,7 @@ class Profile extends StatelessWidget {
                     )
                   ],
                 ),
+                
               ),
               SizedBox(height: 10),
               Container(
