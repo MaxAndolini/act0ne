@@ -10,7 +10,7 @@ class AuthenticationService {
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  Future<int> signIn({scaffold, String email, String password}) async {
+  Future<int> signIn({scaffold, aContext, String email, String password}) async {
     try {
       if (email.isEmpty || !EmailValidator.validate(email)) {
         scaffold.currentState.showSnackBar(
@@ -33,8 +33,8 @@ class AuthenticationService {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       Navigator.push(
-        scaffold,
-        MaterialPageRoute(builder: (context) => Begin()),
+        aContext,
+        MaterialPageRoute(builder: (aContext) => Begin()),
       );
       return 1;
     } on FirebaseAuthException catch (error) {
