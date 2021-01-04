@@ -107,16 +107,16 @@ class SignIn extends StatelessWidget {
                             "LOGIN",
                             style: TextStyle(
                                 fontSize:
-                                MediaQuery.of(context).size.height / 40,
+                                    MediaQuery.of(context).size.height / 40,
                                 color: Colors.white),
                           ),
                           onPressed: () {
                             context.read<AuthenticationService>().signIn(
-                              scaffold: _scaffoldKey.currentState,
-                              aContext: context,
-                              email: emailController.text,
-                              password: passwordController.text,
-                            );
+                                  scaffold: _scaffoldKey.currentState,
+                                  aContext: context,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
                           },
                         ),
                       ),
@@ -138,16 +138,7 @@ class SignIn extends StatelessWidget {
                               fontSize: MediaQuery.of(context).size.height / 55,
                               color: Colors.white),
                         ),
-                        onPressed: () {
-                          context.read<AuthenticationService>().signIn(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
-                          );
-                        },
+                        onPressed: () {},
                       ),
                     ),
                     Padding(
@@ -163,10 +154,6 @@ class SignIn extends StatelessWidget {
                               color: Colors.white),
                         ),
                         onPressed: () {
-                          context.read<AuthenticationService>().signIn(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => SignUp()),
