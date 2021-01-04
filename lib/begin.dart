@@ -6,10 +6,10 @@ import 'tasks.dart';
 import 'profile.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Beginning());
 }
 
-class MyApp extends StatelessWidget {
+class Beginning extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

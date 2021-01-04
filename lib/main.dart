@@ -11,10 +11,10 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(Main());
 }
 
-class MyApp extends StatelessWidget {
+class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -51,6 +51,6 @@ class AuthenticationWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return Begin();
     }
-    return SignIn();
+    return Splash();
   }
 }

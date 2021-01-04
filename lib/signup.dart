@@ -58,7 +58,7 @@ class SignUp extends StatelessWidget {
                           height: 20,
                         ),
                         Text(
-                          "Username",
+                          "e-mail",
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height / 30,
                               fontWeight: FontWeight.bold),
@@ -89,6 +89,7 @@ class SignUp extends StatelessWidget {
                         Container(
                           ////// PASSWORD CONTAINER
                           child: TextField(
+                            obscureText: true,
                             controller: passwordController,
                           ),
                           decoration: BoxDecoration(
@@ -109,6 +110,7 @@ class SignUp extends StatelessWidget {
                         Container(
                           ////// PASSWORD CONTAINER
                           child: TextField(
+                            obscureText: true,
                             controller: passwordController,
                           ),
                           decoration: BoxDecoration(

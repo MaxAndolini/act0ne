@@ -1,7 +1,8 @@
-import 'package:act0ne/main.dart';
-import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'signin.dart';
+
+
 
 class Splash extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _SplashState extends State<Splash> {
       gradientBackground: LinearGradient(
         begin: Alignment.topRight,
         end: Alignment.bottomLeft,
-        colors: [Colors.deepOrange[900], Colors.deepOrange[100]],
+        colors: [Colors.deepOrange[900],Colors.deepOrange[100]],
       ),
 
       seconds: 3,

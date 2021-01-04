@@ -92,6 +92,7 @@ class SignIn extends StatelessWidget {
                       Container(
                         ////// PASSWORD CONTAINER
                         child: TextField(
+                          obscureText: true,
                           controller: passwordController,
                         ),
                         decoration: BoxDecoration(
