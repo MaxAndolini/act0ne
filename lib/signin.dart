@@ -1,7 +1,8 @@
+import 'package:act0ne/authentication_service.dart';
 import 'package:act0ne/begin.dart';
 import 'package:act0ne/signup.dart';
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:act0ne/authentication_service.dart';
 import 'package:provider/provider.dart';
 
 class SignIn extends StatelessWidget {
@@ -23,15 +24,12 @@ class SignIn extends StatelessWidget {
           child: ListView(children: [
             Column(
               children: [
-                SizedBox(
-                  height: 60,
-                ),
-                Image.asset(
-                  "assets/images/egelogouc.png",
-                  height: 70,
-                ),
-                SizedBox(
-                  height: 20,
+                Padding(
+                  padding: EdgeInsets.only(top: 60.0, bottom: 20.0),
+                  child: Image.asset(
+                    "assets/images/egelogouc.png",
+                    height: 70,
+                  ),
                 ),
                 Text(
                   "SIGN IN",
@@ -40,36 +38,33 @@ class SignIn extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
                 Container(
                   //BOX AROUND ITEMS
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.deepOrange[100]),
-                  padding: EdgeInsets.all(10.0),
+                  margin: EdgeInsets.only(top: 20.0),
                   width: MediaQuery.of(context).size.width - 50,
-                  height: MediaQuery.of(context).size.height / 2.2,
+                  height: MediaQuery.of(context).size.height / 2.5,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Username",
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height / 30,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 10,
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
+                        child: Text(
+                          "E-Mail",
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.height / 40,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                       Container(
                         ////// USERNAME CONTAINER
-                        child: TextField(
-                          controller: emailController,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: emailController,
+                          ),
                         ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -77,23 +72,23 @@ class SignIn extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 15,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Password",
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height / 30,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 10,
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
+                        child: Text(
+                          "Password",
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.height / 40,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                       Container(
                         ////// PASSWORD CONTAINER
-                        child: TextField(
-                          obscureText: true,
-                          controller: passwordController,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: passwordController,
+                            obscureText: true,
+                          ),
                         ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -101,90 +96,85 @@ class SignIn extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 15,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: InkWell(
-                          //LOGIN BUTTON
-                          onTap: () {
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: AnimatedButton(
+                          color: Colors.deepOrange[500],
+                          height: MediaQuery.of(context).size.height / 17,
+                          width: 150,
+                          child: Text(
+                            "LOGIN",
+                            style: TextStyle(
+                                fontSize:
+                                MediaQuery.of(context).size.height / 40,
+                                color: Colors.white),
+                          ),
+                          onPressed: () {
                             context.read<AuthenticationService>().signIn(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                );
+                              email: emailController.text,
+                              password: passwordController.text,
+                            );
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => Begin()),
                             );
                           },
-                          child: Container(
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.deepOrange[500]),
-                            height: MediaQuery.of(context).size.height / 17,
-                            width: 150,
-                            child: Text(
-                              "LOGIN",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 30,
-                                  color: Colors.white),
-                            ),
-                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      //Terms
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.deepOrange[500]),
-                      height: MediaQuery.of(context).size.height / 17,
-                      width: 150,
-                      child: Text(
-                        "TERMS",
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height / 30,
-                            color: Colors.white),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, right: 5.0),
+                      child: AnimatedButton(
+                        color: Colors.deepOrange[500],
+                        height: MediaQuery.of(context).size.height / 17,
+                        width: 150,
+                        child: Text(
+                          "FORGOT PASSWORD",
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.height / 55,
+                              color: Colors.white),
+                        ),
+                        onPressed: () {
+                          context.read<AuthenticationService>().signIn(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUp()),
+                          );
+                        },
                       ),
                     ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    InkWell(
-                      //SIGN UP
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignUp()),
-                        );
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.deepOrange[500]),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: AnimatedButton(
+                        color: Colors.deepOrange[500],
                         height: MediaQuery.of(context).size.height / 17,
                         width: 150,
                         child: Text(
                           "SIGN UP",
                           style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 30,
+                              fontSize: MediaQuery.of(context).size.height / 55,
                               color: Colors.white),
                         ),
+                        onPressed: () {
+                          context.read<AuthenticationService>().signIn(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUp()),
+                          );
+                        },
                       ),
-                    )
+                    ),
                   ],
                 )
               ],
