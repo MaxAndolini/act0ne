@@ -3,7 +3,7 @@ import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'tasks.dart';
-import 'profile.dart';
+import 'profileSelector.dart';
 
 void main() {
   runApp(Beginning());
@@ -41,7 +41,7 @@ class _BeginState extends State<Begin> {
       Home(),
       Tasks(),
       Market(), 
-      Profile(),
+      ProfileSelector(),
     ];
   }
 
