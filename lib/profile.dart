@@ -5,6 +5,7 @@ import 'package:act0ne/authentication_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 void main() {
+
   runApp(MyApp());
 }
 
@@ -64,6 +65,7 @@ class _ProfileState extends State<Profile> {
               ),
               SizedBox(height: 30),
               Container(
+                
                 margin: EdgeInsets.all(15.0),
                 padding: EdgeInsets.all(15.0),
                 decoration:
@@ -75,6 +77,7 @@ class _ProfileState extends State<Profile> {
                     )
                   ],
                 ),
+                
               ),
               SizedBox(height: 10),
               Container(
