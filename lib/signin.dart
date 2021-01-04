@@ -1,5 +1,4 @@
 import 'package:act0ne/authentication_service.dart';
-import 'package:act0ne/begin.dart';
 import 'package:act0ne/signup.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +7,12 @@ import 'package:provider/provider.dart';
 class SignIn extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.deepOrange[900],
       body: Center(
         child: Container(
@@ -111,12 +112,9 @@ class SignIn extends StatelessWidget {
                           ),
                           onPressed: () {
                             context.read<AuthenticationService>().signIn(
+                              scaffold: _scaffoldKey,
                               email: emailController.text,
                               password: passwordController.text,
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Begin()),
                             );
                           },
                         ),
