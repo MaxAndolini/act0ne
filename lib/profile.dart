@@ -1,4 +1,5 @@
 import 'package:act0ne/signin.dart';
+import 'package:act0ne/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:act0ne/authentication_service.dart';
@@ -64,20 +65,27 @@ class _ProfileState extends State<Profile> {
                     }),
               ),
               SizedBox(height: 30),
-              Container(
-                
-                margin: EdgeInsets.all(15.0),
-                padding: EdgeInsets.all(15.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Row(
-                  children: [
-                    Text(
-                      "SETTINGS",
-                    )
-                  ],
+              InkWell(
+                /// SETTINGS BUTTON TAP
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Settings()),
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(15.0),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black)),
+                  child: Row(
+                    children: [
+                      Text(
+                        "SETTINGS",
+                      )
+                    ],
+                  ),
                 ),
-                
               ),
               SizedBox(height: 10),
               Container(
