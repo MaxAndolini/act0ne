@@ -13,7 +13,7 @@ class AuthenticationService {
   Future<int> signIn({scaffold, aContext, String email, String password}) async {
     try {
       if (email.isEmpty || !EmailValidator.validate(email)) {
-        scaffold.currentState.showSnackBar(
+        scaffold.showSnackBar(
           new SnackBar(
             content: new Text('Invalid e-mail!'),
           ),
@@ -22,7 +22,7 @@ class AuthenticationService {
       }
 
       if (password.isEmpty && password.length < 4) {
-        scaffold.currentState.showSnackBar(
+        scaffold.showSnackBar(
           new SnackBar(
             content: new Text('Invalid password!'),
           ),
@@ -38,7 +38,7 @@ class AuthenticationService {
       );
       return 1;
     } on FirebaseAuthException catch (error) {
-      scaffold.currentState.showSnackBar(
+      scaffold.showSnackBar(
         new SnackBar(
           content: new Text(error.message),
         ),

@@ -112,7 +112,7 @@ class SignIn extends StatelessWidget {
                           ),
                           onPressed: () {
                             context.read<AuthenticationService>().signIn(
-                              scaffold: _scaffoldKey,
+                              scaffold: _scaffoldKey.currentState,
                               aContext: context,
                               email: emailController.text,
                               password: passwordController.text,
