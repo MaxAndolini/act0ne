@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
           _title(context, 'General Achievements'),
           SliverToBoxAdapter(
             child: Container(
-              height: 250,
+              height: MediaQuery.of(context).size.height / 3.0,
               margin: EdgeInsets.only(top: 10.0, left: 25.0, right: 25.0),
               padding: EdgeInsets.all(10.0),
               decoration: BoxDecoration(
@@ -77,7 +77,7 @@ class Home extends StatelessWidget {
           _title(context, 'My Achievements'),
           SliverToBoxAdapter(
             child: Container(
-              height: 250,
+              height: MediaQuery.of(context).size.height / 3.0,
               margin: EdgeInsets.only(top: 10.0, left: 25.0, right: 25.0),
               padding: EdgeInsets.all(10.0),
               decoration: BoxDecoration(
