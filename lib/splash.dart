@@ -22,10 +22,8 @@ class _SplashState extends State<Splash> {
         end: Alignment.bottomLeft,
         colors: [Colors.deepOrange[900], Colors.deepOrange[100]],
       ),
-
       seconds: 3,
       image: Image.asset("assets/images/egelogouc.png"),
-      // Do not forget the declare the image into the pubspec.yaml
       loaderColor: Colors.black,
       photoSize: 125.0,
       navigateAfterSeconds: widget.login ? Begin() : SignIn(),
