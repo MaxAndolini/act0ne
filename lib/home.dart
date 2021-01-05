@@ -112,10 +112,8 @@ class Home extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.only(top: 10.0),
           child: Text(title,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  .merge(TextStyle(fontSize: 16.0, color: Colors.cyan))),
+              style: Theme.of(context).textTheme.headline6.merge(
+                  TextStyle(fontSize: 16.0, color: Colors.deepOrange[900]))),
         ),
       ),
     );

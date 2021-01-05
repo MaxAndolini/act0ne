@@ -1,16 +1,15 @@
 import 'package:act0ne/aboutUs.dart';
 import 'package:act0ne/profile.dart';
-import 'package:act0ne/signin.dart';
 import 'package:act0ne/settings.dart';
 import 'package:flutter/material.dart';
-
 
 class ProfileSelector extends StatefulWidget {
   @override
   _ProfileSelectorState createState() => _ProfileSelectorState();
 }
 
-class _ProfileSelectorState extends State<ProfileSelector> with SingleTickerProviderStateMixin {
+class _ProfileSelectorState extends State<ProfileSelector>
+    with SingleTickerProviderStateMixin {
   TabController pageController;
 
   void initState() {
@@ -41,11 +40,7 @@ class _ProfileSelectorState extends State<ProfileSelector> with SingleTickerProv
         Expanded(
           child: TabBarView(
             controller: pageController,
-            children: [
-              Profile(),
-              Settings(),
-              AboutUs()
-            ],
+            children: [Profile(), Settings(), AboutUs()],
           ),
         ),
       ],
