@@ -1,10 +1,7 @@
-import 'package:act0ne/signin.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:act0ne/authentication_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
-
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -48,11 +45,7 @@ class _ProfileState extends State<Profile> {
               InkWell(
                 /// LOG OUT BUTTON TAP
                 onTap: () {
-                  context.read<AuthenticationService>().signOut();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignIn()),
-                  );
+                  context.read<AuthenticationService>().signOut(context);
                 },
                 child: Container(
                   margin: EdgeInsets.all(15.0),
@@ -86,7 +79,8 @@ class _ProfileState extends State<Profile> {
 
 class FireStorageService extends ChangeNotifier {
   FireStorageService();
-  static Future<dynamic> loadImage(BuildContext context, String Image) async {
-    return await FirebaseStorage.instance.ref().child(Image).getDownloadURL();
+
+  static Future<dynamic> loadImage(BuildContext context, String image) async {
+    return await FirebaseStorage.instance.ref().child(image).getDownloadURL();
   }
 }
