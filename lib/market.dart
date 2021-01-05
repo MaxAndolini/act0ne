@@ -1,67 +1,65 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
+class Market extends StatefulWidget {
+  @override
+  _MarketState createState() => _MarketState();
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Market',
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Market(),
-    );
+class _MarketState extends State<Market> with SingleTickerProviderStateMixin {
+  TabController pageController;
+
+  void initState() {
+    super.initState();
+    pageController = TabController(length: 4, vsync: this);
   }
-}
 
-class Market extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
+      children: <Widget>[
+        TabBar(
+            indicatorColor: Colors.deepOrange[900],
+            labelColor: Colors.deepOrange[900],
+            unselectedLabelColor: Colors.grey,
+            controller: pageController,
+            tabs: [
+              Tab(
+                child: Text("CAT"),
+              ),
+              Tab(
+                child: Text("DOG"),
+              ),
+              Tab(
+                child: Text("TOYS"),
+              ),
+              Tab(
+                child: Text("OTHERS"),
+              ),
+            ]),
+        Expanded(
+          child: TabBarView(
+            controller: pageController,
             children: [
-              SizedBox(height: 30),
               Container(
-                margin: EdgeInsets.all(15.0),
-                padding: EdgeInsets.all(15.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Row(
-                  children: [
-                    Text(
-                      "Market is coming SOON!!!",
-                    )
-                  ],
-                ),
+                color: Colors.amber,
+                child:Center(child: Text("MARKET IS COMMING SOON!!"))
               ),
-              SizedBox(height: 10),
               Container(
-                margin: EdgeInsets.all(15.0),
-                padding: EdgeInsets.all(15.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Row(
-                  children: [
-                    Text(
-                      "SOON!",
-                    )
-                  ],
-                ),
+                color: Colors.red,
+                child:Center(child: Text("MARKET IS COMMING SOON!!"))
               ),
+              Container(
+                color: Colors.blue,
+                child:Center(child: Text("MARKET IS COMMING SOON!!"))
+              ),
+              Container(
+                color: Colors.purple,
+                child:Center(child: Text("MARKET IS COMMING SOON!!"))
+              )
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }

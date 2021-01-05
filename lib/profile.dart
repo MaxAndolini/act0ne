@@ -1,28 +1,10 @@
-import 'package:act0ne/authentication_service.dart';
-import 'package:act0ne/settings.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:act0ne/authentication_service.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Profile',
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Profile(),
-    );
-  }
-}
 
 class Profile extends StatefulWidget {
   @override
@@ -40,10 +22,10 @@ class _ProfileState extends State<Profile> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                backgroundColor: Colors.deepOrange[700],
+                backgroundColor: Colors.transparent,
                 radius: 100,
                 child: FutureBuilder(
-                    future: _getImage(context, "avatar2.png"),
+                    future: _getImage(context, "user.png"),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         return Container(
@@ -64,46 +46,13 @@ class _ProfileState extends State<Profile> {
               ),
               SizedBox(height: 30),
               InkWell(
-                /// SETTINGS BUTTON TAP
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Settings()),
-                  );
-                },
-                child: Container(
-                  margin: EdgeInsets.all(15.0),
-                  padding: EdgeInsets.all(15.0),
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                  child: Row(
-                    children: [
-                      Text(
-                        "SETTINGS",
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                margin: EdgeInsets.all(15.0),
-                padding: EdgeInsets.all(15.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Row(
-                  children: [
-                    Text(
-                      "ABOUT US",
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              InkWell(
                 /// LOG OUT BUTTON TAP
                 onTap: () {
-                  context.read<AuthenticationService>().signOut(context);
+                  context.read<AuthenticationService>().signOut();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignIn()),
+                  );
                 },
                 child: Container(
                   margin: EdgeInsets.all(15.0),
@@ -137,8 +86,7 @@ class _ProfileState extends State<Profile> {
 
 class FireStorageService extends ChangeNotifier {
   FireStorageService();
-
-  static Future<dynamic> loadImage(BuildContext context, String image) async {
-    return await FirebaseStorage.instance.ref().child(image).getDownloadURL();
+  static Future<dynamic> loadImage(BuildContext context, String Image) async {
+    return await FirebaseStorage.instance.ref().child(Image).getDownloadURL();
   }
 }
