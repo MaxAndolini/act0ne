@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatelessWidget {
-  List<String> litems = [
+  final List<String> litems = [
     "Deneme fed: 100",
     "Köpek fed: 100",
     "Kedi fed: 100",
@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
     "Ayı fed: 100",
     "Yengeç fed: 100"
   ];
-  List<String> litems2 = [
+  final List<String> litems2 = [
     "Kaplan fed: 100",
     "Aslan fed: 100",
     "At fed: 100",

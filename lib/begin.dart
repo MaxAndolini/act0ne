@@ -1,5 +1,4 @@
 import 'package:act0ne/Market.dart';
-import 'package:act0ne/signin.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'tasks.dart';
@@ -40,7 +39,7 @@ class _BeginState extends State<Begin> {
     pages = [
       Home(),
       Tasks(),
-      Market(), 
+      Market(),
       Profile(),
     ];
   }
@@ -48,67 +47,6 @@ class _BeginState extends State<Begin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-          child: ListView(
-
-            children: <Widget>[
-              DrawerHeader(
-                child:CircleAvatar(
-
-                  backgroundImage:AssetImage("assets/images/egelogo.png" , ) ,  // Here Profile picture comes
-                  minRadius: 30.3,
-                  backgroundColor:Colors.deepOrange[700],
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.deepOrange[700],
-                ),
-              ),
-              Card(
-
-                child: ListTile(
-                  title: Text("Explore" ) ,
-                  trailing: Icon(Icons.explore_outlined) ,
-                  onTap: (){
-                    Navigator.pop(context);  // This code will point the settings page then you can reach your  needs
-                  },
-                ),
-              ),
-              Card(
-
-                child: ListTile(
-                  title: Text("Massages") ,
-                  trailing: Icon(Icons.mail_outline) ,
-                  onTap: (){
-                    Navigator.pop(context);  // This code will point the settings page then you can reach your  needs
-                  },
-                ),
-              ),
-
-              Card(
-
-                child: ListTile(
-                  title: Text("Notifications") ,
-                  trailing: Icon(Icons.notifications_active_outlined) ,
-                  onTap: (){
-                    Navigator.pop(context);  // This code will point the settings page then you can reach your  needs
-                  },
-                ),
-              ),
-
-              Card(
-                child: ListTile(
-                  trailing: Icon(Icons.settings) ,
-                  title: Text("Settings") ,
-                  onTap: (){
-                    Navigator.pop(context);  // This code will point the settings page then you can reach your  needs
-                  },
-                ),
-              )],
-
-          ),
-
-        ),
-
       body: pages[positionNumber],
       appBar: AppBar(
         flexibleSpace: Container(

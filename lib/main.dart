@@ -2,6 +2,7 @@ import 'package:act0ne/authentication_service.dart';
 import 'package:act0ne/begin.dart';
 import 'package:act0ne/home.dart';
 import 'package:act0ne/signin.dart';
+import 'package:act0ne/signup.dart';
 import 'package:act0ne/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,6 +36,12 @@ class Main extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home: AuthenticationWrapper(),
+        routes: {
+          "/begin": (_) => new Begin(),
+          "/signin": (_) => new SignIn(),
+          "/signup": (_) => new SignUp(),
+          "/home": (_) => new Home(),
+        },
       ),
     );
   }

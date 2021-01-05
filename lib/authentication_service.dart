@@ -1,5 +1,3 @@
-import 'package:act0ne/begin.dart';
-import 'package:act0ne/signin.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +20,7 @@ class AuthenticationService {
       return 0;
     }
 
-    if (password.isEmpty && password.length < 4) {
+    if (password.isEmpty || password.length < 6) {
       scaffold.showSnackBar(
         new SnackBar(
           content: new Text('Invalid password!'),
@@ -34,10 +32,7 @@ class AuthenticationService {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      Navigator.push(
-        aContext,
-        MaterialPageRoute(builder: (aContext) => Begin()),
-      );
+      Navigator.pushReplacementNamed(aContext, "/begin");
       return 1;
     } on FirebaseAuthException catch (error) {
       scaffold.showSnackBar(
@@ -64,8 +59,8 @@ class AuthenticationService {
       return 0;
     }
 
-    if ((password.isEmpty && password.length < 4) &&
-        (password2.isEmpty && password2.length < 4)) {
+    if ((password.isEmpty || password.length < 6) ||
+        (password2.isEmpty || password2.length < 6)) {
       scaffold.showSnackBar(
         new SnackBar(
           content: new Text('Invalid password!'),
@@ -86,10 +81,7 @@ class AuthenticationService {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      Navigator.push(
-        aContext,
-        MaterialPageRoute(builder: (aContext) => SignIn()),
-      );
+      Navigator.pushReplacementNamed(aContext, "/signin");
       return 1;
     } on FirebaseAuthException catch (error) {
       scaffold.showSnackBar(
@@ -101,7 +93,8 @@ class AuthenticationService {
     }
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut(aContext) async {
     await _firebaseAuth.signOut();
+    Navigator.pushReplacementNamed(aContext, "/signin");
   }
 }
