@@ -1,6 +1,4 @@
-import 'package:act0ne/authentication_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
   @override
