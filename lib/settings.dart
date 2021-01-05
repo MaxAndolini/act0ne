@@ -116,25 +116,6 @@ class Settings extends StatelessWidget {
                     ],
                   ),
                 ),
-                InkWell(
-                  /// LOG OUT BUTTON TAP
-                  onTap: () {
-                    context.read<AuthenticationService>().signOut(context);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.all(15.0),
-                    padding: EdgeInsets.all(15.0),
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
-                    child: Row(
-                      children: [
-                        Text(
-                          "LOG OUT",
-                        )
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
           ]),
