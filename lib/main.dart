@@ -4,9 +4,9 @@ import 'package:act0ne/home.dart';
 import 'package:act0ne/signin.dart';
 import 'package:act0ne/signup.dart';
 import 'package:act0ne/splash.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {

@@ -2,9 +2,13 @@ import 'package:act0ne/authentication_service.dart';
 import 'package:act0ne/signin.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:provider/provider.dart';
 
 class SignUp extends StatelessWidget {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
+  String birthdayController;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController password2Controller = TextEditingController();
@@ -27,7 +31,7 @@ class SignUp extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 60.0, bottom: 20.0),
+                  padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                   child: Image.asset(
                     "assets/images/egelogouc.png",
                     height: 70,
@@ -45,23 +49,42 @@ class SignUp extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.deepOrange[100]),
-                  margin: EdgeInsets.only(top: 20.0),
+                  margin: EdgeInsets.only(top: 10.0),
                   width: MediaQuery.of(context).size.width - 50,
-                  height: MediaQuery.of(context).size.height / 1.9,
+                  height: MediaQuery.of(context).size.height / 1.6,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
-                        child: Text(
-                          "E-Mail",
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 40,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      _title(context, "Name"),
                       Container(
-                        ////// USERNAME CONTAINER
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: nameController,
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white),
+                        height: MediaQuery.of(context).size.height / 23,
+                        width: MediaQuery.of(context).size.width - 130,
+                      ),
+                      _title(context, "Surname"),
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: surnameController,
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white),
+                        height: MediaQuery.of(context).size.height / 23,
+                        width: MediaQuery.of(context).size.width - 130,
+                      ),
+                      _title(context, "E-Mail"),
+                      Container(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
@@ -71,18 +94,37 @@ class SignUp extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 15,
+                        height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
+                      _title(context, "Birthday"),
+                      AnimatedButton(
+                        color: Colors.white,
+                        height: MediaQuery.of(context).size.height / 23,
+                        width: MediaQuery.of(context).size.width - 130,
                         child: Text(
-                          "Password",
+                          "Change Birthday",
                           style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 40,
-                              fontWeight: FontWeight.bold),
+                              fontSize: MediaQuery.of(context).size.height / 55,
+                              color: Colors.black),
                         ),
+                        onPressed: () {
+                          DatePicker.showDatePicker(context,
+                              showTitleActions: true,
+                              minTime: DateTime(1900, 1, 1),
+                              maxTime: DateTime(
+                                  DateTime.now().year - 18,
+                                  DateTime.now().month,
+                                  DateTime.now().day), onChanged: (date) {
+                          }, onConfirm: (date) {
+                            print('change ' + date.toString().split(" ").first);
+                            birthdayController = date.toString().split(" ").first;
+                          },
+                              currentTime: DateTime.now(),
+                              locale: LocaleType.en);
+                        },
                       ),
+                      _title(context, "Password"),
                       Container(
                         ////// PASSWORD CONTAINER
                         child: Padding(
@@ -95,18 +137,10 @@ class SignUp extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 15,
+                        height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
-                        child: Text(
-                          "Repeat Password",
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 40,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      _title(context, "Repeat Password"),
                       Container(
                         ////// PASSWORD CONTAINER
                         child: Padding(
@@ -119,11 +153,11 @@ class SignUp extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 15,
+                        height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
+                        padding: const EdgeInsets.only(top: 20.0),
                         child: AnimatedButton(
                           color: Colors.deepOrange[500],
                           height: MediaQuery.of(context).size.height / 17,
@@ -193,6 +227,18 @@ class SignUp extends StatelessWidget {
             ),
           ]),
         ),
+      ),
+    );
+  }
+
+  _title(BuildContext context, String title) {
+    return Padding(
+      padding: EdgeInsets.only(top: 10.0, bottom: 6.0),
+      child: Text(
+        title,
+        style: TextStyle(
+            fontSize: MediaQuery.of(context).size.height / 50,
+            fontWeight: FontWeight.bold),
       ),
     );
   }
