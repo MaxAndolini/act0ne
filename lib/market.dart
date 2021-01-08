@@ -1,3 +1,7 @@
+import 'package:act0ne/cat.dart';
+import 'package:act0ne/dog.dart';
+import 'package:act0ne/other_items.dart';
+import 'package:act0ne/toys.dart';
 import 'package:flutter/material.dart';
 
 class Market extends StatefulWidget {
@@ -40,22 +44,11 @@ class _MarketState extends State<Market> with SingleTickerProviderStateMixin {
           child: TabBarView(
             controller: pageController,
             children: [
+              Container(color: Colors.amber, child: Center(child: Cat())),
+              Container(color: Colors.red, child: Center(child: Dog())),
+              Container(color: Colors.blue, child: Center(child: Toys())),
               Container(
-                color: Colors.amber,
-                child:Center(child: Text("MARKET IS COMMING SOON!!"))
-              ),
-              Container(
-                color: Colors.red,
-                child:Center(child: Text("MARKET IS COMMING SOON!!"))
-              ),
-              Container(
-                color: Colors.blue,
-                child:Center(child: Text("MARKET IS COMMING SOON!!"))
-              ),
-              Container(
-                color: Colors.purple,
-                child:Center(child: Text("MARKET IS COMMING SOON!!"))
-              )
+                  color: Colors.purple, child: Center(child: OtherItems()))
             ],
           ),
         ),
