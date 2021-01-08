@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,13 +48,43 @@ class AuthenticationService {
   Future<int> signUp(
       {scaffold,
       aContext,
+      String name,
+      String surname,
       String email,
+      String birthday,
       String password,
       String password2}) async {
+    if (name.isEmpty || name.length < 3) {
+      scaffold.showSnackBar(
+        new SnackBar(
+          content: new Text('Name is invalid!'),
+        ),
+      );
+      return 0;
+    }
+
+    if (surname.isEmpty || surname.length < 2) {
+      scaffold.showSnackBar(
+        new SnackBar(
+          content: new Text('Surname is invalid!'),
+        ),
+      );
+      return 0;
+    }
+
     if (email.isEmpty || !EmailValidator.validate(email)) {
       scaffold.showSnackBar(
         new SnackBar(
           content: new Text('Invalid e-mail!'),
+        ),
+      );
+      return 0;
+    }
+
+    if (birthday == null || birthday.isEmpty || birthday.length < 3) {
+      scaffold.showSnackBar(
+        new SnackBar(
+          content: new Text('Birthday is invalid!'),
         ),
       );
       return 0;
@@ -79,8 +110,15 @@ class AuthenticationService {
     }
 
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((user) {
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(user.user.uid)
+            .set({name: name, surname: surname, birthday: birthday});
+      });
+
       Navigator.pushReplacementNamed(aContext, "/signin");
       return 1;
     } on FirebaseAuthException catch (error) {

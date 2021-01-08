@@ -112,13 +112,12 @@ class SignUp extends StatelessWidget {
                           DatePicker.showDatePicker(context,
                               showTitleActions: true,
                               minTime: DateTime(1900, 1, 1),
-                              maxTime: DateTime(
-                                  DateTime.now().year - 18,
-                                  DateTime.now().month,
-                                  DateTime.now().day), onChanged: (date) {
-                          }, onConfirm: (date) {
+                              maxTime: DateTime(DateTime.now().year - 18,
+                                  DateTime.now().month, DateTime.now().day),
+                              onChanged: (date) {}, onConfirm: (date) {
                             print('change ' + date.toString().split(" ").first);
-                            birthdayController = date.toString().split(" ").first;
+                            birthdayController =
+                                date.toString().split(" ").first;
                           },
                               currentTime: DateTime.now(),
                               locale: LocaleType.en);
@@ -173,7 +172,10 @@ class SignUp extends StatelessWidget {
                             context.read<AuthenticationService>().signUp(
                                   scaffold: _scaffoldKey.currentState,
                                   aContext: context,
+                                  name: nameController.text,
+                                  surname: surnameController.text,
                                   email: emailController.text,
+                                  birthday: birthdayController,
                                   password: passwordController.text,
                                   password2: password2Controller.text,
                                 );
