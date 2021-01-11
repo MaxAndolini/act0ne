@@ -116,7 +116,7 @@ class AuthenticationService {
         FirebaseFirestore.instance
             .collection("users")
             .doc(user.user.uid)
-            .set({name: name, surname: surname, birthday: birthday});
+            .set({"name": name, "surname": surname, "birthday": birthday});
       });
 
       Navigator.pushReplacementNamed(aContext, "/signin");
