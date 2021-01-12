@@ -1,6 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+  @override
+  _SettingsState createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  var name;
+  var surname;
+
+  Future<void> getData() async {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        name = event.get("name");
+        surname = event.get("surname");
+        print(name);
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +60,10 @@ class Settings extends StatelessWidget {
                     children: [
                       Text(
                         "Name:",
-                      )
+                      ),
+                      Container(
+                          width: MediaQuery.of(context).size.height / 3.6,
+                          child: TextField())
                     ],
                   ),
                 ),
@@ -46,7 +79,10 @@ class Settings extends StatelessWidget {
                     children: [
                       Text(
                         "Surname: ",
-                      )
+                      ),
+                      Container(
+                          width: MediaQuery.of(context).size.height / 3.6,
+                          child: TextField())
                     ],
                   ),
                 ),
@@ -62,7 +98,10 @@ class Settings extends StatelessWidget {
                     children: [
                       Text(
                         "Birthday:",
-                      )
+                      ),
+                      Container(
+                          width: MediaQuery.of(context).size.height / 3.6,
+                          child: TextField())
                     ],
                   ),
                 ),
@@ -78,23 +117,10 @@ class Settings extends StatelessWidget {
                     children: [
                       Text(
                         "E-Mail: ",
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  margin: EdgeInsets.all(3.0),
-                  padding: EdgeInsets.all(15.0),
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.black)),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Telephone Number: ",
-                      )
+                      ),
+                      Container(
+                          width: MediaQuery.of(context).size.height / 3.6,
+                          child: TextField())
                     ],
                   ),
                 ),
@@ -110,7 +136,10 @@ class Settings extends StatelessWidget {
                     children: [
                       Text(
                         "Change Avatar",
-                      )
+                      ),
+                      Container(
+                          width: MediaQuery.of(context).size.height / 3.6,
+                          child: TextField())
                     ],
                   ),
                 ),
