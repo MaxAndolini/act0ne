@@ -56,139 +56,142 @@ class _SignUpState extends State<SignUp> {
                   margin: EdgeInsets.only(top: 10.0),
                   width: MediaQuery.of(context).size.width - 50,
                   height: MediaQuery.of(context).size.height / 1.6,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      _title(context, "Name"),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: nameController,
+                  child: ListView(children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        _title(context, "Name"),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: nameController,
+                            ),
                           ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white),
+                          height: MediaQuery.of(context).size.height / 23,
+                          width: MediaQuery.of(context).size.width - 130,
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 23,
-                        width: MediaQuery.of(context).size.width - 130,
-                      ),
-                      _title(context, "Surname"),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: surnameController,
+                        _title(context, "Surname"),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: surnameController,
+                            ),
                           ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white),
+                          height: MediaQuery.of(context).size.height / 23,
+                          width: MediaQuery.of(context).size.width - 130,
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 23,
-                        width: MediaQuery.of(context).size.width - 130,
-                      ),
-                      _title(context, "E-Mail"),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: emailController,
+                        _title(context, "E-Mail"),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: emailController,
+                            ),
                           ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white),
+                          height: MediaQuery.of(context).size.height / 23,
+                          width: MediaQuery.of(context).size.width - 130,
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 23,
-                        width: MediaQuery.of(context).size.width - 130,
-                      ),
-                      _title(context, "Birthday"),
-                      AnimatedButton(
-                        color: Colors.white,
-                        height: MediaQuery.of(context).size.height / 23,
-                        width: MediaQuery.of(context).size.width - 130,
-                        child: Text(
-                          birthdayController == null
-                              ? ("Change Birthday")
-                              : birthdayController,
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 55,
-                              color: Colors.black),
-                        ),
-                        onPressed: () {
-                          DatePicker.showDatePicker(context,
-                              showTitleActions: true,
-                              minTime: DateTime(1900, 1, 1),
-                              maxTime: DateTime(DateTime.now().year - 18,
-                                  DateTime.now().month, DateTime.now().day),
-                              onChanged: (date) {}, onConfirm: (date) {
-                            setState(() {
-                              birthdayController =
-                                  date.toString().split(" ").first;
-                            });
-                          },
-                              currentTime: DateTime.now(),
-                              locale: LocaleType.en);
-                        },
-                      ),
-                      _title(context, "Password"),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: passwordController,
-                            obscureText: true,
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 23,
-                        width: MediaQuery.of(context).size.width - 130,
-                      ),
-                      _title(context, "Repeat Password"),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: password2Controller,
-                            obscureText: true,
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white),
-                        height: MediaQuery.of(context).size.height / 23,
-                        width: MediaQuery.of(context).size.width - 130,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: AnimatedButton(
-                          color: Colors.deepOrange[500],
-                          height: MediaQuery.of(context).size.height / 17,
-                          width: 150,
+                        _title(context, "Birthday"),
+                        AnimatedButton(
+                          color: Colors.white,
+                          height: MediaQuery.of(context).size.height / 23,
+                          width: MediaQuery.of(context).size.width - 130,
                           child: Text(
-                            "REGISTER",
+                            birthdayController == null
+                                ? ("Change Birthday")
+                                : birthdayController,
                             style: TextStyle(
                                 fontSize:
-                                    MediaQuery.of(context).size.height / 40,
-                                color: Colors.white),
+                                    MediaQuery.of(context).size.height / 55,
+                                color: Colors.black),
                           ),
                           onPressed: () {
-                            context.read<AuthenticationService>().signUp(
-                                  scaffold: _scaffoldKey.currentState,
-                                  aContext: context,
-                                  name: nameController.text,
-                                  surname: surnameController.text,
-                                  email: emailController.text,
-                                  birthday: birthdayController,
-                                  password: passwordController.text,
-                                  password2: password2Controller.text,
-                                );
+                            DatePicker.showDatePicker(context,
+                                showTitleActions: true,
+                                minTime: DateTime(1900, 1, 1),
+                                maxTime: DateTime(DateTime.now().year - 18,
+                                    DateTime.now().month, DateTime.now().day),
+                                onChanged: (date) {}, onConfirm: (date) {
+                              setState(() {
+                                birthdayController =
+                                    date.toString().split(" ").first;
+                              });
+                            },
+                                currentTime: DateTime.now(),
+                                locale: LocaleType.en);
                           },
                         ),
-                      ),
-                    ],
-                  ),
+                        _title(context, "Password"),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: passwordController,
+                              obscureText: true,
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white),
+                          height: MediaQuery.of(context).size.height / 23,
+                          width: MediaQuery.of(context).size.width - 130,
+                        ),
+                        _title(context, "Repeat Password"),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: password2Controller,
+                              obscureText: true,
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white),
+                          height: MediaQuery.of(context).size.height / 23,
+                          width: MediaQuery.of(context).size.width - 130,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: AnimatedButton(
+                            color: Colors.deepOrange[500],
+                            height: MediaQuery.of(context).size.height / 17,
+                            width: 150,
+                            child: Text(
+                              "REGISTER",
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 40,
+                                  color: Colors.white),
+                            ),
+                            onPressed: () {
+                              context.read<AuthenticationService>().signUp(
+                                    scaffold: _scaffoldKey.currentState,
+                                    aContext: context,
+                                    name: nameController.text,
+                                    surname: surnameController.text,
+                                    email: emailController.text,
+                                    birthday: birthdayController,
+                                    password: passwordController.text,
+                                    password2: password2Controller.text,
+                                  );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ]),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
