@@ -11,27 +11,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  var fullName;
-
-  Future<void> getData() async {
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .snapshots()
-        .listen((event) {
-      setState(() {
-        fullName = event.get("name") + " " + event.get("surname");
-        print(fullName);
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,10 +46,20 @@ class _ProfileState extends State<Profile> {
                       }),
                 ),
                 SizedBox(height: 30),
-                Text(
-                  fullName != null ? fullName : "Loading...",
-                  style: TextStyle(fontSize: 30),
-                ),
+                StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(FirebaseAuth.instance.currentUser.uid)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return new CircularProgressIndicator();
+                      }
+                      var document = snapshot.data;
+                      return new Text(
+                          document["name"] + " " + document["surname"],
+                          style: TextStyle(fontSize: 30));
+                    }),
                 SizedBox(height: 30),
                 InkWell(
                   /// LOG OUT BUTTON TAP
