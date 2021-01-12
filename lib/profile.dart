@@ -49,7 +49,6 @@ class _ProfileState extends State<Profile> {
                 _getFullName(),
                 SizedBox(height: 30),
                 InkWell(
-                  /// LOG OUT BUTTON TAP
                   onTap: () {
                     context.read<AuthenticationService>().signOut(context);
                   },

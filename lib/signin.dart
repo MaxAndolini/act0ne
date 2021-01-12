@@ -39,7 +39,6 @@ class SignIn extends StatelessWidget {
                       color: Colors.white),
                 ),
                 Container(
-                  //BOX AROUND ITEMS
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.deepOrange[100]),
@@ -65,7 +64,6 @@ class SignIn extends StatelessWidget {
                       ),
                       _title(context, "Password"),
                       Container(
-                        ////// PASSWORD CONTAINER
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(

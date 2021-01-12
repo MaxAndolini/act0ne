@@ -107,7 +107,9 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                         child: Text(
-                          "Change Birthday",
+                          birthdayController == null
+                              ? ("Change Birthday")
+                              : birthdayController,
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height / 55,
                               color: Colors.black),
@@ -119,8 +121,10 @@ class _SignUpState extends State<SignUp> {
                               maxTime: DateTime(DateTime.now().year - 18,
                                   DateTime.now().month, DateTime.now().day),
                               onChanged: (date) {}, onConfirm: (date) {
-                            birthdayController =
-                                date.toString().split(" ").first;
+                            setState(() {
+                              birthdayController =
+                                  date.toString().split(" ").first;
+                            });
                           },
                               currentTime: DateTime.now(),
                               locale: LocaleType.en);
@@ -128,7 +132,6 @@ class _SignUpState extends State<SignUp> {
                       ),
                       _title(context, "Password"),
                       Container(
-                        ////// PASSWORD CONTAINER
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
@@ -144,7 +147,6 @@ class _SignUpState extends State<SignUp> {
                       ),
                       _title(context, "Repeat Password"),
                       Container(
-                        ////// PASSWORD CONTAINER
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
