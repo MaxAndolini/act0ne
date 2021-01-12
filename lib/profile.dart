@@ -11,24 +11,29 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String username;
-  String surname;
+  var fullName;
 
-  void getData() async {
-    var docRef = FirebaseFirestore.instance
-        .collection('users')
-        .doc('C91Z6pmKD0hE1MQTSkIu');
-    var docSnap = await docRef.get();
-    var docData = docSnap.data();
-    username = docData['name'];
-    surname = docData['surname'];
-    print(username);
+  Future<void> getData() async {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .snapshots()
+        .listen((event) {
+      setState(() {
+        fullName = event.get("name") + " " + event.get("surname");
+        print(fullName);
+      });
+    });
   }
 
   @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    getData();
     return Scaffold(
       body: Container(
         child: Padding(
@@ -61,7 +66,7 @@ class _ProfileState extends State<Profile> {
               ),
               SizedBox(height: 30),
               Text(
-                username + " " + surname,
+                fullName != null ? fullName : "Loading...",
                 style: TextStyle(fontSize: 30),
               ),
               SizedBox(height: 30),

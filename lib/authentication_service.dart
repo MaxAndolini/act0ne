@@ -116,10 +116,16 @@ class AuthenticationService {
         FirebaseFirestore.instance
             .collection("users")
             .doc(user.user.uid)
-            .set({"name": name, "surname": surname, "birthday": birthday});
+            .set({"name": name, "surname": surname, "birthday": birthday}).then(
+                (value) {
+          Navigator.pushReplacementNamed(aContext, "/signin");
+          scaffold.showSnackBar(
+            new SnackBar(
+              content: new Text('Successfully signed up!'),
+            ),
+          );
+        });
       });
-
-      Navigator.pushReplacementNamed(aContext, "/signin");
       return 1;
     } on FirebaseAuthException catch (error) {
       scaffold.showSnackBar(

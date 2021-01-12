@@ -29,9 +29,8 @@ class Main extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'MainF',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.deepOrange,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         debugShowCheckedModeBanner: false,
