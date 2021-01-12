@@ -27,36 +27,43 @@ class _CatState extends State<Cat> {
                 children: [
                   Container(
                     child: Text(docData['cat_item1'] +
+                        ": " +
                         docData['price1'] +
                         docData['photo1']),
                   ),
                   Container(
                     child: Text(docData['cat_item2'] +
+                        ": " +
                         docData['price2'] +
                         docData['photo2']),
                   ),
                   Container(
                     child: Text(docData['cat_item3'] +
+                        ": " +
                         docData['price3'] +
                         docData['photo3']),
                   ),
                   Container(
                     child: Text(docData['cat_item4'] +
+                        ": " +
                         docData['price4'] +
                         docData['photo4']),
                   ),
                   Container(
                     child: Text(docData['cat_item5'] +
+                        ": " +
                         docData['price5'] +
                         docData['photo5']),
                   ),
                   Container(
                     child: Text(docData['cat_item6'] +
+                        ": " +
                         docData['price6'] +
                         docData['photo6']),
                   ),
                   Container(
                     child: Text(docData['cat_item7'] +
+                        ": " +
                         docData['price7'] +
                         docData['photo7']),
                   ),

@@ -44,9 +44,9 @@ class _MarketState extends State<Market> with SingleTickerProviderStateMixin {
           child: TabBarView(
             controller: pageController,
             children: [
-              Container(color: Colors.amber, child: Center(child: Cat())),
-              Container(color: Colors.red, child: Center(child: Dog())),
-              Container(color: Colors.blue, child: Center(child: Toys())),
+              Container(child: Center(child: Cat())),
+              Container(child: Center(child: Dog())),
+              Container(child: Center(child: Toys())),
               Container(
                   color: Colors.purple, child: Center(child: OtherItems()))
             ],
