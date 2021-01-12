@@ -150,4 +150,21 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
+
+  _getName() {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new CircularProgressIndicator();
+          }
+          var document = snapshot.data;
+          return new Text(document["name"],
+              style: TextStyle(fontSize: 30));
+        });
+  }
+
 }
