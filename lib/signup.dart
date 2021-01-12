@@ -5,14 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:provider/provider.dart';
 
-class SignUp extends StatelessWidget {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController surnameController = TextEditingController();
+class SignUp extends StatefulWidget {
+  @override
+  _SignUpState createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController surnameController = TextEditingController();
   String birthdayController;
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController password2Controller = TextEditingController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController password2Controller = TextEditingController();
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,6 @@ class SignUp extends StatelessWidget {
       backgroundColor: Colors.deepOrange[900],
       body: Center(
         child: Container(
-          //BACKGROUND
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -115,7 +119,6 @@ class SignUp extends StatelessWidget {
                               maxTime: DateTime(DateTime.now().year - 18,
                                   DateTime.now().month, DateTime.now().day),
                               onChanged: (date) {}, onConfirm: (date) {
-                            print('change ' + date.toString().split(" ").first);
                             birthdayController =
                                 date.toString().split(" ").first;
                           },

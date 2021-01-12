@@ -2,7 +2,7 @@ import 'package:act0ne/Market.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
-import 'profileSelector.dart';
+import 'profile_selector.dart';
 import 'tasks.dart';
 
 void main() {

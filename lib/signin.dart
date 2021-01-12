@@ -16,7 +16,6 @@ class SignIn extends StatelessWidget {
       backgroundColor: Colors.deepOrange[900],
       body: Center(
         child: Container(
-          //BACKGROUND
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,

@@ -45,9 +45,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               end: Alignment.bottomCenter,
               stops: [0.1, 0.4, 0.7, 0.9],
               colors: [
-                Colors.orange[200] ,
-                Colors.orange[300] ,
-                Colors.orange[400] ,
+                Colors.orange[200],
+                Colors.orange[300],
+                Colors.orange[400],
                 Colors.orange[500]
               ],
             ),
@@ -60,7 +60,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: FlatButton(
-                    onPressed: () => Navigator.push(context , new MaterialPageRoute(builder: (context) => MyApp()) ),
+                    onPressed: () => Navigator.push(context,
+                        new MaterialPageRoute(builder: (context) => MyApp())),
                     child: Text(
                       'Skip',
                       style: TextStyle(
@@ -146,8 +147,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             SizedBox(height: 30.0),
-                            Text(''
-                            ),
+                            Text(''),
                             SizedBox(height: 15.0),
                             Text(
                               'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
@@ -164,37 +164,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 _currentPage != _numPages - 1
                     ? Expanded(
-                  child: Align(
-                    alignment: FractionalOffset.bottomRight,
-                    child: FlatButton(
-                      onPressed: () {
-                        _pageController.nextPage(
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.ease,
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text(
-                            'Next',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22.0,
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight,
+                          child: FlatButton(
+                            onPressed: () {
+                              _pageController.nextPage(
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.ease,
+                              );
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  'Next',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22.0,
+                                  ),
+                                ),
+                                SizedBox(width: 10.0),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                  size: 30.0,
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(width: 10.0),
-                          Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white,
-                            size: 30.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                )
+                        ),
+                      )
                     : Text(''),
               ],
             ),
@@ -203,26 +203,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       bottomSheet: _currentPage == _numPages - 1
           ? Container(
-        height: 100.0,
-        width: double.infinity,
-        color: Colors.white,
-        child: GestureDetector(
-          onTap: () => Navigator.push(context , new MaterialPageRoute(builder: (context) => MyApp()) ),
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 30.0),
-              child: Text(
-                "Let's Gooooo !",
-                style: TextStyle(
-                  color: Color(0xFF5B16D0),
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
+              height: 100.0,
+              width: double.infinity,
+              color: Colors.white,
+              child: GestureDetector(
+                onTap: () => Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) => MyApp())),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 30.0),
+                    child: Text(
+                      "Let's Gooooo !",
+                      style: TextStyle(
+                        color: Color(0xFF5B16D0),
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-        ),
-      )
+            )
           : Text(''),
     );
   }

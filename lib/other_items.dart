@@ -1,7 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class OtherItems extends StatelessWidget {
+class OtherItems extends StatefulWidget {
+  @override
+  _OtherItemsState createState() => _OtherItemsState();
+}
+
+class _OtherItemsState extends State<OtherItems> {
   String item1 = '';
   String item2 = '';
   String item3 = '';

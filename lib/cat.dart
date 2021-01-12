@@ -1,7 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Cat extends StatelessWidget {
+class Cat extends StatefulWidget {
+  @override
+  _CatState createState() => _CatState();
+}
+
+class _CatState extends State<Cat> {
   String item1 = '';
   String item2 = '';
   String item3 = '';

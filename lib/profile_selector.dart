@@ -1,4 +1,4 @@
-import 'package:act0ne/aboutUs.dart';
+import 'package:act0ne/about_us.dart';
 import 'package:act0ne/profile.dart';
 import 'package:act0ne/settings.dart';
 import 'package:flutter/material.dart';
