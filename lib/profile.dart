@@ -46,20 +46,7 @@ class _ProfileState extends State<Profile> {
                       }),
                 ),
                 SizedBox(height: 30),
-                StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection("users")
-                        .doc(FirebaseAuth.instance.currentUser.uid)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return new CircularProgressIndicator();
-                      }
-                      var document = snapshot.data;
-                      return new Text(
-                          document["name"] + " " + document["surname"],
-                          style: TextStyle(fontSize: 30));
-                    }),
+                _getFullName(),
                 SizedBox(height: 30),
                 InkWell(
                   /// LOG OUT BUTTON TAP
@@ -86,6 +73,22 @@ class _ProfileState extends State<Profile> {
         ),
       ]),
     );
+  }
+
+  _getFullName() {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new CircularProgressIndicator();
+          }
+          var document = snapshot.data;
+          return new Text(document["name"] + " " + document["surname"],
+              style: TextStyle(fontSize: 30));
+        });
   }
 
   Future<Widget> _getImage(BuildContext context, String imageName) async {
