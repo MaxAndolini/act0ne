@@ -1,6 +1,9 @@
+import 'dart:io';
+import 'package:animated_button/animated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -8,8 +11,27 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-
-
+  File _image;
+  Future getImageFromPhone(bool gallery) async {
+    ImagePicker picker = ImagePicker();
+    PickedFile pickedFile;
+    if (gallery) {
+      pickedFile = await picker.getImage(
+        source: ImageSource.gallery,
+      );
+    } else {
+      pickedFile = await picker.getImage(
+        source: ImageSource.camera,
+      );
+    }
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print("No image selected.");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +146,12 @@ class _SettingsState extends State<Settings> {
                             border: Border.all(color: Colors.black)),
                         child: Row(
                           children: [
-                            Text(
-                              "Change Avatar",style:TextStyle(fontSize: 20)
+                            AnimatedButton(
+                              child: Text("Change Avatar"),
+                              onPressed: () {
+                                getImageFromPhone(true);
+                              },
                             ),
-                            
                           ],
                         ),
                       ),
