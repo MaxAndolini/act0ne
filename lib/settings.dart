@@ -18,6 +18,8 @@ class _SettingsState extends State<Settings> {
   Future pickImage(bool gallery) async {
     if (gallery) {
       pickedFile = await picker.getImage(source: ImageSource.gallery);
+    } else {
+      pickedFile = await picker.getImage(source: ImageSource.camera);
     }
     setState(() {
       if (pickedFile != null) {
