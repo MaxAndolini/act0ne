@@ -12,6 +12,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  
   File _imageFile;
   final picker = ImagePicker();
   PickedFile pickedFile;
@@ -31,6 +32,7 @@ class _SettingsState extends State<Settings> {
       }
     });
   }
+ 
 
   Future uploadImageToFirebase() async {
     String fileName = basename(_imageFile.path);
@@ -39,7 +41,9 @@ class _SettingsState extends State<Settings> {
     UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then(
-          (value) => print("Done: $value"),
+          (value) => 
+          FirebaseFirestore.instance.collection("users")
+          .doc(FirebaseAuth.instance.currentUser.uid).update({"image": value}),
         );
   }
 
