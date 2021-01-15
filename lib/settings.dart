@@ -43,7 +43,7 @@ class _SettingsState extends State<Settings> {
     taskSnapshot.ref.getDownloadURL().then(
           (value) => 
           FirebaseFirestore.instance.collection("users")
-          .doc(FirebaseAuth.instance.currentUser.uid).update({"image": value}),
+          .doc(FirebaseAuth.instance.currentUser.uid).update({"image": 'uploads/$fileName'}),
         );
   }
 
