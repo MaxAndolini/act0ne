@@ -116,7 +116,7 @@ class AuthenticationService {
         FirebaseFirestore.instance
             .collection("users")
             .doc(user.user.uid)
-            .set({"name": name, "surname": surname, "birthday": birthday}).then(
+            .set({"name": name, "surname": surname, "birthday": birthday, "image": "user.png", "token": 0, "admin": 0}).then(
                 (value) {
           Navigator.pushReplacementNamed(aContext, "/signin");
           scaffold.showSnackBar(

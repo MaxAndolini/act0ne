@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:act0ne/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +11,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  Image my_image_url;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +34,40 @@ class _ProfileState extends State<Profile> {
                         CircleAvatar(
                           backgroundColor: Colors.transparent,
                           radius: 100,
-                          child: Image.network(document['image']),
+                          child: FutureBuilder(
+                              future: _getImage(context, document["image"]),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    height: MediaQuery.of(context).size.height /
+                                        1.2,
+                                    child: snapshot.data,
+                                  );
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.2,
+                                    height: MediaQuery.of(context).size.height /
+                                        1.2,
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                return Container();
+                              }),
                         ),
                         SizedBox(height: 30),
-                        Text(document['name']+" "+document['surname'],style: TextStyle(fontSize: 30),),
+                        Text(
+                          document["name"] + " " + document["surname"],
+                          style: TextStyle(fontSize: 30),
+                        ),
                         SizedBox(height: 30),
                         InkWell(
+                          /// LOG OUT BUTTON TAP
                           onTap: () {
                             context
                                 .read<AuthenticationService>()
@@ -70,5 +95,19 @@ class _ProfileState extends State<Profile> {
             }));
   }
 
- 
+  Future<Widget> _getImage(BuildContext context, String imageName) async {
+    Image image;
+    await FireStorageService.loadImage(context, imageName).then((value) {
+      image = Image.network(value.toString(), fit: BoxFit.scaleDown);
+    });
+    return image;
+  }
+}
+
+class FireStorageService extends ChangeNotifier {
+  FireStorageService();
+
+  static Future<dynamic> loadImage(BuildContext context, String image) async {
+    return await FirebaseStorage.instance.ref().child(image).getDownloadURL();
+  }
 }
