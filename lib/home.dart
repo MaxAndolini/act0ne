@@ -22,24 +22,22 @@ class MyApp extends StatelessWidget {
 
 class Home extends StatelessWidget {
   final List<String> litems = [
-    "Deneme fed: 100",
-    "Köpek fed: 100",
-    "Kedi fed: 100",
-    "Martı fed: 100",
-    "Hamsi fed: 100",
-    "Sardalya fed: 100",
-    "Ayı fed: 100",
-    "Yengeç fed: 100"
+    "The number of stray dogs fed: 100",
+    "The number of stray cats fed: 100",
+    "The number of plastic sent for recyling: 100",
+    "The number of paper sent for recyling: 100",
+    "The number of glass sent for recyling: 100",
+    "The number of metal sent for recyling: 100",
+    "The number of cell sent for recyling: 100",
   ];
   final List<String> litems2 = [
-    "Kaplan fed: 100",
-    "Aslan fed: 100",
-    "At fed: 100",
-    "Zürafa fed: 100",
-    "Fil fed: 100",
-    "Sardalya fed: 100",
-    "Ayı fed: 100",
-    "Yengeç fed: 100"
+    "The number of stray dogs fed: 100",
+    "The number of stray cats fed: 100",
+    "The number of plastic sent for recyling: 100",
+    "The number of paper sent for recyling: 100",
+    "The number of glass sent for recyling: 100",
+    "The number of metal sent for recyling: 100",
+    "The number of cell sent for recyling: 100",
   ];
 
   @override

@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class Dog extends StatefulWidget {
@@ -7,61 +10,130 @@ class Dog extends StatefulWidget {
 }
 
 class _DogState extends State<Dog> {
-  String item1 = '';
-  String item2 = '';
-  String item3 = '';
-  String item4 = '';
-  String item5 = '';
-  String item6 = '';
-  String item7 = '';
-  String price1 = '';
-  String price2 = '';
-  String price3 = '';
-  String price4 = '';
-  String price5 = '';
-  String price6 = '';
-  String price7 = '';
-  String photo1 = '';
-  String photo2 = '';
-  String photo3 = '';
-  String photo4 = '';
-  String photo5 = '';
-  String photo6 = '';
-  String photo7 = '';
-
-  void getData() async {
-    var docRef = FirebaseFirestore.instance
-        .collection('market_items')
-        .doc('jw3CnXonz4MsdD5aZTfe');
-    var docSnap = await docRef.get();
-    var docData = docSnap.data();
-    item1 = docData['item1'];
-    item2 = docData['item2'];
-    item3 = docData['item3'];
-    item4 = docData['item4'];
-    item5 = docData['item5'];
-    item6 = docData['item6'];
-    item7 = docData['item7'];
-    price1 = docData['price1'];
-    price2 = docData['price2'];
-    price3 = docData['price3'];
-    price4 = docData['price4'];
-    price5 = docData['price5'];
-    price6 = docData['price6'];
-    price7 = docData['price7'];
-    photo1 = docData['photo1'];
-    photo2 = docData['photo2'];
-    photo3 = docData['photo3'];
-    photo4 = docData['photo4'];
-    photo5 = docData['photo5'];
-    photo6 = docData['photo6'];
-    photo7 = docData['photo7'];
-
-    print(docData);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('market_items')
+              .doc('ln7hUZU7RMAvRX2oUtV8')
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return new CircularProgressIndicator();
+            }
+            var docData = snapshot.data;
+            return Container(
+              child: ListView(children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.height / 3,
+                      decoration: BoxDecoration(color: Colors.deepOrange[100]),
+                      child: Column(
+                        children: [
+                          Text(docData['dog_item1']),
+                          Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 100,
+                              child: FutureBuilder(
+                                  future:
+                                      _getImage(context, docData["photo1"]),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                4,
+                                        child: snapshot.data,
+                                      );
+                                    }
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                4,
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                    return Container();
+                                  }),
+                            ),
+                          ),
+                          Text(docData['price1'])
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Text(docData['dog_item2'] +
+                          ": " +
+                          docData['price2'] +
+                          docData['photo2']),
+                    ),
+                    Container(
+                      child: Text(docData['dog_item3'] +
+                          ": " +
+                          docData['price3'] +
+                          docData['photo3']),
+                    ),
+                    Container(
+                      child: Text(docData['dog_item4'] +
+                          ": " +
+                          docData['price4'] +
+                          docData['photo4']),
+                    ),
+                    Container(
+                      child: Text(docData['dog_item5'] +
+                          ": " +
+                          docData['price5'] +
+                          docData['photo5']),
+                    ),
+                    Container(
+                      child: Text(docData['dog_item6'] +
+                          ": " +
+                          docData['price6'] +
+                          docData['photo6']),
+                    ),
+                    Container(
+                      child: Text(docData['dog_item7'] +
+                          ": " +
+                          docData['price7'] +
+                          docData['photo7']),
+                    ),
+                  ],
+                ),
+              ]),
+            );
+          }),
+    );
+  }
+
+  Future<Widget> _getImage(BuildContext context, String imageName) async {
+    Image image;
+    await FireStorageService.loadImage(context, imageName).then((value) {
+      image = Image.network(value.toString(), fit: BoxFit.scaleDown);
+    });
+    return image;
+  }
+}
+
+class FireStorageService extends ChangeNotifier {
+  FireStorageService();
+
+  static Future<dynamic> loadImage(BuildContext context, String image) async {
+    return await FirebaseStorage.instance.ref().child(image).getDownloadURL();
   }
 }
