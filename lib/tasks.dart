@@ -3,10 +3,12 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'task.dart';
+import 'package:path/path.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,15 +42,37 @@ class Tasks extends StatefulWidget {
 
 class _TasksState extends State<Tasks> {
 
-  File newImage ;
+  File _imageFile ;
   final imagePicker = ImagePicker();
+  PickedFile pickedFile ;
 
-  Future getImage() async{
-    final image =  await imagePicker.getImage(source: ImageSource.camera);
-    setState(() {
-      newImage = File(image.path);
-    });
+    Future getImage() async{
+      final pickedFile =  await imagePicker.getImage(source: ImageSource.camera);
+
+      setState(() {
+        if (pickedFile != null) {
+          _imageFile = File(pickedFile.path);
+          print("Your Photo sent");
+          uploadImageToFirebase();
+        } else {
+          print("Something went wrong.");
+        }
+      });
   }
+
+  Future uploadImageToFirebase() async {
+    String fileName = basename(_imageFile.path);
+    Reference firebaseStorageRef =
+    FirebaseStorage.instance.ref().child('TaskPhotos/$fileName');
+    UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
+    TaskSnapshot taskSnapshot = await uploadTask;
+    taskSnapshot.ref.getDownloadURL().then(
+          (value) =>
+          FirebaseFirestore.instance.collection("users")
+              .doc(FirebaseAuth.instance.currentUser.uid).update({"Taskimage":"TaskPhotos/$fileName"}),
+    );
+  }
+
 
 /*
   Random random = Random();
@@ -103,7 +127,7 @@ class _TasksState extends State<Tasks> {
       .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Center(child: Text("Loading Please Wait.."));
+          return Center(child: new CircularProgressIndicator());
         }
         var taskData = snapshot.data;
 
@@ -244,4 +268,6 @@ class _TasksState extends State<Tasks> {
 
 
 
+
 }
+
