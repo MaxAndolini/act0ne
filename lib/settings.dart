@@ -1,7 +1,8 @@
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
@@ -12,10 +13,10 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  
   File _imageFile;
   final picker = ImagePicker();
   PickedFile pickedFile;
+
   Future pickImage(bool gallery) async {
     if (gallery) {
       pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -32,7 +33,6 @@ class _SettingsState extends State<Settings> {
       }
     });
   }
- 
 
   Future uploadImageToFirebase() async {
     String fileName = basename(_imageFile.path);
@@ -41,9 +41,10 @@ class _SettingsState extends State<Settings> {
     UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then(
-          (value) => 
-          FirebaseFirestore.instance.collection("users")
-          .doc(FirebaseAuth.instance.currentUser.uid).update({"image": 'uploads/$fileName'}),
+          (value) => FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseAuth.instance.currentUser.uid)
+              .update({"image": 'uploads/$fileName'}),
         );
   }
 
@@ -102,6 +103,7 @@ class _SettingsState extends State<Settings> {
                             ),
                             Container(
                                 width: MediaQuery.of(context).size.height / 3.6,
+                                padding: EdgeInsets.only(left: 10.0),
                                 child: TextField(
                                   style: TextStyle(fontSize: 20),
                                   decoration: InputDecoration(
@@ -127,6 +129,7 @@ class _SettingsState extends State<Settings> {
                             ),
                             Container(
                                 width: MediaQuery.of(context).size.height / 3.6,
+                                padding: EdgeInsets.only(left: 10.0),
                                 child: TextField(
                                   style: TextStyle(fontSize: 20),
                                   decoration: InputDecoration(
@@ -152,6 +155,7 @@ class _SettingsState extends State<Settings> {
                             ),
                             Container(
                                 width: MediaQuery.of(context).size.height / 3.6,
+                                padding: EdgeInsets.only(left: 10.0),
                                 child: TextField(
                                   style: TextStyle(fontSize: 20),
                                   decoration: InputDecoration(

@@ -61,7 +61,28 @@ class _BeginState extends State<Begin> {
           fit: BoxFit.cover,
           width: 150,
         ),
-        // actions: [ for tickets ]
+        actions: [
+          Container(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: 8.0),
+                  child: Text("5500000",
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                ),
+                Image.asset(
+                  "assets/images/icons/token.png",
+                  fit: BoxFit.contain,
+                  width: 32,
+                ),
+              ],
+            ),
+          )
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: positionNumber,
