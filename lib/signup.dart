@@ -55,7 +55,7 @@ class _SignUpState extends State<SignUp> {
                       color: Colors.deepOrange[100]),
                   margin: EdgeInsets.only(top: 10.0),
                   width: MediaQuery.of(context).size.width - 50,
-                  height: MediaQuery.of(context).size.height / 1.6,
+                  height: MediaQuery.of(context).size.height / 1.55,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

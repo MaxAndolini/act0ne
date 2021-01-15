@@ -11,8 +11,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  Image my_image_url;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
