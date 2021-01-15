@@ -25,7 +25,7 @@ class SignIn extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                  padding: EdgeInsets.only(bottom: 20.0),
                   child: Image.asset(
                     "assets/images/egelogouc.png",
                     height: 70,
