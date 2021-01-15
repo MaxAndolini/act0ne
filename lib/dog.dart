@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +26,8 @@ class _DogState extends State<Dog> {
             }
             var docData = snapshot.data;
             return Container(
-              child: ListView(children: [
-                Column(
+                child: ListView(children: [
+              Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -44,10 +43,11 @@ class _DogState extends State<Dog> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(40)),
                                   elevation: 16,
-                                  child: Container( //container when clicked
+                                  child: Container(
+                                    //container when clicked
                                     padding: new EdgeInsets.all(20.0),
-                                    height:
-                                        MediaQuery.of(context).size.height / 2,
+                                    height: MediaQuery.of(context).size.height /
+                                        1.5,
                                     width:
                                         MediaQuery.of(context).size.width / 2,
                                     child: ListView(
@@ -84,6 +84,7 @@ class _DogState extends State<Dog> {
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
                                                 docData['dog_item1'] +
+                                                    " : " +
                                                     docData['price1'],
                                                 style: TextStyle(
                                                     fontSize:
@@ -184,11 +185,11 @@ class _DogState extends State<Dog> {
                               },
                             );
                           },
-
-                          child: Container(      //Container with photo
+                          child: Container(
+                            //Container with photo
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.8,
+                            height: MediaQuery.of(context).size.height / 2.6,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
@@ -266,8 +267,7 @@ class _DogState extends State<Dog> {
                           ),
                         ),
 
-
-                        //Second Item 
+                        //Second Item
                         InkWell(
                           onTap: () {
                             showDialog(
@@ -280,8 +280,8 @@ class _DogState extends State<Dog> {
                                   elevation: 16,
                                   child: Container(
                                     padding: new EdgeInsets.all(20.0),
-                                    height:
-                                        MediaQuery.of(context).size.height / 2,
+                                    height: MediaQuery.of(context).size.height /
+                                        1.5,
                                     width:
                                         MediaQuery.of(context).size.width / 2,
                                     child: ListView(
@@ -318,6 +318,7 @@ class _DogState extends State<Dog> {
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
                                                 docData['dog_item2'] +
+                                                    " : " +
                                                     docData['price2'],
                                                 style: TextStyle(
                                                     fontSize:
@@ -419,10 +420,9 @@ class _DogState extends State<Dog> {
                             );
                           },
                           child: Container(
-
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.8,
+                            height: MediaQuery.of(context).size.height / 2.6,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
@@ -500,8 +500,6 @@ class _DogState extends State<Dog> {
                           ),
                         ),
 
-
-
                         //Third Item
                         InkWell(
                           onTap: () {
@@ -515,8 +513,8 @@ class _DogState extends State<Dog> {
                                   elevation: 16,
                                   child: Container(
                                     padding: new EdgeInsets.all(20.0),
-                                    height:
-                                        MediaQuery.of(context).size.height / 2,
+                                    height: MediaQuery.of(context).size.height /
+                                        1.5,
                                     width:
                                         MediaQuery.of(context).size.width / 2,
                                     child: ListView(
@@ -553,6 +551,7 @@ class _DogState extends State<Dog> {
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
                                                 docData['dog_item3'] +
+                                                    " : " +
                                                     docData['price3'],
                                                 style: TextStyle(
                                                     fontSize:
@@ -656,7 +655,7 @@ class _DogState extends State<Dog> {
                           child: Container(
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.8,
+                            height: MediaQuery.of(context).size.height / 2.6,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
@@ -733,52 +732,939 @@ class _DogState extends State<Dog> {
                             ),
                           ),
                         ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        
                       ],
                     ),
-                  ],
-                ),
-              ]),
-            );
+                    Row(children: [
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                backgroundColor: Colors.blue[100],
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                elevation: 16,
+                                child: Container(
+                                  //container when clicked
+                                  padding: new EdgeInsets.all(20.0),
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.5,
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: ListView(
+                                    children: <Widget>[
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Do you want to buy this item ?",
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22,
+                                            color: Colors.deepOrange[900],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 4.0),
+                                            child: Text(
+                                              docData['dog_item4'] +
+                                                  " : " +
+                                                  docData['price4'],
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          50),
+                                            ),
+                                          ),
+                                          Image.asset(
+                                            "assets/images/icons/token.png",
+                                            fit: BoxFit.contain,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                20,
+                                          ),
+                                        ],
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Your name :",
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: TextField(
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                            focusColor: Colors.white),
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Your Adress :",
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: TextField(
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                            focusColor: Colors.white),
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      RaisedButton(
+                                        onPressed: () {
+                                          _scaffoldKey.currentState
+                                              .showSnackBar(SnackBar(
+                                            content: Text(
+                                                'The item is ordered succesfully!!'),
+                                          ));
+                                        },
+                                        child: Text("BUY"),
+                                        color: Colors.green[100],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          //Container with photo
+                          padding: new EdgeInsets.all(10.0),
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.height / 2.6,
+                          decoration:
+                              BoxDecoration(color: Colors.deepOrange[100]),
+                          child: Column(
+                            children: [
+                              Text(
+                                docData['dog_item4'],
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height /
+                                            50),
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                radius: 100,
+                                child: FutureBuilder(
+                                    future:
+                                        _getImage(context, docData["photo4"]),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        return Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.2,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: snapshot.data,
+                                        );
+                                      }
+
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.2,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                      return Container();
+                                    }),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 4.0),
+                                    child: Text(
+                                      docData['price4'],
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              50),
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    "assets/images/icons/token.png",
+                                    fit: BoxFit.contain,
+                                    width:
+                                        MediaQuery.of(context).size.width / 20,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      //Second Item
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                backgroundColor: Colors.blue[100],
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                elevation: 16,
+                                child: Container(
+                                  padding: new EdgeInsets.all(20.0),
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.5,
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: ListView(
+                                    children: <Widget>[
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Do you want to buy this item ?",
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22,
+                                            color: Colors.deepOrange[900],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 4.0),
+                                            child: Text(
+                                              docData['dog_item5'] +
+                                                  " : " +
+                                                  docData['price5'],
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          50),
+                                            ),
+                                          ),
+                                          Image.asset(
+                                            "assets/images/icons/token.png",
+                                            fit: BoxFit.contain,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                20,
+                                          ),
+                                        ],
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Your name :",
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: TextField(
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                            focusColor: Colors.white),
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Your Adress :",
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: TextField(
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                            focusColor: Colors.white),
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      RaisedButton(
+                                        onPressed: () {
+                                          _scaffoldKey.currentState
+                                              .showSnackBar(SnackBar(
+                                            content: Text(
+                                                'The item is ordered succesfully!!'),
+                                          ));
+                                        },
+                                        child: Text("BUY"),
+                                        color: Colors.green[100],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          padding: new EdgeInsets.all(10.0),
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: MediaQuery.of(context).size.height / 2.6,
+                          decoration:
+                              BoxDecoration(color: Colors.deepOrange[100]),
+                          child: Column(
+                            children: [
+                              Text(
+                                docData['dog_item5'],
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height /
+                                            50),
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                radius: 100,
+                                child: FutureBuilder(
+                                    future:
+                                        _getImage(context, docData["photo5"]),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        return Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.2,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: snapshot.data,
+                                        );
+                                      }
+
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.2,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                      return Container();
+                                    }),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 4.0),
+                                    child: Text(
+                                      docData['price5'],
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              50),
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    "assets/images/icons/token.png",
+                                    fit: BoxFit.contain,
+                                    width:
+                                        MediaQuery.of(context).size.width / 20,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      //Third Item
+                      InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  backgroundColor: Colors.blue[100],
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40)),
+                                  elevation: 16,
+                                  child: Container(
+                                    padding: new EdgeInsets.all(20.0),
+                                    height: MediaQuery.of(context).size.height /
+                                        1.5,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: ListView(
+                                      children: <Widget>[
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22),
+                                        Center(
+                                          child: Text(
+                                            "Do you want to buy this item ?",
+                                            style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  22,
+                                              color: Colors.deepOrange[900],
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22),
+                                        Center(
+                                            child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 4.0),
+                                              child: Text(
+                                                docData['dog_item6'] +
+                                                    " : " +
+                                                    docData['price6'],
+                                                style: TextStyle(
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height /
+                                                            50),
+                                              ),
+                                            ),
+                                            Image.asset(
+                                              "assets/images/icons/token.png",
+                                              fit: BoxFit.contain,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  20,
+                                            ),
+                                          ],
+                                        )),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22),
+                                        Center(
+                                          child: Text(
+                                            "Your name :",
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    25,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22),
+                                        Center(
+                                            child: TextField(
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: null,
+                                          decoration: InputDecoration(
+                                              focusColor: Colors.white),
+                                        )),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22),
+                                        Center(
+                                          child: Text(
+                                            "Your Adress :",
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    25,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22),
+                                        Center(
+                                            child: TextField(
+                                          keyboardType: TextInputType.multiline,
+                                          maxLines: null,
+                                          decoration: InputDecoration(
+                                              focusColor: Colors.white),
+                                        )),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22),
+                                        RaisedButton(
+                                          onPressed: () {
+                                            _scaffoldKey.currentState
+                                                .showSnackBar(SnackBar(
+                                              content: Text(
+                                                  'The item is ordered succesfully!!'),
+                                            ));
+                                          },
+                                          child: Text("BUY"),
+                                          color: Colors.green[100],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Container(
+                              padding: new EdgeInsets.all(10.0),
+                              width: MediaQuery.of(context).size.width / 3,
+                              height: MediaQuery.of(context).size.height / 2.6,
+                              decoration:
+                                  BoxDecoration(color: Colors.deepOrange[100]),
+                              child: Column(children: [
+                                Text(
+                                  docData['dog_item6'],
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              50),
+                                ),
+                                CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  radius: 100,
+                                  child: FutureBuilder(
+                                      future:
+                                          _getImage(context, docData["photo6"]),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          return Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.2,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                4,
+                                            child: snapshot.data,
+                                          );
+                                        }
+
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.2,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                4,
+                                            child: CircularProgressIndicator(),
+                                          );
+                                        }
+                                        return Container();
+                                      }),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 4.0),
+                                      child: Text(
+                                        docData['price6'],
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                50),
+                                      ),
+                                    ),
+                                    Image.asset(
+                                      "assets/images/icons/token.png",
+                                      fit: BoxFit.contain,
+                                      width: MediaQuery.of(context).size.width /
+                                          20,
+                                    ),
+                                  ],
+                                )
+                              ])))
+                    ]),
+                    Row(children: [
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                backgroundColor: Colors.blue[100],
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)),
+                                elevation: 16,
+                                child: Container(
+                                  //container when clicked
+                                  padding: new EdgeInsets.all(20.0),
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.5,
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: ListView(
+                                    children: <Widget>[
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Do you want to buy this item ?",
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                22,
+                                            color: Colors.deepOrange[900],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 4.0),
+                                            child: Text(
+                                              docData['dog_item7'] +
+                                                  " : " +
+                                                  docData['price7'],
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          50),
+                                            ),
+                                          ),
+                                          Image.asset(
+                                            "assets/images/icons/token.png",
+                                            fit: BoxFit.contain,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                20,
+                                          ),
+                                        ],
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Your name :",
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: TextField(
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                            focusColor: Colors.white),
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                        child: Text(
+                                          "Your Adress :",
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      Center(
+                                          child: TextField(
+                                        keyboardType: TextInputType.multiline,
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                            focusColor: Colors.white),
+                                      )),
+                                      SizedBox(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              22),
+                                      RaisedButton(
+                                        onPressed: () {
+                                          _scaffoldKey.currentState
+                                              .showSnackBar(SnackBar(
+                                            content: Text(
+                                                'The item is ordered succesfully!!'),
+                                          ));
+                                        },
+                                        child: Text("BUY"),
+                                        color: Colors.green[100],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          //Container with photo
+                          padding: new EdgeInsets.all(10.0),
+                          width: MediaQuery.of(context).size.width / 3.0,
+                          height: MediaQuery.of(context).size.height / 2.6,
+                          decoration:
+                              BoxDecoration(color: Colors.deepOrange[100]),
+                          child: Column(
+                            children: [
+                              Text(
+                                docData['dog_item7'],
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height /
+                                            50),
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                radius: 100,
+                                child: FutureBuilder(
+                                    future:
+                                        _getImage(context, docData["photo7"]),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        return Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.2,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: snapshot.data,
+                                        );
+                                      }
+
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.2,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              4,
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                      return Container();
+                                    }),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 4.0),
+                                    child: Text(
+                                      docData['price7'],
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              50),
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    "assets/images/icons/token.png",
+                                    fit: BoxFit.contain,
+                                    width:
+                                        MediaQuery.of(context).size.width / 20,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ])
+                  ])
+            ]));
           }),
     );
   }
