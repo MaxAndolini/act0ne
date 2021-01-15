@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'package:image_picker/image_picker.dart';
 import 'task.dart';
 
 void main() {
@@ -34,11 +37,23 @@ class Tasks extends StatefulWidget {
   _TasksState createState() => _TasksState();
 }
 
+
 class _TasksState extends State<Tasks> {
+
+  File newImage ;
+  final imagePicker = ImagePicker();
+
+  Future getImage() async{
+    final image =  await imagePicker.getImage(source: ImageSource.camera);
+    setState(() {
+      newImage = File(image.path);
+    });
+  }
+
+/*
   Random random = Random();
 
   List<Task> dailyTasksList = [
-    Task.withdailyTasks("Give cup of water"),
     Task.withdailyTasks("Give cup of food"),
     Task.withdailyTasks("Give some love"),
     Task.withdailyTasks("Play with animals"),
@@ -56,13 +71,14 @@ class _TasksState extends State<Tasks> {
     Task.withmonthlyTasks("Construct a animal shelter"),
     Task.withmonthlyTasks("Adopt a animal"),
   ];
+*/
 
+/*
   int _counter = 10;
-
   Timer _timer;
 
   void _startTimer() {
-    _counter = 10;
+    _counter =  TimeOfDay.hoursPerDay;
     if (_timer != null) {
       _timer.cancel();
     }
@@ -76,12 +92,22 @@ class _TasksState extends State<Tasks> {
       });
     });
   }
-
+*/
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: ListView(children: [
+    return Scaffold(
+      body: StreamBuilder(
+      stream: FirebaseFirestore.instance
+      .collection('Tasks')
+      .doc('Q8elnpjjwODUNKwp3uu6')
+      .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(child: Text("Loading Please Wait.."));
+        }
+        var taskData = snapshot.data;
+
+        return ListView(children: [
           Column(
             //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,17 +135,7 @@ class _TasksState extends State<Tasks> {
                       children: [
                         Row(
                           children: <Widget>[
-                            Text(
-                              dailyTasksList[
-                                      random.nextInt(dailyTasksList.length)]
-                                  .dailyTasks,
-                              style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                // font style will change
-                                fontWeight: FontWeight.bold,
-                                height: 2.1,
-                              ),
-                            ),
+                            Text(taskData["task5"]),
                           ],
                         ),
                       ],
@@ -127,23 +143,30 @@ class _TasksState extends State<Tasks> {
                   ),
                 ),
               ),
-              (_counter > 0)
-                  ? Text('')
-                  : Text(
-                      'Lets try to new task',
-                      style: TextStyle(color: Colors.amber),
-                    ),
-              RaisedButton(
+              RaisedButton(onPressed:getImage ,
+                child: Icon(Icons.camera_alt),
+              ),
+
+              //(_counter > 0)
+              //  ? Text('')
+             /* Text(
+                'Lets try to new task',
+                style: TextStyle(color: Colors.amber),
+
+              ),
+              */
+              /* RaisedButton(
                 onPressed: () => _startTimer(),
                 child: Text("You have 24 hours to complete this task"),
-              ),
-              Text(
+              ),*/
+              /*Text(
                 '$_counter',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
                 ),
-              ),
+              ),*/
+
               SizedBox(width: 0, height: 100.0),
               Text("Weekly Task"),
               Center(
@@ -167,23 +190,16 @@ class _TasksState extends State<Tasks> {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              weeklyTasksList[
-                                      random.nextInt(weeklyTasksList.length)]
-                                  .weeklyTasks,
-                              style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                // font style will change
-                                fontWeight: FontWeight.bold,
-                                height: 2.1,
-                              ),
-                            )
+                            Text(taskData["task2"])
                           ],
                         ),
                       ],
                     ),
                   ),
                 ),
+              ),
+              RaisedButton(onPressed:getImage ,
+                child: Icon(Icons.camera_alt),
               ),
               SizedBox(width: 0, height: 100.0),
               Text("Monthly Tasks"),
@@ -208,28 +224,24 @@ class _TasksState extends State<Tasks> {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              monthlyTasksList[
-                                      random.nextInt(monthlyTasksList.length)]
-                                  .dailyTasks,
-                              style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                // font style will change
-                                fontWeight: FontWeight.bold,
-                                height: 2.1,
-                              ),
-                            ),
+                            Text(taskData["task3"]),
                           ],
                         ),
                       ],
                     ),
                   ),
                 ),
-              )
+              ),
+              RaisedButton(onPressed:getImage ,
+                child: Icon(Icons.camera_alt),
+              ),
             ],
           ),
-        ]),
-      ),
+        ]);
+      }),
     );
   }
+
+
+
 }
