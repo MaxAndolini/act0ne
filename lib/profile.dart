@@ -60,33 +60,48 @@ class _ProfileState extends State<Profile> {
                                 return Container();
                               }),
                         ),
-                        SizedBox(height: 30),
                         Text(
                           document["name"] + " " + document["surname"],
-                          style: TextStyle(fontSize: 30),
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 10),
                         ),
                         SizedBox(height: 30),
-                        InkWell(
-                          /// LOG OUT BUTTON TAP
-                          onTap: () {
-                            context
-                                .read<AuthenticationService>()
-                                .signOut(context);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(15.0),
-                            padding: EdgeInsets.all(15.0),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black)),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "LOG OUT",
-                                )
-                              ],
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 4.0),
+                              child: Text(
+                                document['token'].toString(),
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height /
+                                            10),
+                              ),
                             ),
-                          ),
+                            Image.asset(
+                              "assets/images/icons/token.png",
+                              fit: BoxFit.contain,
+                              width: MediaQuery.of(context).size.width / 10,
+                            ),
+                          ],
                         ),
+                        SizedBox(height: 30),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: RaisedButton(
+                            onPressed: () {
+                              context
+                                  .read<AuthenticationService>()
+                                  .signOut(context);
+                            },
+                            child: Text(
+                              "Log Out",
+                              style: TextStyle(fontSize: 30),
+                            ),
+                            color: Colors.orange[100],
+                          ),
+                        )
                       ],
                     ),
                   ),

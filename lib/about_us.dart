@@ -18,7 +18,7 @@ class AboutUs extends StatelessWidget {
                     ),
                     Text(
                       "About Us",
-                      style: TextStyle(fontSize: 50, color: Colors.grey[600]),
+                      style: TextStyle(fontSize: 50, color: Colors.deepOrange[900]),
                     ),
                     SizedBox(
                       height: 30,
@@ -28,8 +28,8 @@ class AboutUs extends StatelessWidget {
                       child: Text(
                         "We are 4 students of Izmir University of Economics. We realised that there are people who try to take care of the environment" +
                             " and the animals around them. We decided to support these people with our mobile application and encourage them." +
-                            " If you have any feedbacks please contact us! ",
-                        style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+                            " If you have any feedbacks please contact us! \n \n Thank You !!!",
+                        style: TextStyle(fontSize: 20, color: Colors.black),
                       ),
                     ),
                   ],

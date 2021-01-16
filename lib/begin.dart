@@ -1,4 +1,6 @@
 import 'package:act0ne/Market.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
@@ -62,26 +64,37 @@ class _BeginState extends State<Begin> {
           width: 150,
         ),
         actions: [
-          Container(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Row(
-              children: [
-                Padding(
+          StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(FirebaseAuth.instance.currentUser.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return new CircularProgressIndicator();
+                }
+                var document = snapshot.data;
+                return new Container(
                   padding: EdgeInsets.only(right: 8.0),
-                  child: Text("5500000",
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black)),
-                ),
-                Image.asset(
-                  "assets/images/icons/token.png",
-                  fit: BoxFit.contain,
-                  width: 32,
-                ),
-              ],
-            ),
-          )
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 8.0),
+                        child: Text(document["token"].toString(),
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                      ),
+                      Image.asset(
+                        "assets/images/icons/token.png",
+                        fit: BoxFit.contain,
+                        width: 32,
+                      ),
+                    ],
+                  ),
+                );
+              })
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
