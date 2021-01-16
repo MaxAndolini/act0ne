@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -167,12 +168,7 @@ class _ToysState extends State<Toys> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'The item is ordered succesfully!!'),
-                                            ));
+                                           onPressed: () {_buyItem(docData["price1"],docData["toy_item1"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -401,12 +397,7 @@ class _ToysState extends State<Toys> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'The item is ordered succesfully!!'),
-                                            ));
+                                            onPressed: () {_buyItem(docData["price2"],docData["toy_item2"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -634,12 +625,7 @@ class _ToysState extends State<Toys> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'The item is ordered succesfully!!'),
-                                            ));
+                                           onPressed: () {_buyItem(docData["price3"],docData["toy_item3"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -868,13 +854,8 @@ class _ToysState extends State<Toys> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                            content: Text(
-                                                'The item is ordered succesfully!!'),
-                                          ));
-                                        },
+                                         onPressed: () {_buyItem(docData["price4"],docData["toy_item4"]);
+                                          },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
                                       )
@@ -1101,13 +1082,8 @@ class _ToysState extends State<Toys> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                            content: Text(
-                                                'The item is ordered succesfully!!'),
-                                          ));
-                                        },
+                                         onPressed: () {_buyItem(docData["price5"],docData["toy_item5"]);
+                                          },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
                                       )
@@ -1334,12 +1310,7 @@ class _ToysState extends State<Toys> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'The item is ordered succesfully!!'),
-                                            ));
+                                         onPressed: () {_buyItem(docData["price6"],docData["toy_item6"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -1563,13 +1534,8 @@ class _ToysState extends State<Toys> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                            content: Text(
-                                                'The item is ordered succesfully!!'),
-                                          ));
-                                        },
+                                        onPressed: () {_buyItem(docData["price7"],docData["toy_item7"]);
+                                          },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
                                       )
@@ -1666,6 +1632,29 @@ class _ToysState extends State<Toys> {
             ]));
           }),
     );
+  }
+
+  _buyItem(String price, String name) {
+    int getprice = int.parse(price);
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get()
+        .then((value) {
+      if (value.data()["token"] - getprice >= 0) {
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser.uid)
+            .update({"token": (value.data()["token"] - getprice)});
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('The item(' + name + ') ordered succesfully!!'),
+        ));
+      } else {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('You dont have enough money'),
+        ));
+      }
+    });
   }
 
   Future<Widget> _getImage(BuildContext context, String imageName) async {

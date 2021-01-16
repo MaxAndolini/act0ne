@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,7 @@ class _DogState extends State<Dog> {
             if (!snapshot.hasData) {
               return new CircularProgressIndicator();
             }
+
             var docData = snapshot.data;
             return Container(
                 child: ListView(children: [
@@ -169,11 +171,7 @@ class _DogState extends State<Dog> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'The item is ordered succesfully!!'),
-                                            ));
+                                            _buyItem(docData["price1"],docData["dog_item1"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -403,11 +401,7 @@ class _DogState extends State<Dog> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'The item is ordered succesfully!!'),
-                                            ));
+                                            _buyItem(docData["price2"],docData["dog_item2"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -635,12 +629,7 @@ class _DogState extends State<Dog> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'The item is ordered succesfully!!'),
-                                            ));
+                                          onPressed: () {_buyItem(docData["price3"],docData["dog_item3"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -870,11 +859,7 @@ class _DogState extends State<Dog> {
                                               22),
                                       RaisedButton(
                                         onPressed: () {
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                            content: Text(
-                                                'The item is ordered succesfully!!'),
-                                          ));
+                                         _buyItem(docData["price4"],docData["dog_item4"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1102,12 +1087,7 @@ class _DogState extends State<Dog> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                            content: Text(
-                                                'The item is ordered succesfully!!'),
-                                          ));
+                                        onPressed: () {_buyItem(docData["price5"],docData["dog_item5"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1335,12 +1315,7 @@ class _DogState extends State<Dog> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {
-                                            _scaffoldKey.currentState
-                                                .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  'The item is ordered succesfully!!'),
-                                            ));
+                                          onPressed: () {_buyItem(docData["price6"],docData["dog_item6"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -1564,12 +1539,7 @@ class _DogState extends State<Dog> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {
-                                          _scaffoldKey.currentState
-                                              .showSnackBar(SnackBar(
-                                            content: Text(
-                                                'The item is ordered succesfully!!'),
-                                          ));
+                                        onPressed: () {_buyItem(docData["price7"],docData["dog_item7"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1667,6 +1637,29 @@ class _DogState extends State<Dog> {
             ]));
           }),
     );
+  }
+
+  _buyItem(String price,String name) {
+    int getprice = int.parse(price);
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get()
+        .then((value) {
+      if (value.data()["token"] - getprice >= 0) {
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser.uid)
+            .update({"token": (value.data()["token"] - getprice)});
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('The item('+ name +') is ordered succesfully!!'),
+        ));
+      } else {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('You dont have enough money'),
+        ));
+      }
+    });
   }
 
   Future<Widget> _getImage(BuildContext context, String imageName) async {
