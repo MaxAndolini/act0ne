@@ -188,7 +188,7 @@ class _OtherItemsState extends State<OtherItems> {
                             //Container with photo
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.5,
+                            height: MediaQuery.of(context).size.height / 3,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
@@ -421,7 +421,7 @@ class _OtherItemsState extends State<OtherItems> {
                           child: Container(
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.5,
+                            height: MediaQuery.of(context).size.height / 3,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
@@ -431,7 +431,7 @@ class _OtherItemsState extends State<OtherItems> {
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
-                                              50),
+                                              60),
                                 ),
                                 CircleAvatar(
                                   backgroundColor: Colors.transparent,
@@ -654,7 +654,7 @@ class _OtherItemsState extends State<OtherItems> {
                           child: Container(
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.5,
+                            height: MediaQuery.of(context).size.height / 3,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
