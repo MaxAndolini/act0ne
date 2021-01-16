@@ -168,7 +168,9 @@ class _OtherItemsState extends State<OtherItems> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                         onPressed: () {_buyItem(docData["price1"],docData["other_item1"]);
+                                          onPressed: () {
+                                            _buyItem(docData["price1"],
+                                                docData["other_item1"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -184,7 +186,7 @@ class _OtherItemsState extends State<OtherItems> {
                             //Container with photo
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 3,
+                            height: MediaQuery.of(context).size.height / 2.6,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
@@ -397,7 +399,9 @@ class _OtherItemsState extends State<OtherItems> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                         onPressed: () {_buyItem(docData["price2"],docData["other_item2"]);
+                                          onPressed: () {
+                                            _buyItem(docData["price2"],
+                                                docData["other_item2"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -412,7 +416,7 @@ class _OtherItemsState extends State<OtherItems> {
                           child: Container(
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 3,
+                            height: MediaQuery.of(context).size.height / 2.6,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
@@ -625,7 +629,9 @@ class _OtherItemsState extends State<OtherItems> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                           onPressed: () {_buyItem(docData["price3"],docData["other_item3"]);
+                                          onPressed: () {
+                                            _buyItem(docData["price3"],
+                                                docData["other_item3"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -640,7 +646,7 @@ class _OtherItemsState extends State<OtherItems> {
                           child: Container(
                             padding: new EdgeInsets.all(10.0),
                             width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 3,
+                            height: MediaQuery.of(context).size.height / 2.6,
                             decoration:
                                 BoxDecoration(color: Colors.deepOrange[100]),
                             child: Column(
@@ -854,8 +860,10 @@ class _OtherItemsState extends State<OtherItems> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {_buyItem(docData["price4"],docData["other_item4"]);
-                                          },
+                                        onPressed: () {
+                                          _buyItem(docData["price4"],
+                                              docData["other_item4"]);
+                                        },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
                                       )
@@ -1085,8 +1093,10 @@ class _OtherItemsState extends State<OtherItems> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {_buyItem(docData["price5"],docData["other_item5"]);
-                                          },
+                                        onPressed: () {
+                                          _buyItem(docData["price5"],
+                                              docData["other_item5"]);
+                                        },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
                                       )
@@ -1313,7 +1323,9 @@ class _OtherItemsState extends State<OtherItems> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                         onPressed: () {_buyItem(docData["price6"],docData["other_item6"]);
+                                          onPressed: () {
+                                            _buyItem(docData["price6"],
+                                                docData["other_item6"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -1537,8 +1549,10 @@ class _OtherItemsState extends State<OtherItems> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                       onPressed: () {_buyItem(docData["price7"],docData["other_item7"]);
-                                          },
+                                        onPressed: () {
+                                          _buyItem(docData["price7"],
+                                              docData["other_item7"]);
+                                        },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
                                       )
@@ -1636,7 +1650,8 @@ class _OtherItemsState extends State<OtherItems> {
           }),
     );
   }
-  _buyItem(String price,String name) {
+
+  _buyItem(String price, String name) {
     int getprice = int.parse(price);
     return FirebaseFirestore.instance
         .collection("users")
@@ -1649,7 +1664,7 @@ class _OtherItemsState extends State<OtherItems> {
             .doc(FirebaseAuth.instance.currentUser.uid)
             .update({"token": (value.data()["token"] - getprice)});
         _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text('The item('+ name +') ordered succesfully!!'),
+          content: Text('The item(' + name + ') ordered succesfully!!'),
         ));
       } else {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
