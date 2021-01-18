@@ -148,11 +148,6 @@ class AuthenticationService {
 
   _getTask() {
     return FirebaseFirestore.instance
-        .collection('Tasks')
-        .doc('Q8elnpjjwODUNKwp3uu6')
-        .get()
-        .then((value) {
-      FirebaseFirestore.instance
           .collection("Tasks")
           .doc(FirebaseAuth.instance.currentUser.uid)
           .set({
@@ -170,6 +165,5 @@ class AuthenticationService {
         "deneme3_token": "",
         "my_total_tasks": 0,
       });
-    });
   }
 }
