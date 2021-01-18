@@ -1,7 +1,9 @@
 import 'package:act0ne/Market.dart';
+import 'package:act0ne/authentication_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'ahome.dart';
 import 'ausers.dart';
@@ -95,7 +97,21 @@ class _BeginState extends State<Begin> {
                             ],
                           ),
                         )
-                      : Container();
+                      : Container(
+                          width: MediaQuery.of(context).size.width / 4.6,
+                          child: RaisedButton(
+                            onPressed: () {
+                              context
+                                  .read<AuthenticationService>()
+                                  .signOut(context);
+                            },
+                            child: Text(
+                              "Log Out",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            color: Colors.deepOrange[400],
+                          ),
+                        );
                 })
           ],
         ),
