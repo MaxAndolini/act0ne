@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,6 +10,7 @@ class OtherItems extends StatefulWidget {
 
 class _OtherItemsState extends State<OtherItems> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ class _OtherItemsState extends State<OtherItems> {
             if (!snapshot.hasData) {
               return new CircularProgressIndicator();
             }
-            var docData = snapshot.data;
+            var document = snapshot.data;
             return Container(
                 child: ListView(children: [
               Column(
@@ -83,9 +83,9 @@ class _OtherItemsState extends State<OtherItems> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['other_item1'] +
+                                                document['other_item1'] +
                                                     " : " +
-                                                    docData['price1'],
+                                                    document['price1'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -169,8 +169,8 @@ class _OtherItemsState extends State<OtherItems> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _buyItem(docData["price1"],
-                                                docData["other_item1"]);
+                                            _buyItem(document["price1"],
+                                                document["other_item1"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -192,7 +192,7 @@ class _OtherItemsState extends State<OtherItems> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['other_item1'],
+                                  document['other_item1'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -202,8 +202,8 @@ class _OtherItemsState extends State<OtherItems> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo1"]),
+                                      future: _getImage(
+                                          context, document["photo1"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -243,7 +243,7 @@ class _OtherItemsState extends State<OtherItems> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price1'],
+                                        document['price1'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -314,9 +314,9 @@ class _OtherItemsState extends State<OtherItems> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['other_item2'] +
+                                                document['other_item2'] +
                                                     " : " +
-                                                    docData['price2'],
+                                                    document['price2'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -400,8 +400,8 @@ class _OtherItemsState extends State<OtherItems> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _buyItem(docData["price2"],
-                                                docData["other_item2"]);
+                                            _buyItem(document["price2"],
+                                                document["other_item2"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -422,7 +422,7 @@ class _OtherItemsState extends State<OtherItems> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['other_item2'],
+                                  document['other_item2'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -432,8 +432,8 @@ class _OtherItemsState extends State<OtherItems> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo2"]),
+                                      future: _getImage(
+                                          context, document["photo2"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -473,7 +473,7 @@ class _OtherItemsState extends State<OtherItems> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price2'],
+                                        document['price2'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -544,9 +544,9 @@ class _OtherItemsState extends State<OtherItems> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['other_item3'] +
+                                                document['other_item3'] +
                                                     " : " +
-                                                    docData['price3'],
+                                                    document['price3'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -630,8 +630,8 @@ class _OtherItemsState extends State<OtherItems> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _buyItem(docData["price3"],
-                                                docData["other_item3"]);
+                                            _buyItem(document["price3"],
+                                                document["other_item3"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -652,7 +652,7 @@ class _OtherItemsState extends State<OtherItems> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['other_item3'],
+                                  document['other_item3'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -662,8 +662,8 @@ class _OtherItemsState extends State<OtherItems> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo3"]),
+                                      future: _getImage(
+                                          context, document["photo3"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -703,7 +703,7 @@ class _OtherItemsState extends State<OtherItems> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price3'],
+                                        document['price3'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -775,9 +775,9 @@ class _OtherItemsState extends State<OtherItems> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['other_item4'] +
+                                              document['other_item4'] +
                                                   " : " +
-                                                  docData['price4'],
+                                                  document['price4'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -861,8 +861,8 @@ class _OtherItemsState extends State<OtherItems> {
                                               22),
                                       RaisedButton(
                                         onPressed: () {
-                                          _buyItem(docData["price4"],
-                                              docData["other_item4"]);
+                                          _buyItem(document["price4"],
+                                              document["other_item4"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -884,7 +884,7 @@ class _OtherItemsState extends State<OtherItems> {
                           child: Column(
                             children: [
                               Text(
-                                docData['other_item4'],
+                                document['other_item4'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -898,7 +898,7 @@ class _OtherItemsState extends State<OtherItems> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo4"]),
+                                        _getImage(context, document["photo4"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -938,7 +938,7 @@ class _OtherItemsState extends State<OtherItems> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price4'],
+                                      document['price4'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -1008,9 +1008,9 @@ class _OtherItemsState extends State<OtherItems> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['other_item5'] +
+                                              document['other_item5'] +
                                                   " : " +
-                                                  docData['price5'],
+                                                  document['price5'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -1094,8 +1094,8 @@ class _OtherItemsState extends State<OtherItems> {
                                               22),
                                       RaisedButton(
                                         onPressed: () {
-                                          _buyItem(docData["price5"],
-                                              docData["other_item5"]);
+                                          _buyItem(document["price5"],
+                                              document["other_item5"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1116,7 +1116,7 @@ class _OtherItemsState extends State<OtherItems> {
                           child: Column(
                             children: [
                               Text(
-                                docData['other_item5'],
+                                document['other_item5'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -1127,7 +1127,7 @@ class _OtherItemsState extends State<OtherItems> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo5"]),
+                                        _getImage(context, document["photo5"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -1167,7 +1167,7 @@ class _OtherItemsState extends State<OtherItems> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price5'],
+                                      document['price5'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -1238,9 +1238,9 @@ class _OtherItemsState extends State<OtherItems> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['other_item6'] +
+                                                document['other_item6'] +
                                                     " : " +
-                                                    docData['price6'],
+                                                    document['price6'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -1324,8 +1324,8 @@ class _OtherItemsState extends State<OtherItems> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _buyItem(docData["price6"],
-                                                docData["other_item6"]);
+                                            _buyItem(document["price6"],
+                                                document["other_item6"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -1345,7 +1345,7 @@ class _OtherItemsState extends State<OtherItems> {
                                   BoxDecoration(color: Colors.deepOrange[100]),
                               child: Column(children: [
                                 Text(
-                                  docData['other_item6'],
+                                  document['other_item6'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -1355,8 +1355,8 @@ class _OtherItemsState extends State<OtherItems> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo6"]),
+                                      future: _getImage(
+                                          context, document["photo6"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -1396,7 +1396,7 @@ class _OtherItemsState extends State<OtherItems> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price6'],
+                                        document['price6'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -1464,9 +1464,9 @@ class _OtherItemsState extends State<OtherItems> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['other_item7'] +
+                                              document['other_item7'] +
                                                   " : " +
-                                                  docData['price7'],
+                                                  document['price7'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -1550,8 +1550,8 @@ class _OtherItemsState extends State<OtherItems> {
                                               22),
                                       RaisedButton(
                                         onPressed: () {
-                                          _buyItem(docData["price7"],
-                                              docData["other_item7"]);
+                                          _buyItem(document["price7"],
+                                              document["other_item7"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1573,7 +1573,7 @@ class _OtherItemsState extends State<OtherItems> {
                           child: Column(
                             children: [
                               Text(
-                                docData['other_item7'],
+                                document['other_item7'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -1584,7 +1584,7 @@ class _OtherItemsState extends State<OtherItems> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo7"]),
+                                        _getImage(context, document["photo7"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -1624,7 +1624,7 @@ class _OtherItemsState extends State<OtherItems> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price7'],
+                                      document['price7'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size

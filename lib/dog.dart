@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -25,8 +24,7 @@ class _DogState extends State<Dog> {
             if (!snapshot.hasData) {
               return new CircularProgressIndicator();
             }
-
-            var docData = snapshot.data;
+            var document = snapshot.data;
             return Container(
                 child: ListView(children: [
               Column(
@@ -85,9 +83,9 @@ class _DogState extends State<Dog> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['dog_item1'] +
+                                                document['dog_item1'] +
                                                     " : " +
-                                                    docData['price1'],
+                                                    document['price1'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -171,7 +169,8 @@ class _DogState extends State<Dog> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _buyItem(docData["price1"],docData["dog_item1"]);
+                                            _buyItem(document["price1"],
+                                                document["dog_item1"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -193,7 +192,7 @@ class _DogState extends State<Dog> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['dog_item1'],
+                                  document['dog_item1'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -203,8 +202,8 @@ class _DogState extends State<Dog> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo1"]),
+                                      future: _getImage(
+                                          context, document["photo1"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -244,7 +243,7 @@ class _DogState extends State<Dog> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price1'],
+                                        document['price1'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -315,9 +314,9 @@ class _DogState extends State<Dog> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['dog_item2'] +
+                                                document['dog_item2'] +
                                                     " : " +
-                                                    docData['price2'],
+                                                    document['price2'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -401,7 +400,8 @@ class _DogState extends State<Dog> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _buyItem(docData["price2"],docData["dog_item2"]);
+                                            _buyItem(document["price2"],
+                                                document["dog_item2"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -422,7 +422,7 @@ class _DogState extends State<Dog> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['dog_item2'],
+                                  document['dog_item2'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -432,8 +432,8 @@ class _DogState extends State<Dog> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo2"]),
+                                      future: _getImage(
+                                          context, document["photo2"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -473,7 +473,7 @@ class _DogState extends State<Dog> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price2'],
+                                        document['price2'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -544,9 +544,9 @@ class _DogState extends State<Dog> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['dog_item3'] +
+                                                document['dog_item3'] +
                                                     " : " +
-                                                    docData['price3'],
+                                                    document['price3'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -629,7 +629,9 @@ class _DogState extends State<Dog> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {_buyItem(docData["price3"],docData["dog_item3"]);
+                                          onPressed: () {
+                                            _buyItem(document["price3"],
+                                                document["dog_item3"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -650,7 +652,7 @@ class _DogState extends State<Dog> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['dog_item3'],
+                                  document['dog_item3'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -660,8 +662,8 @@ class _DogState extends State<Dog> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo3"]),
+                                      future: _getImage(
+                                          context, document["photo3"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -701,7 +703,7 @@ class _DogState extends State<Dog> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price3'],
+                                        document['price3'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -773,9 +775,9 @@ class _DogState extends State<Dog> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['dog_item4'] +
+                                              document['dog_item4'] +
                                                   " : " +
-                                                  docData['price4'],
+                                                  document['price4'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -859,7 +861,8 @@ class _DogState extends State<Dog> {
                                               22),
                                       RaisedButton(
                                         onPressed: () {
-                                         _buyItem(docData["price4"],docData["dog_item4"]);
+                                          _buyItem(document["price4"],
+                                              document["dog_item4"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -881,7 +884,7 @@ class _DogState extends State<Dog> {
                           child: Column(
                             children: [
                               Text(
-                                docData['dog_item4'],
+                                document['dog_item4'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -892,7 +895,7 @@ class _DogState extends State<Dog> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo4"]),
+                                        _getImage(context, document["photo4"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -932,7 +935,7 @@ class _DogState extends State<Dog> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price4'],
+                                      document['price4'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -1002,9 +1005,9 @@ class _DogState extends State<Dog> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['dog_item5'] +
+                                              document['dog_item5'] +
                                                   " : " +
-                                                  docData['price5'],
+                                                  document['price5'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -1087,7 +1090,9 @@ class _DogState extends State<Dog> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {_buyItem(docData["price5"],docData["dog_item5"]);
+                                        onPressed: () {
+                                          _buyItem(document["price5"],
+                                              document["dog_item5"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1108,7 +1113,7 @@ class _DogState extends State<Dog> {
                           child: Column(
                             children: [
                               Text(
-                                docData['dog_item5'],
+                                document['dog_item5'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -1119,7 +1124,7 @@ class _DogState extends State<Dog> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo5"]),
+                                        _getImage(context, document["photo5"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -1159,7 +1164,7 @@ class _DogState extends State<Dog> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price5'],
+                                      document['price5'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -1230,9 +1235,9 @@ class _DogState extends State<Dog> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['dog_item6'] +
+                                                document['dog_item6'] +
                                                     " : " +
-                                                    docData['price6'],
+                                                    document['price6'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -1315,7 +1320,9 @@ class _DogState extends State<Dog> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {_buyItem(docData["price6"],docData["dog_item6"]);
+                                          onPressed: () {
+                                            _buyItem(document["price6"],
+                                                document["dog_item6"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -1335,7 +1342,7 @@ class _DogState extends State<Dog> {
                                   BoxDecoration(color: Colors.deepOrange[100]),
                               child: Column(children: [
                                 Text(
-                                  docData['dog_item6'],
+                                  document['dog_item6'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -1345,8 +1352,8 @@ class _DogState extends State<Dog> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo6"]),
+                                      future: _getImage(
+                                          context, document["photo6"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -1386,7 +1393,7 @@ class _DogState extends State<Dog> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price6'],
+                                        document['price6'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -1454,9 +1461,9 @@ class _DogState extends State<Dog> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['dog_item7'] +
+                                              document['dog_item7'] +
                                                   " : " +
-                                                  docData['price7'],
+                                                  document['price7'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -1539,7 +1546,9 @@ class _DogState extends State<Dog> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {_buyItem(docData["price7"],docData["dog_item7"]);
+                                        onPressed: () {
+                                          _buyItem(document["price7"],
+                                              document["dog_item7"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1561,7 +1570,7 @@ class _DogState extends State<Dog> {
                           child: Column(
                             children: [
                               Text(
-                                docData['dog_item7'],
+                                document['dog_item7'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -1572,7 +1581,7 @@ class _DogState extends State<Dog> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo7"]),
+                                        _getImage(context, document["photo7"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -1612,7 +1621,7 @@ class _DogState extends State<Dog> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price7'],
+                                      document['price7'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -1639,7 +1648,7 @@ class _DogState extends State<Dog> {
     );
   }
 
-  _buyItem(String price,String name) {
+  _buyItem(String price, String name) {
     int getprice = int.parse(price);
     return FirebaseFirestore.instance
         .collection("users")
@@ -1652,7 +1661,7 @@ class _DogState extends State<Dog> {
             .doc(FirebaseAuth.instance.currentUser.uid)
             .update({"token": (value.data()["token"] - getprice)});
         _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text('The item('+ name +') is ordered succesfully!!'),
+          content: Text('The item(' + name + ') is ordered succesfully!!'),
         ));
       } else {
         _scaffoldKey.currentState.showSnackBar(SnackBar(

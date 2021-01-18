@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -11,6 +10,7 @@ class Cat extends StatefulWidget {
 
 class _CatState extends State<Cat> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ class _CatState extends State<Cat> {
             if (!snapshot.hasData) {
               return new CircularProgressIndicator();
             }
-            var docData = snapshot.data;
+            var document = snapshot.data;
             return Container(
                 child: ListView(children: [
               Column(
@@ -83,9 +83,9 @@ class _CatState extends State<Cat> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['cat_item1'] +
+                                                document['cat_item1'] +
                                                     " : " +
-                                                    docData['price1'],
+                                                    document['price1'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -169,7 +169,8 @@ class _CatState extends State<Cat> {
                                                 22),
                                         RaisedButton(
                                           onPressed: () {
-                                            _buyItem(docData["price1"],docData["cat_item1"]);
+                                            _buyItem(document["price1"],
+                                                document["cat_item1"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -191,7 +192,7 @@ class _CatState extends State<Cat> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['cat_item1'],
+                                  document['cat_item1'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -201,8 +202,8 @@ class _CatState extends State<Cat> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo1"]),
+                                      future: _getImage(
+                                          context, document["photo1"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -242,7 +243,7 @@ class _CatState extends State<Cat> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price1'],
+                                        document['price1'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -313,9 +314,9 @@ class _CatState extends State<Cat> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['cat_item2'] +
+                                                document['cat_item2'] +
                                                     " : " +
-                                                    docData['price2'],
+                                                    document['price2'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -398,7 +399,9 @@ class _CatState extends State<Cat> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {_buyItem(docData["price2"],docData["cat_item2"]);
+                                          onPressed: () {
+                                            _buyItem(document["price2"],
+                                                document["cat_item2"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -419,7 +422,7 @@ class _CatState extends State<Cat> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['cat_item2'],
+                                  document['cat_item2'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -429,8 +432,8 @@ class _CatState extends State<Cat> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo2"]),
+                                      future: _getImage(
+                                          context, document["photo2"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -470,7 +473,7 @@ class _CatState extends State<Cat> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price2'],
+                                        document['price2'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -541,9 +544,9 @@ class _CatState extends State<Cat> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['cat_item3'] +
+                                                document['cat_item3'] +
                                                     " : " +
-                                                    docData['price3'],
+                                                    document['price3'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -626,7 +629,9 @@ class _CatState extends State<Cat> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {_buyItem(docData["price3"],docData["cat_item3"]);
+                                          onPressed: () {
+                                            _buyItem(document["price3"],
+                                                document["cat_item3"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -647,7 +652,7 @@ class _CatState extends State<Cat> {
                             child: Column(
                               children: [
                                 Text(
-                                  docData['cat_item3'],
+                                  document['cat_item3'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -657,8 +662,8 @@ class _CatState extends State<Cat> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo3"]),
+                                      future: _getImage(
+                                          context, document["photo3"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -698,7 +703,7 @@ class _CatState extends State<Cat> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price3'],
+                                        document['price3'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -770,9 +775,9 @@ class _CatState extends State<Cat> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['cat_item4'] +
+                                              document['cat_item4'] +
                                                   " : " +
-                                                  docData['price4'],
+                                                  document['price4'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -855,7 +860,9 @@ class _CatState extends State<Cat> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {_buyItem(docData["price4"],docData["cat_item4"]);
+                                        onPressed: () {
+                                          _buyItem(document["price4"],
+                                              document["cat_item4"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -877,7 +884,7 @@ class _CatState extends State<Cat> {
                           child: Column(
                             children: [
                               Text(
-                                docData['cat_item4'],
+                                document['cat_item4'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -888,7 +895,7 @@ class _CatState extends State<Cat> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo4"]),
+                                        _getImage(context, document["photo4"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -928,7 +935,7 @@ class _CatState extends State<Cat> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price4'],
+                                      document['price4'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -998,9 +1005,9 @@ class _CatState extends State<Cat> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['cat_item5'] +
+                                              document['cat_item5'] +
                                                   " : " +
-                                                  docData['price5'],
+                                                  document['price5'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -1083,7 +1090,9 @@ class _CatState extends State<Cat> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {_buyItem(docData["price5"],docData["cat_item5"]);
+                                        onPressed: () {
+                                          _buyItem(document["price5"],
+                                              document["cat_item5"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1104,7 +1113,7 @@ class _CatState extends State<Cat> {
                           child: Column(
                             children: [
                               Text(
-                                docData['cat_item5'],
+                                document['cat_item5'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -1115,7 +1124,7 @@ class _CatState extends State<Cat> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo5"]),
+                                        _getImage(context, document["photo5"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -1155,7 +1164,7 @@ class _CatState extends State<Cat> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price5'],
+                                      document['price5'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -1226,9 +1235,9 @@ class _CatState extends State<Cat> {
                                               padding:
                                                   EdgeInsets.only(right: 4.0),
                                               child: Text(
-                                                docData['cat_item6'] +
+                                                document['cat_item6'] +
                                                     " : " +
-                                                    docData['price6'],
+                                                    document['price6'],
                                                 style: TextStyle(
                                                     fontSize:
                                                         MediaQuery.of(context)
@@ -1311,7 +1320,9 @@ class _CatState extends State<Cat> {
                                                     .width /
                                                 22),
                                         RaisedButton(
-                                          onPressed: () {_buyItem(docData["price6"],docData["cat_item6"]);
+                                          onPressed: () {
+                                            _buyItem(document["price6"],
+                                                document["cat_item6"]);
                                           },
                                           child: Text("BUY"),
                                           color: Colors.green[100],
@@ -1331,7 +1342,7 @@ class _CatState extends State<Cat> {
                                   BoxDecoration(color: Colors.deepOrange[100]),
                               child: Column(children: [
                                 Text(
-                                  docData['cat_item6'],
+                                  document['cat_item6'],
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /
@@ -1341,8 +1352,8 @@ class _CatState extends State<Cat> {
                                   backgroundColor: Colors.transparent,
                                   radius: 100,
                                   child: FutureBuilder(
-                                      future:
-                                          _getImage(context, docData["photo6"]),
+                                      future: _getImage(
+                                          context, document["photo6"]),
                                       builder: (context, snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
@@ -1382,7 +1393,7 @@ class _CatState extends State<Cat> {
                                     Padding(
                                       padding: EdgeInsets.only(right: 4.0),
                                       child: Text(
-                                        docData['price6'],
+                                        document['price6'],
                                         style: TextStyle(
                                             fontSize: MediaQuery.of(context)
                                                     .size
@@ -1450,9 +1461,9 @@ class _CatState extends State<Cat> {
                                             padding:
                                                 EdgeInsets.only(right: 4.0),
                                             child: Text(
-                                              docData['cat_item7'] +
+                                              document['cat_item7'] +
                                                   " : " +
-                                                  docData['price7'],
+                                                  document['price7'],
                                               style: TextStyle(
                                                   fontSize:
                                                       MediaQuery.of(context)
@@ -1535,7 +1546,9 @@ class _CatState extends State<Cat> {
                                                   .width /
                                               22),
                                       RaisedButton(
-                                        onPressed: () {_buyItem(docData["price7"],docData["cat_item7"]);
+                                        onPressed: () {
+                                          _buyItem(document["price7"],
+                                              document["cat_item7"]);
                                         },
                                         child: Text("BUY"),
                                         color: Colors.green[100],
@@ -1557,7 +1570,7 @@ class _CatState extends State<Cat> {
                           child: Column(
                             children: [
                               Text(
-                                docData['cat_item7'],
+                                document['cat_item7'],
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height /
@@ -1568,7 +1581,7 @@ class _CatState extends State<Cat> {
                                 radius: 100,
                                 child: FutureBuilder(
                                     future:
-                                        _getImage(context, docData["photo7"]),
+                                        _getImage(context, document["photo7"]),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.done) {
@@ -1608,7 +1621,7 @@ class _CatState extends State<Cat> {
                                   Padding(
                                     padding: EdgeInsets.only(right: 4.0),
                                     child: Text(
-                                      docData['price7'],
+                                      document['price7'],
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -1635,7 +1648,7 @@ class _CatState extends State<Cat> {
     );
   }
 
-  _buyItem(String price,String name) {
+  _buyItem(String price, String name) {
     int getprice = int.parse(price);
     return FirebaseFirestore.instance
         .collection("users")
@@ -1648,7 +1661,7 @@ class _CatState extends State<Cat> {
             .doc(FirebaseAuth.instance.currentUser.uid)
             .update({"token": (value.data()["token"] - getprice)});
         _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text('The item('+ name +') ordered succesfully!!'),
+          content: Text('The item(' + name + ') ordered succesfully!!'),
         ));
       } else {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
