@@ -118,12 +118,12 @@ class AuthenticationService {
             .doc(user.user.uid)
             .set({"name": name, "surname": surname, "birthday": birthday, "image": "user.png", "token": 0, "admin": 0}).then(
                 (value) {
-          Navigator.pushReplacementNamed(aContext, "/signin");
           scaffold.showSnackBar(
             new SnackBar(
               content: new Text('Successfully signed up!'),
             ),
           );
+          Navigator.pushReplacementNamed(aContext, "/signin");
         });
       });
       return 1;

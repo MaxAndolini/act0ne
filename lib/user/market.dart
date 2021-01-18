@@ -1,8 +1,9 @@
-import 'package:act0ne/cat.dart';
-import 'package:act0ne/dog.dart';
-import 'package:act0ne/other_items.dart';
-import 'package:act0ne/toys.dart';
+import 'package:act0ne/user/toys.dart';
 import 'package:flutter/material.dart';
+
+import 'cat.dart';
+import 'dog.dart';
+import 'other_items.dart';
 
 class Market extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
+import 'package:act0ne/user/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'tasks.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -61,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   alignment: Alignment.centerRight,
                   child: FlatButton(
                     onPressed: () => Navigator.push(context,
-                        new MaterialPageRoute(builder: (context) => MyApp())),
+                        new MaterialPageRoute(builder: (context) => Tasks())),
                     child: Text(
                       'Skip',
                       style: TextStyle(
@@ -208,7 +208,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               color: Colors.white,
               child: GestureDetector(
                 onTap: () => Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => MyApp())),
+                    new MaterialPageRoute(builder: (context) => Tasks())),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 30.0),

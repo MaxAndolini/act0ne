@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AHome extends StatelessWidget {
@@ -13,6 +14,7 @@ class AHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _deneme();
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -59,5 +61,13 @@ class AHome extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _deneme() async {
+    final QuerySnapshot result =
+    await FirebaseFirestore.instance.collection('users').get();
+    final List<DocumentSnapshot> documents = result.docs;
+
+    documents.forEach((data) => print(data.id));
   }
 }

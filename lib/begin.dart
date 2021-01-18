@@ -1,15 +1,16 @@
-import 'package:act0ne/Market.dart';
+
 import 'package:act0ne/authentication_service.dart';
+import 'package:act0ne/user/market.dart';
+import 'package:act0ne/user/tasks.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'ahome.dart';
-import 'ausers.dart';
-import 'home.dart';
-import 'profile_selector.dart';
-import 'tasks.dart';
+import 'admin/ahome.dart';
+import 'admin/ausers.dart';
+import 'user/home.dart';
+import 'user/profile_selector.dart';
 
 class Begin extends StatefulWidget {
   @override

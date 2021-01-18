@@ -1,6 +1,6 @@
 import 'package:act0ne/authentication_service.dart';
 import 'package:act0ne/begin.dart';
-import 'package:act0ne/home.dart';
+import 'file:///C:/Users/PC/IdeaProjects/act0ne/lib/user/home.dart';
 import 'package:act0ne/signin.dart';
 import 'package:act0ne/signup.dart';
 import 'package:act0ne/splash.dart';
