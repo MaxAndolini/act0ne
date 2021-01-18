@@ -6,7 +6,7 @@ class AUsers extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> litems = [];
     return Scaffold(
-      body: FutureBuilder<QuerySnapshot>(
+      body: FutureBuilder(
           future: FirebaseFirestore.instance.collection("users").get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {

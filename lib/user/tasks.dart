@@ -44,7 +44,7 @@ class _TasksState extends State<Tasks> {
           if (picNumber == 1)
             {
               FirebaseFirestore.instance
-                  .collection("Tasks")
+                  .collection("users")
                   .doc(FirebaseAuth.instance.currentUser.uid)
                   .update({
                 "task1_image": "TaskPhotos/$fileName",
@@ -53,7 +53,7 @@ class _TasksState extends State<Tasks> {
           else if (picNumber == 2)
             {
               FirebaseFirestore.instance
-                  .collection("Tasks")
+                  .collection("users")
                   .doc(FirebaseAuth.instance.currentUser.uid)
                   .update({
                 "task2_image": "TaskPhotos/$fileName",
@@ -62,7 +62,7 @@ class _TasksState extends State<Tasks> {
           else if (picNumber == 3)
             {
               FirebaseFirestore.instance
-                  .collection("Tasks")
+                  .collection("users")
                   .doc(FirebaseAuth.instance.currentUser.uid)
                   .update({
                 "task3_image": "TaskPhotos/$fileName",
@@ -324,12 +324,12 @@ class _TasksState extends State<Tasks> {
         .get()
         .then((value) {
       FirebaseFirestore.instance
-          .collection("Tasks")
+          .collection("users")
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
         "task1_name": value.data()["task1"],
-        "task1_approve": "0",
-        "deneme1_token": value.data()["task1_price"]
+        "task1_token": value.data()["task1_price"],
+        "task1_approve": 1
       });
     });
   }
@@ -341,12 +341,12 @@ class _TasksState extends State<Tasks> {
         .get()
         .then((value) {
       FirebaseFirestore.instance
-          .collection("Tasks")
+          .collection("users")
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
         "task2_name": value.data()["task2"],
-        "task2_approve": "0",
-        "deneme2_token": value.data()["task2_price"]
+        "task2_token": value.data()["task2_price"],
+        "task2_approve": 1
       });
     });
   }
@@ -358,12 +358,12 @@ class _TasksState extends State<Tasks> {
         .get()
         .then((value) {
       FirebaseFirestore.instance
-          .collection("Tasks")
+          .collection("users")
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
         "task3_name": value.data()["task3"],
-        "task3_approve": "0",
-        "deneme3_token": value.data()["task3_price"]
+        "task3_token": value.data()["task3_price"],
+        "task3_approve": 1
       });
     });
   }

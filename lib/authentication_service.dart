@@ -119,9 +119,21 @@ class AuthenticationService {
           "birthday": birthday,
           "image": "user.png",
           "token": 0,
-          "admin": 0
+          "admin": 0,
+          "task1_name": "",
+          "task1_image": "",
+          "task1_token": "",
+          "task1_approve": 0,
+          "task2_name": "",
+          "task2_image": "",
+          "task2_token": "",
+          "task2_approve": 0,
+          "task3_name": "",
+          "task3_image": "",
+          "task3_token": "",
+          "task3_approve": 0,
+          "my_total_tasks": 0,
         }).then((value) {
-          _getTask();
           scaffold.showSnackBar(
             new SnackBar(
               content: new Text('Successfully signed up!'),
@@ -144,26 +156,5 @@ class AuthenticationService {
   Future<void> signOut(aContext) async {
     await _firebaseAuth.signOut();
     Navigator.pushReplacementNamed(aContext, "/signin");
-  }
-
-  _getTask() {
-    return FirebaseFirestore.instance
-          .collection("Tasks")
-          .doc(FirebaseAuth.instance.currentUser.uid)
-          .set({
-        "task1_name": "",
-        "task1_image": "",
-        "task1_approve": "0",
-        "task1_token": "",
-        "task2_name": "",
-        "task2_image": "",
-        "task2_approve": "0",
-        "task2_token": "",
-        "task3_name": "",
-        "task3_image": "",
-        "task3_approve": "0",
-        "task3_token": "",
-        "my_total_tasks": 0,
-      });
   }
 }

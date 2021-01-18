@@ -6,7 +6,7 @@ class AHome extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> litems = [];
     return Scaffold(
-      body: FutureBuilder<QuerySnapshot>(
+      body: FutureBuilder(
           future: FirebaseFirestore.instance.collection("users").get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
@@ -17,10 +17,17 @@ class AHome extends StatelessWidget {
               String variable = data.get("name") +
                   " " +
                   data.get("surname") +
-                  ": " +
-                  data.get("token").toString();
+                  ": ";
 
-              litems.add(variable);
+              if(data.get("task1_approve") == 1) {
+                litems.add(variable + data.get("task1_name"));
+              }
+              if(data.get("task2_approve") == 1) {
+                litems.add(variable + data.get("task2_name"));
+              }
+              if(data.get("task3_approve") == 1) {
+                litems.add(variable + data.get("task3_name"));
+              }
             });
 
             return CustomScrollView(
