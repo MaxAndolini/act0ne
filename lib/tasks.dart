@@ -136,8 +136,10 @@ class _TasksState extends State<Tasks> {
             //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(width: 0, height: 100.0),
-              Text("Daily Task", textAlign: TextAlign.left),
+              Text("Daily Task", textAlign: TextAlign.left , style: TextStyle(
+                fontSize: 20 ,
+                fontWeight: FontWeight.bold ,
+              ),),
               Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -155,11 +157,14 @@ class _TasksState extends State<Tasks> {
                     height: 50,
                     width: 275,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: <Widget>[
-                            Text(taskData["task5"]),
+                            Text(taskData["task5"] , style: TextStyle(
+                              fontSize: 17,
+                            ),),
                           ],
                         ),
                       ],
@@ -192,7 +197,10 @@ class _TasksState extends State<Tasks> {
               ),*/
 
               SizedBox(width: 0, height: 100.0),
-              Text("Weekly Task"),
+              Text("Weekly Task" , style:  TextStyle(
+                fontSize: 20 ,
+                fontWeight: FontWeight.bold ,
+              ),),
               Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -210,11 +218,14 @@ class _TasksState extends State<Tasks> {
                         borderRadius: BorderRadiusDirectional.circular(6.0),
                         shape: BoxShape.rectangle),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
-                            Text(taskData["task2"])
+                            Text(taskData["task2"] , style: TextStyle(
+                              fontSize: 17
+                            ),)
                           ],
                         ),
                       ],
@@ -226,7 +237,11 @@ class _TasksState extends State<Tasks> {
                 child: Icon(Icons.camera_alt),
               ),
               SizedBox(width: 0, height: 100.0),
-              Text("Monthly Tasks"),
+              Text("Monthly Tasks" , style: TextStyle(
+                fontSize: 20 ,
+                fontWeight: FontWeight.bold ,
+
+              ),),
               Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -244,11 +259,14 @@ class _TasksState extends State<Tasks> {
                         borderRadius: BorderRadiusDirectional.circular(6.0),
                         shape: BoxShape.rectangle),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
-                            Text(taskData["task3"]),
+                            Text(taskData["task3"] , style: TextStyle(
+                              fontSize: 17,
+                            ),),
                           ],
                         ),
                       ],
