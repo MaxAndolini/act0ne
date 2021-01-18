@@ -126,8 +126,7 @@ class _TasksState extends State<Tasks> {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
             }
-            var taskData = snapshot.data;
-
+            var document = snapshot.data;
             return ListView(children: [
               Column(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -164,7 +163,7 @@ class _TasksState extends State<Tasks> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  taskData["task1"],
+                                  document["task1"],
                                   style: TextStyle(
                                     fontSize: 17,
                                   ),
@@ -238,7 +237,7 @@ class _TasksState extends State<Tasks> {
                             Row(
                               children: [
                                 Text(
-                                  taskData["task2"],
+                                  document["task2"],
                                   style: TextStyle(fontSize: 17),
                                 )
                               ],
@@ -289,7 +288,7 @@ class _TasksState extends State<Tasks> {
                             Row(
                               children: [
                                 Text(
-                                  taskData["task3"],
+                                  document["task3"],
                                   style: TextStyle(
                                     fontSize: 17,
                                   ),

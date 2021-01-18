@@ -75,14 +75,14 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: StreamBuilder(
-          stream: FirebaseFirestore.instance
+      body: FutureBuilder(
+          future: FirebaseFirestore.instance
               .collection("users")
               .doc(FirebaseAuth.instance.currentUser.uid)
-              .snapshots(),
+              .get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return new CircularProgressIndicator();
+              return Center(child: new CircularProgressIndicator());
             }
             var document = snapshot.data;
 

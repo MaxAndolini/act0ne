@@ -40,11 +40,11 @@ class _BeginState extends State<Begin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: StreamBuilder(
-            stream: FirebaseFirestore.instance
+        body: FutureBuilder(
+            future: FirebaseFirestore.instance
                 .collection("users")
                 .doc(FirebaseAuth.instance.currentUser.uid)
-                .snapshots(),
+                .get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return new CircularProgressIndicator();
@@ -116,17 +116,16 @@ class _BeginState extends State<Begin> {
                 })
           ],
         ),
-        bottomNavigationBar: StreamBuilder(
-            stream: FirebaseFirestore.instance
+        bottomNavigationBar: FutureBuilder(
+            future: FirebaseFirestore.instance
                 .collection("users")
                 .doc(FirebaseAuth.instance.currentUser.uid)
-                .snapshots(),
+                .get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return new CircularProgressIndicator();
               }
               var document = snapshot.data;
-
               return document["admin"] == 0
                   ? BottomNavigationBar(
                       currentIndex: positionNumber,

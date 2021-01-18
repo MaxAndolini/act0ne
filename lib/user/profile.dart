@@ -14,14 +14,14 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: StreamBuilder(
-            stream: FirebaseFirestore.instance
+        body: FutureBuilder(
+            future: FirebaseFirestore.instance
                 .collection("users")
                 .doc(FirebaseAuth.instance.currentUser.uid)
-                .snapshots(),
+                .get(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return new CircularProgressIndicator();
+                return Center(child: new CircularProgressIndicator());
               }
               var document = snapshot.data;
               return new ListView(children: [

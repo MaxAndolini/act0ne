@@ -22,7 +22,7 @@ class _OtherItemsState extends State<OtherItems> {
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return new CircularProgressIndicator();
+              return Center(child: new CircularProgressIndicator());
             }
             var document = snapshot.data;
             return Container(
