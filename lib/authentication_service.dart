@@ -148,22 +148,22 @@ class AuthenticationService {
 
   _getTask() {
     return FirebaseFirestore.instance
-        .collection("Tasks")
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .set({
-      "task1_name": "",
-      "task1_image": "",
-      "task1_approve": "0",
-      "deneme1_token": "",
-      "task2_name": "",
-      "task2_image": "",
-      "task2_approve": "0",
-      "deneme2_token": "",
-      "task3_name": "",
-      "task3_image": "",
-      "task3_approve": "0",
-      "deneme3_token": "",
-      "my_total_tasks": 0,
-    });
+          .collection("Tasks")
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .set({
+        "task1_name": "",
+        "task1_image": "",
+        "task1_approve": "0",
+        "task1_token": "",
+        "task2_name": "",
+        "task2_image": "",
+        "task2_approve": "0",
+        "task2_token": "",
+        "task3_name": "",
+        "task3_image": "",
+        "task3_approve": "0",
+        "task3_token": "",
+        "my_total_tasks": 0,
+      });
   }
 }
