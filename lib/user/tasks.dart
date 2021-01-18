@@ -14,6 +14,7 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
+  int picNumber = 0;
   File _imageFile;
 
   final imagePicker = ImagePicker();
@@ -39,12 +40,35 @@ class _TasksState extends State<Tasks> {
         FirebaseStorage.instance.ref().child('TaskPhotos/$fileName');
     UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
     TaskSnapshot taskSnapshot = await uploadTask;
-    taskSnapshot.ref.getDownloadURL().then(
-          (value) => FirebaseFirestore.instance
-              .collection("users")
-              .doc(FirebaseAuth.instance.currentUser.uid)
-              .update({"Taskimage": "TaskPhotos/$fileName"}),
-        );
+    taskSnapshot.ref.getDownloadURL().then((value) => {
+          if (picNumber == 1)
+            {
+              FirebaseFirestore.instance
+                  .collection("Tasks")
+                  .doc(FirebaseAuth.instance.currentUser.uid)
+                  .update({
+                "task1_image": "TaskPhotos/$fileName",
+              }),
+            }
+          else if (picNumber == 2)
+            {
+              FirebaseFirestore.instance
+                  .collection("Tasks")
+                  .doc(FirebaseAuth.instance.currentUser.uid)
+                  .update({
+                "task2_image": "TaskPhotos/$fileName",
+              })
+            }
+          else if (picNumber == 3)
+            {
+              FirebaseFirestore.instance
+                  .collection("Tasks")
+                  .doc(FirebaseAuth.instance.currentUser.uid)
+                  .update({
+                "task3_image": "TaskPhotos/$fileName",
+              })
+            }
+        });
   }
 
 /*
@@ -140,7 +164,7 @@ class _TasksState extends State<Tasks> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  taskData["task5"],
+                                  taskData["task1"],
                                   style: TextStyle(
                                     fontSize: 17,
                                   ),
@@ -153,7 +177,13 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: getImage,
+                    onPressed: () {
+                      setState(() {
+                        picNumber = 1;
+                      });
+                      _getTask1();
+                      getImage();
+                    },
                     child: Icon(Icons.camera_alt),
                   ),
 
@@ -219,7 +249,13 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: getImage,
+                    onPressed: () {
+                      setState(() {
+                        picNumber = 2;
+                      });
+                      _getTask2();
+                      getImage();
+                    },
                     child: Icon(Icons.camera_alt),
                   ),
                   SizedBox(width: 0, height: 100.0),
@@ -266,7 +302,13 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: getImage,
+                    onPressed: () {
+                      setState(() {
+                        picNumber = 3;
+                      });
+                      _getTask3();
+                      getImage();
+                    },
                     child: Icon(Icons.camera_alt),
                   ),
                 ],
@@ -274,5 +316,56 @@ class _TasksState extends State<Tasks> {
             ]);
           }),
     );
+  }
+
+  _getTask1() {
+    return FirebaseFirestore.instance
+        .collection('Tasks')
+        .doc('Q8elnpjjwODUNKwp3uu6')
+        .get()
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection("Tasks")
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .update({
+        "task1_name": value.data()["task1"],
+        "task1_approve": "0",
+        "deneme1_token": value.data()["task1_price"]
+      });
+    });
+  }
+
+  _getTask2() {
+    return FirebaseFirestore.instance
+        .collection('Tasks')
+        .doc('Q8elnpjjwODUNKwp3uu6')
+        .get()
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection("Tasks")
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .update({
+        "task2_name": value.data()["task2"],
+        "task2_approve": "0",
+        "deneme2_token": value.data()["task2_price"]
+      });
+    });
+  }
+
+  _getTask3() {
+    return FirebaseFirestore.instance
+        .collection('Tasks')
+        .doc('Q8elnpjjwODUNKwp3uu6')
+        .get()
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection("Tasks")
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .update({
+        "task3_name": value.data()["task3"],
+        "task3_approve": "0",
+        "deneme3_token": value.data()["task3_price"]
+      });
+    });
   }
 }
