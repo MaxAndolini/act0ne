@@ -1,9 +1,9 @@
 import 'package:act0ne/authentication_service.dart';
 import 'package:act0ne/begin.dart';
-import 'file:///C:/Users/PC/IdeaProjects/act0ne/lib/user/home.dart';
 import 'package:act0ne/signin.dart';
 import 'package:act0ne/signup.dart';
 import 'package:act0ne/splash.dart';
+import 'package:act0ne/user/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

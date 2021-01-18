@@ -1,8 +1,8 @@
+import 'package:act0ne/user/profile.dart';
 import 'package:act0ne/user/settings.dart';
 import 'package:flutter/material.dart';
 
-import 'file:///C:/Users/PC/IdeaProjects/act0ne/lib/user/about_us.dart';
-import 'file:///C:/Users/PC/IdeaProjects/act0ne/lib/user/profile.dart';
+import 'about_us.dart';
 
 class ProfileSelector extends StatefulWidget {
   @override
