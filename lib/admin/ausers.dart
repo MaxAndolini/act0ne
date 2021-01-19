@@ -17,8 +17,11 @@ class AUsers extends StatelessWidget {
               String variable = data.get("name") +
                   " " +
                   data.get("surname") +
-                  ": " +
-                  data.get("token").toString();
+                  " (" +
+                  data.get("birthday") +
+                  "): " +
+                  data.get("token").toString() +
+                  " token";
 
               litems.add(variable);
             });
@@ -40,7 +43,7 @@ class AUsers extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) => Container(
                               decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: Colors.blue,
                                 border: Border.all(width: 2.0),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),

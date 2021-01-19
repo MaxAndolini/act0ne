@@ -14,18 +14,16 @@ class AHome extends StatelessWidget {
             }
             var document = snapshot.data.docs;
             document.forEach((data) {
-              String variable = data.get("name") +
-                  " " +
-                  data.get("surname") +
-                  ": ";
+              String variable =
+                  data.get("name") + " " + data.get("surname") + ": ";
 
-              if(data.get("task1_approve") == 1) {
+              if (data.get("task1_approve") == 1) {
                 litems.add(variable + data.get("task1_name"));
               }
-              if(data.get("task2_approve") == 1) {
+              if (data.get("task2_approve") == 1) {
                 litems.add(variable + data.get("task2_name"));
               }
-              if(data.get("task3_approve") == 1) {
+              if (data.get("task3_approve") == 1) {
                 litems.add(variable + data.get("task3_name"));
               }
             });
@@ -46,16 +44,18 @@ class AHome extends StatelessWidget {
                         itemExtent: 40,
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) => Container(
-                              decoration: BoxDecoration(
-                                color: Colors.orangeAccent,
-                                border: Border.all(width: 2.0),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0)),
-                              ),
-                              alignment: Alignment.centerLeft,
                               margin: EdgeInsets.all(5.0),
-                              padding: EdgeInsets.only(left: 10.0),
-                              child: new Text(litems[index]),
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      color: Colors.black, width: 2.0),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25.0)),
+                                ),
+                                color: Colors.orangeAccent,
+                                child: Text(litems[index]),
+                                onPressed: () {},
+                              ),
                             ),
                         itemCount: litems.length),
                   ),
