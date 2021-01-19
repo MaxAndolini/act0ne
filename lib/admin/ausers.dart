@@ -40,7 +40,7 @@ class AUsers extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) => Container(
                               decoration: BoxDecoration(
-                                color: Colors.orangeAccent,
+                                color: Colors.red,
                                 border: Border.all(width: 2.0),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
