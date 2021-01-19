@@ -1,5 +1,4 @@
 import 'package:act0ne/authentication_service.dart';
-import 'package:act0ne/signup.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -134,10 +133,7 @@ class SignIn extends StatelessWidget {
                               color: Colors.white),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignUp()),
-                          );
+                          Navigator.pushReplacementNamed(context, "/signup");
                         },
                       ),
                     ),

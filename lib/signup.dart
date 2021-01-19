@@ -1,5 +1,4 @@
 import 'package:act0ne/authentication_service.dart';
-import 'package:act0ne/signin.dart';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -121,11 +120,11 @@ class _SignUpState extends State<SignUp> {
                               maxTime: DateTime(DateTime.now().year - 18,
                                   DateTime.now().month, DateTime.now().day),
                               onChanged: (date) {}, onConfirm: (date) {
-                                setState(() {
-                                  birthdayController =
-                                      date.toString().split(" ").first;
-                                });
-                              },
+                            setState(() {
+                              birthdayController =
+                                  date.toString().split(" ").first;
+                            });
+                          },
                               currentTime: DateTime.now(),
                               locale: LocaleType.en);
                         },
@@ -170,20 +169,20 @@ class _SignUpState extends State<SignUp> {
                             "REGISTER",
                             style: TextStyle(
                                 fontSize:
-                                MediaQuery.of(context).size.height / 40,
+                                    MediaQuery.of(context).size.height / 40,
                                 color: Colors.white),
                           ),
                           onPressed: () {
                             context.read<AuthenticationService>().signUp(
-                              scaffold: _scaffoldKey.currentState,
-                              aContext: context,
-                              name: nameController.text,
-                              surname: surnameController.text,
-                              email: emailController.text,
-                              birthday: birthdayController,
-                              password: passwordController.text,
-                              password2: password2Controller.text,
-                            );
+                                  scaffold: _scaffoldKey.currentState,
+                                  aContext: context,
+                                  name: nameController.text,
+                                  surname: surnameController.text,
+                                  email: emailController.text,
+                                  birthday: birthdayController,
+                                  password: passwordController.text,
+                                  password2: password2Controller.text,
+                                );
                           },
                         ),
                       ),
@@ -221,10 +220,7 @@ class _SignUpState extends State<SignUp> {
                               color: Colors.white),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignIn()),
-                          );
+                          Navigator.pushReplacementNamed(context, "/signin");
                         },
                       ),
                     ),
