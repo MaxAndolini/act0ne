@@ -7,7 +7,12 @@ class AHome extends StatelessWidget {
     List<String> litems = [];
     return Scaffold(
       body: FutureBuilder(
-          future: FirebaseFirestore.instance.collection("users").get(),
+          future: FirebaseFirestore.instance
+              .collection("users")
+              .where("task1_approve", isEqualTo: 1)
+              .where("task2_approve", isEqualTo: 1)
+              .where("task3_approve", isEqualTo: 1)
+              .get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
