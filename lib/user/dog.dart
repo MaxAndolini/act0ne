@@ -31,1616 +31,36 @@ class _DogState extends State<Dog> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                  backgroundColor: Colors.blue[100],
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40)),
-                                  elevation: 16,
-                                  child: Container(
-                                    //container when clicked
-                                    padding: new EdgeInsets.all(20.0),
-                                    height: MediaQuery.of(context).size.height /
-                                        1.5,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    child: ListView(
-                                      children: <Widget>[
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Do you want to buy this item ?",
-                                            style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  22,
-                                              color: Colors.deepOrange[900],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 4.0),
-                                              child: Text(
-                                                document['dog_item1'] +
-                                                    " : " +
-                                                    document['price1'],
-                                                style: TextStyle(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            50),
-                                              ),
-                                            ),
-                                            Image.asset(
-                                              "assets/images/icons/token.png",
-                                              fit: BoxFit.contain,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  20,
-                                            ),
-                                          ],
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Your name :",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                              focusColor: Colors.white),
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Your Adress :",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                              focusColor: Colors.white),
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        RaisedButton(
-                                          onPressed: () {
-                                            _buyItem(document["price1"],
-                                                document["dog_item1"]);
-                                          },
-                                          child: Text("BUY"),
-                                          color: Colors.green[100],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Container(
-                            //Container with photo
-                            padding: new EdgeInsets.all(10.0),
-                            width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.6,
-                            decoration:
-                                BoxDecoration(color: Colors.deepOrange[100]),
-                            child: Column(
-                              children: [
-                                Text(
-                                  document['dog_item1'],
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              50),
-                                ),
-                                CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 100,
-                                  child: FutureBuilder(
-                                      future: _getImage(
-                                          context, document["photo1"]),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                4,
-                                            child: snapshot.data,
-                                          );
-                                        }
-
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                4,
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        }
-                                        return Container();
-                                      }),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 4.0),
-                                      child: Text(
-                                        document['price1'],
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                50),
-                                      ),
-                                    ),
-                                    Image.asset(
-                                      "assets/images/icons/token.png",
-                                      fit: BoxFit.contain,
-                                      width: MediaQuery.of(context).size.width /
-                                          20,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        //Second Item
-                        InkWell(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                  backgroundColor: Colors.blue[100],
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40)),
-                                  elevation: 16,
-                                  child: Container(
-                                    padding: new EdgeInsets.all(20.0),
-                                    height: MediaQuery.of(context).size.height /
-                                        1.5,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    child: ListView(
-                                      children: <Widget>[
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Do you want to buy this item ?",
-                                            style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  22,
-                                              color: Colors.deepOrange[900],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 4.0),
-                                              child: Text(
-                                                document['dog_item2'] +
-                                                    " : " +
-                                                    document['price2'],
-                                                style: TextStyle(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            50),
-                                              ),
-                                            ),
-                                            Image.asset(
-                                              "assets/images/icons/token.png",
-                                              fit: BoxFit.contain,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  20,
-                                            ),
-                                          ],
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Your name :",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                              focusColor: Colors.white),
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Your Adress :",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                              focusColor: Colors.white),
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        RaisedButton(
-                                          onPressed: () {
-                                            _buyItem(document["price2"],
-                                                document["dog_item2"]);
-                                          },
-                                          child: Text("BUY"),
-                                          color: Colors.green[100],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Container(
-                            padding: new EdgeInsets.all(10.0),
-                            width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.6,
-                            decoration:
-                                BoxDecoration(color: Colors.deepOrange[100]),
-                            child: Column(
-                              children: [
-                                Text(
-                                  document['dog_item2'],
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              50),
-                                ),
-                                CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 100,
-                                  child: FutureBuilder(
-                                      future: _getImage(
-                                          context, document["photo2"]),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                4,
-                                            child: snapshot.data,
-                                          );
-                                        }
-
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                4,
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        }
-                                        return Container();
-                                      }),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 4.0),
-                                      child: Text(
-                                        document['price2'],
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                50),
-                                      ),
-                                    ),
-                                    Image.asset(
-                                      "assets/images/icons/token.png",
-                                      fit: BoxFit.contain,
-                                      width: MediaQuery.of(context).size.width /
-                                          20,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        //Third Item
-                        InkWell(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                  backgroundColor: Colors.blue[100],
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40)),
-                                  elevation: 16,
-                                  child: Container(
-                                    padding: new EdgeInsets.all(20.0),
-                                    height: MediaQuery.of(context).size.height /
-                                        1.5,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    child: ListView(
-                                      children: <Widget>[
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Do you want to buy this item ?",
-                                            style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  22,
-                                              color: Colors.deepOrange[900],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 4.0),
-                                              child: Text(
-                                                document['dog_item3'] +
-                                                    " : " +
-                                                    document['price3'],
-                                                style: TextStyle(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            50),
-                                              ),
-                                            ),
-                                            Image.asset(
-                                              "assets/images/icons/token.png",
-                                              fit: BoxFit.contain,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  20,
-                                            ),
-                                          ],
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Your name :",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                              focusColor: Colors.white),
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Your Adress :",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                              focusColor: Colors.white),
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        RaisedButton(
-                                          onPressed: () {
-                                            _buyItem(document["price3"],
-                                                document["dog_item3"]);
-                                          },
-                                          child: Text("BUY"),
-                                          color: Colors.green[100],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Container(
-                            padding: new EdgeInsets.all(10.0),
-                            width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 2.6,
-                            decoration:
-                                BoxDecoration(color: Colors.deepOrange[100]),
-                            child: Column(
-                              children: [
-                                Text(
-                                  document['dog_item3'],
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              50),
-                                ),
-                                CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 100,
-                                  child: FutureBuilder(
-                                      future: _getImage(
-                                          context, document["photo3"]),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                4,
-                                            child: snapshot.data,
-                                          );
-                                        }
-
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                4,
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        }
-                                        return Container();
-                                      }),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 4.0),
-                                      child: Text(
-                                        document['price3'],
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                50),
-                                      ),
-                                    ),
-                                    Image.asset(
-                                      "assets/images/icons/token.png",
-                                      fit: BoxFit.contain,
-                                      width: MediaQuery.of(context).size.width /
-                                          20,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     Row(children: [
-                      InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                backgroundColor: Colors.blue[100],
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40)),
-                                elevation: 16,
-                                child: Container(
-                                  //container when clicked
-                                  padding: new EdgeInsets.all(20.0),
-                                  height:
-                                      MediaQuery.of(context).size.height / 1.5,
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: ListView(
-                                    children: <Widget>[
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Do you want to buy this item ?",
-                                          style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22,
-                                            color: Colors.deepOrange[900],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(right: 4.0),
-                                            child: Text(
-                                              document['dog_item4'] +
-                                                  " : " +
-                                                  document['price4'],
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          50),
-                                            ),
-                                          ),
-                                          Image.asset(
-                                            "assets/images/icons/token.png",
-                                            fit: BoxFit.contain,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                20,
-                                          ),
-                                        ],
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Your name :",
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  25,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: TextField(
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: null,
-                                        decoration: InputDecoration(
-                                            focusColor: Colors.white),
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Your Adress :",
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  25,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: TextField(
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: null,
-                                        decoration: InputDecoration(
-                                            focusColor: Colors.white),
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      RaisedButton(
-                                        onPressed: () {
-                                          _buyItem(document["price4"],
-                                              document["dog_item4"]);
-                                        },
-                                        child: Text("BUY"),
-                                        color: Colors.green[100],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          //Container with photo
-                          padding: new EdgeInsets.all(10.0),
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.height / 2.6,
-                          decoration:
-                              BoxDecoration(color: Colors.deepOrange[100]),
-                          child: Column(
-                            children: [
-                              Text(
-                                document['dog_item4'],
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            50),
-                              ),
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                radius: 100,
-                                child: FutureBuilder(
-                                    future:
-                                        _getImage(context, document["photo4"]),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        return Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              4,
-                                          child: snapshot.data,
-                                        );
-                                      }
-
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              4,
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      }
-                                      return Container();
-                                    }),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 4.0),
-                                    child: Text(
-                                      document['price4'],
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              50),
-                                    ),
-                                  ),
-                                  Image.asset(
-                                    "assets/images/icons/token.png",
-                                    fit: BoxFit.contain,
-                                    width:
-                                        MediaQuery.of(context).size.width / 20,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      //First Item
+                      _listItem(context, document['dog_item1'],
+                          document['price1'], document['photo1']),
 
                       //Second Item
-                      InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                backgroundColor: Colors.blue[100],
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40)),
-                                elevation: 16,
-                                child: Container(
-                                  padding: new EdgeInsets.all(20.0),
-                                  height:
-                                      MediaQuery.of(context).size.height / 1.5,
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: ListView(
-                                    children: <Widget>[
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Do you want to buy this item ?",
-                                          style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22,
-                                            color: Colors.deepOrange[900],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(right: 4.0),
-                                            child: Text(
-                                              document['dog_item5'] +
-                                                  " : " +
-                                                  document['price5'],
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          50),
-                                            ),
-                                          ),
-                                          Image.asset(
-                                            "assets/images/icons/token.png",
-                                            fit: BoxFit.contain,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                20,
-                                          ),
-                                        ],
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Your name :",
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  25,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: TextField(
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: null,
-                                        decoration: InputDecoration(
-                                            focusColor: Colors.white),
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Your Adress :",
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  25,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: TextField(
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: null,
-                                        decoration: InputDecoration(
-                                            focusColor: Colors.white),
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      RaisedButton(
-                                        onPressed: () {
-                                          _buyItem(document["price5"],
-                                              document["dog_item5"]);
-                                        },
-                                        child: Text("BUY"),
-                                        color: Colors.green[100],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          padding: new EdgeInsets.all(10.0),
-                          width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.height / 2.6,
-                          decoration:
-                              BoxDecoration(color: Colors.deepOrange[100]),
-                          child: Column(
-                            children: [
-                              Text(
-                                document['dog_item5'],
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            50),
-                              ),
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                radius: 100,
-                                child: FutureBuilder(
-                                    future:
-                                        _getImage(context, document["photo5"]),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        return Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              4,
-                                          child: snapshot.data,
-                                        );
-                                      }
-
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              4,
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      }
-                                      return Container();
-                                    }),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 4.0),
-                                    child: Text(
-                                      document['price5'],
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              50),
-                                    ),
-                                  ),
-                                  Image.asset(
-                                    "assets/images/icons/token.png",
-                                    fit: BoxFit.contain,
-                                    width:
-                                        MediaQuery.of(context).size.width / 20,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      _listItem(context, document['dog_item2'],
+                          document['price2'], document['photo2']),
 
                       //Third Item
-                      InkWell(
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                  backgroundColor: Colors.blue[100],
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40)),
-                                  elevation: 16,
-                                  child: Container(
-                                    padding: new EdgeInsets.all(20.0),
-                                    height: MediaQuery.of(context).size.height /
-                                        1.5,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    child: ListView(
-                                      children: <Widget>[
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Do you want to buy this item ?",
-                                            style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  22,
-                                              color: Colors.deepOrange[900],
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 4.0),
-                                              child: Text(
-                                                document['dog_item6'] +
-                                                    " : " +
-                                                    document['price6'],
-                                                style: TextStyle(
-                                                    fontSize:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            50),
-                                              ),
-                                            ),
-                                            Image.asset(
-                                              "assets/images/icons/token.png",
-                                              fit: BoxFit.contain,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  20,
-                                            ),
-                                          ],
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Your name :",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                              focusColor: Colors.white),
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                          child: Text(
-                                            "Your Adress :",
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        Center(
-                                            child: TextField(
-                                          keyboardType: TextInputType.multiline,
-                                          maxLines: null,
-                                          decoration: InputDecoration(
-                                              focusColor: Colors.white),
-                                        )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22),
-                                        RaisedButton(
-                                          onPressed: () {
-                                            _buyItem(document["price6"],
-                                                document["dog_item6"]);
-                                          },
-                                          child: Text("BUY"),
-                                          color: Colors.green[100],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Container(
-                              padding: new EdgeInsets.all(10.0),
-                              width: MediaQuery.of(context).size.width / 3,
-                              height: MediaQuery.of(context).size.height / 2.6,
-                              decoration:
-                                  BoxDecoration(color: Colors.deepOrange[100]),
-                              child: Column(children: [
-                                Text(
-                                  document['dog_item6'],
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              50),
-                                ),
-                                CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 100,
-                                  child: FutureBuilder(
-                                      future: _getImage(
-                                          context, document["photo6"]),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                4,
-                                            child: snapshot.data,
-                                          );
-                                        }
-
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                4,
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        }
-                                        return Container();
-                                      }),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 4.0),
-                                      child: Text(
-                                        document['price6'],
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                50),
-                                      ),
-                                    ),
-                                    Image.asset(
-                                      "assets/images/icons/token.png",
-                                      fit: BoxFit.contain,
-                                      width: MediaQuery.of(context).size.width /
-                                          20,
-                                    ),
-                                  ],
-                                )
-                              ])))
+                      _listItem(context, document['dog_item3'],
+                          document['price3'], document['photo3'])
                     ]),
                     Row(children: [
-                      InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                backgroundColor: Colors.blue[100],
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40)),
-                                elevation: 16,
-                                child: Container(
-                                  //container when clicked
-                                  padding: new EdgeInsets.all(20.0),
-                                  height:
-                                      MediaQuery.of(context).size.height / 1.5,
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: ListView(
-                                    children: <Widget>[
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Do you want to buy this item ?",
-                                          style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                22,
-                                            color: Colors.deepOrange[900],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(right: 4.0),
-                                            child: Text(
-                                              document['dog_item7'] +
-                                                  " : " +
-                                                  document['price7'],
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height /
-                                                          50),
-                                            ),
-                                          ),
-                                          Image.asset(
-                                            "assets/images/icons/token.png",
-                                            fit: BoxFit.contain,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                20,
-                                          ),
-                                        ],
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Your name :",
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  25,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: TextField(
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: null,
-                                        decoration: InputDecoration(
-                                            focusColor: Colors.white),
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                        child: Text(
-                                          "Your Adress :",
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  25,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      Center(
-                                          child: TextField(
-                                        keyboardType: TextInputType.multiline,
-                                        maxLines: null,
-                                        decoration: InputDecoration(
-                                            focusColor: Colors.white),
-                                      )),
-                                      SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              22),
-                                      RaisedButton(
-                                        onPressed: () {
-                                          _buyItem(document["price7"],
-                                              document["dog_item7"]);
-                                        },
-                                        child: Text("BUY"),
-                                        color: Colors.green[100],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          //Container with photo
-                          padding: new EdgeInsets.all(10.0),
-                          width: MediaQuery.of(context).size.width / 3.0,
-                          height: MediaQuery.of(context).size.height / 2.6,
-                          decoration:
-                              BoxDecoration(color: Colors.deepOrange[100]),
-                          child: Column(
-                            children: [
-                              Text(
-                                document['dog_item7'],
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            50),
-                              ),
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                radius: 100,
-                                child: FutureBuilder(
-                                    future:
-                                        _getImage(context, document["photo7"]),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        return Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              4,
-                                          child: snapshot.data,
-                                        );
-                                      }
+                      //Fourth Item
+                      _listItem(context, document['dog_item4'],
+                          document['price4'], document['photo4']),
 
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              4,
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      }
-                                      return Container();
-                                    }),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 4.0),
-                                    child: Text(
-                                      document['price7'],
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              50),
-                                    ),
-                                  ),
-                                  Image.asset(
-                                    "assets/images/icons/token.png",
-                                    fit: BoxFit.contain,
-                                    width:
-                                        MediaQuery.of(context).size.width / 20,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      //Fifth Item
+                      _listItem(context, document['dog_item5'],
+                          document['price5'], document['photo5']),
+
+                      //Sixth Item
+                      _listItem(context, document['dog_item6'],
+                          document['price6'], document['photo6'])
+                    ]),
+                    Row(children: [
+                      //Seventh Item
+                      _listItem(context, document['dog_item7'],
+                          document['price7'], document['photo7'])
                     ])
                   ])
             ]));
@@ -1648,20 +68,184 @@ class _DogState extends State<Dog> {
     );
   }
 
-  _buyItem(String price, String name) {
-    int getprice = int.parse(price);
+  _listItem(BuildContext context, String name, String price, String imageName) {
+    return InkWell(
+      onTap: () => _showDialog(context, name, price),
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        width: MediaQuery.of(context).size.width / 3,
+        height: MediaQuery.of(context).size.height / 2.8,
+        decoration: BoxDecoration(color: Colors.deepOrange[100]),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(bottom: 10.0),
+              height: MediaQuery.of(context).size.height / 18,
+              child: Text(name,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.height / 50)),
+            ),
+            FutureBuilder(
+                future: _getImage(context, imageName),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.data == null)
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Center(child: CircularProgressIndicator()));
+                    else
+                      return ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image(image: snapshot.data));
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Center(child: CircularProgressIndicator()));
+                  }
+                  return Container();
+                }),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(right: 4.0),
+                      child: Text(
+                        price,
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 50),
+                      )),
+                  Image.asset(
+                    "assets/images/icons/token.png",
+                    fit: BoxFit.contain,
+                    width: MediaQuery.of(context).size.width / 20,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  _showDialog(BuildContext context, String name, String price) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              backgroundColor: Colors.blue[100],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              elevation: 16,
+              child: Container(
+                  padding: EdgeInsets.all(20.0),
+                  height: MediaQuery.of(context).size.height / 1.5,
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: ListView(
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 60,
+                                  bottom:
+                                      MediaQuery.of(context).size.height / 60),
+                              child: Text("Do you want to buy this item?",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width / 22,
+                                    color: Colors.deepOrange[900],
+                                  ))),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(right: 4.0),
+                                  child: Text(
+                                    name + " : " + price,
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                50),
+                                  )),
+                              Image.asset(
+                                "assets/images/icons/token.png",
+                                fit: BoxFit.contain,
+                                width: MediaQuery.of(context).size.width / 20,
+                              )
+                            ],
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 60,
+                                  bottom:
+                                      MediaQuery.of(context).size.height / 60),
+                              child: Text("Your name :",
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width /
+                                              25,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold))),
+                          TextField(
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              decoration:
+                                  InputDecoration(focusColor: Colors.white)),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 60,
+                                  bottom:
+                                      MediaQuery.of(context).size.height / 60),
+                              child: Text("Your Address :",
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width /
+                                              25,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold))),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                bottom: MediaQuery.of(context).size.width / 22),
+                            child: TextField(
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              decoration:
+                                  InputDecoration(focusColor: Colors.white),
+                            ),
+                          ),
+                          RaisedButton(
+                            onPressed: () => _buyItem(name, price),
+                            child: Text("BUY"),
+                            color: Colors.green[100],
+                          )
+                        ],
+                      )
+                    ],
+                  )));
+        });
+  }
+
+  _buyItem(String name, String price) {
+    int getPrice = int.parse(price);
     return FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser.uid)
         .get()
         .then((value) {
-      if (value.data()["token"] - getprice >= 0) {
+      if (value.data()["token"] - getPrice >= 0) {
         FirebaseFirestore.instance
             .collection("users")
             .doc(FirebaseAuth.instance.currentUser.uid)
-            .update({"token": (value.data()["token"] - getprice)});
+            .update({"token": (value.data()["token"] - getPrice)});
         _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text('The item(' + name + ') is ordered succesfully!!'),
+          content: Text('The item(' + name + ') is ordered successfully!!'),
         ));
       } else {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -1671,10 +255,10 @@ class _DogState extends State<Dog> {
     });
   }
 
-  Future<Widget> _getImage(BuildContext context, String imageName) async {
-    Image image;
+  Future<Object> _getImage(BuildContext context, String imageName) async {
+    ImageProvider image;
     await FireStorageService.loadImage(context, imageName).then((value) {
-      image = Image.network(value.toString(), fit: BoxFit.scaleDown);
+      image = NetworkImage(value.toString());
     });
     return image;
   }

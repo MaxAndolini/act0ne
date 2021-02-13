@@ -1,18 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class AHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> litems = [];
+    List<String> nameList = [], imageList = [];
+    List<int> tokenList = [];
     return Scaffold(
       body: FutureBuilder(
-          future: FirebaseFirestore.instance
-              .collection("users")
-              .where("task1_approve", isEqualTo: 1)
-              .where("task2_approve", isEqualTo: 1)
-              .where("task3_approve", isEqualTo: 1)
-              .get(),
+          future: FirebaseFirestore.instance.collection("users").get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
@@ -23,13 +20,19 @@ class AHome extends StatelessWidget {
                   data.get("name") + " " + data.get("surname") + ": ";
 
               if (data.get("task1_approve") == 1) {
-                litems.add(variable + data.get("task1_name"));
+                nameList.add(variable + data.get("task1_name"));
+                imageList.add(data.get("task1_image"));
+                tokenList.add(data.get("task1_token"));
               }
               if (data.get("task2_approve") == 1) {
-                litems.add(variable + data.get("task2_name"));
+                nameList.add(variable + data.get("task2_name"));
+                imageList.add(data.get("task2_image"));
+                tokenList.add(data.get("task2_token"));
               }
               if (data.get("task3_approve") == 1) {
-                litems.add(variable + data.get("task3_name"));
+                nameList.add(variable + data.get("task3_name"));
+                imageList.add(data.get("task3_image"));
+                tokenList.add(data.get("task3_token"));
               }
             });
 
@@ -58,17 +61,112 @@ class AHome extends StatelessWidget {
                                       BorderRadius.all(Radius.circular(25.0)),
                                 ),
                                 color: Colors.orangeAccent,
-                                child: Text(litems[index]),
-                                onPressed: () {},
+                                child: Text(nameList[index]),
+                                onPressed: () {
+                                  _showDialog(context, nameList[index],
+                                      tokenList[index], imageList[index]);
+                                },
                               ),
                             ),
-                        itemCount: litems.length),
+                        itemCount: nameList.length),
                   ),
                 ),
               ],
             );
           }),
     );
+  }
+
+  _showDialog(BuildContext context, String name, int price, String imageName) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              backgroundColor: Colors.blue[100],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              elevation: 16,
+              child: Container(
+                  padding: EdgeInsets.all(20.0),
+                  height: MediaQuery.of(context).size.height / 1.5,
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: ListView(
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 60,
+                                  bottom:
+                                      MediaQuery.of(context).size.height / 60),
+                              child: Text("REVIEW",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width / 22,
+                                    color: Colors.deepOrange[900],
+                                  ))),
+                          Container(
+                            padding: EdgeInsets.only(bottom: 20.0),
+                            height: MediaQuery.of(context).size.height / 13,
+                            child: Text(
+                              name + " : " + price.toString(),
+                              maxLines: 3,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height / 50),
+                            ),
+                          ),
+                          FutureBuilder(
+                              future: _getImage(context, imageName),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  if (snapshot.data == null)
+                                    ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Center(
+                                            child:
+                                                CircularProgressIndicator()));
+                                  else
+                                    return ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image(image: snapshot.data));
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Center(
+                                          child: CircularProgressIndicator()));
+                                }
+                                return Container();
+                              }),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(right: 4.0),
+                                  child: RaisedButton(
+                                    onPressed: () => {},
+                                    child: Text("ACCEPT"),
+                                    color: Colors.lightGreenAccent,
+                                  )),
+                              RaisedButton(
+                                onPressed: () => {},
+                                child: Text("REJECT"),
+                                color: Colors.redAccent,
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  )));
+        });
   }
 
   _title(BuildContext context, String title) {
@@ -82,5 +180,21 @@ class AHome extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<Object> _getImage(BuildContext context, String imageName) async {
+    ImageProvider image;
+    await FireStorageService.loadImage(context, imageName).then((value) {
+      image = NetworkImage(value.toString());
+    });
+    return image;
+  }
+}
+
+class FireStorageService extends ChangeNotifier {
+  FireStorageService();
+
+  static Future<dynamic> loadImage(BuildContext context, String image) async {
+    return await FirebaseStorage.instance.ref().child(image).getDownloadURL();
   }
 }

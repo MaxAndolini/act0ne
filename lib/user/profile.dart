@@ -26,94 +26,87 @@ class _ProfileState extends State<Profile> {
               var document = snapshot.data;
               return new ListView(children: [
                 Container(
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          radius: 100,
-                          child: FutureBuilder(
-                              future: _getImage(context, document["image"]),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  return Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.2,
-                                    height: MediaQuery.of(context).size.height /
-                                        1.2,
-                                    child: snapshot.data,
-                                  );
-                                }
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.2,
-                                    height: MediaQuery.of(context).size.height /
-                                        1.2,
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                                return Container();
-                              }),
-                        ),
-                        Text(
-                          document["name"] + " " + document["surname"],
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width / 10),
-                        ),
-                        SizedBox(height: 30),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                    child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            FutureBuilder(
+                                future: _getImage(context, document["image"]),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    return CircleAvatar(
+                                        radius: 85,
+                                        backgroundColor: Colors.grey,
+                                        child: CircleAvatar(
+                                            radius: 80,
+                                            backgroundImage: snapshot.data));
+                                  }
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircleAvatar(
+                                        radius: 85,
+                                        backgroundColor: Colors.grey,
+                                        child: CircleAvatar(radius: 80));
+                                  }
+                                  return Container();
+                                }),
                             Padding(
-                              padding: EdgeInsets.only(right: 4.0),
-                              child: Text(
-                                document['token'].toString(),
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height /
-                                            10),
-                              ),
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                child: Text(
+                                    document["name"] +
+                                        " " +
+                                        document["surname"],
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                10))),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 4.0),
+                                  child: Text(
+                                    document['token'].toString(),
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height /
+                                                10),
+                                  ),
+                                ),
+                                Image.asset(
+                                  "assets/images/icons/token.png",
+                                  fit: BoxFit.contain,
+                                  width: MediaQuery.of(context).size.width / 10,
+                                )
+                              ],
                             ),
-                            Image.asset(
-                              "assets/images/icons/token.png",
-                              fit: BoxFit.contain,
-                              width: MediaQuery.of(context).size.width / 10,
-                            ),
+                            Container(
+                                padding: EdgeInsets.only(top: 20),
+                                width: MediaQuery.of(context).size.width / 2,
+                                child: RaisedButton(
+                                  onPressed: () {
+                                    context
+                                        .read<AuthenticationService>()
+                                        .signOut(context);
+                                  },
+                                  child: Text(
+                                    "Log Out",
+                                    style: TextStyle(fontSize: 30),
+                                  ),
+                                  color: Colors.orange[100],
+                                ))
                           ],
-                        ),
-                        SizedBox(height: 30),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 2,
-                          child: RaisedButton(
-                            onPressed: () {
-                              context
-                                  .read<AuthenticationService>()
-                                  .signOut(context);
-                            },
-                            child: Text(
-                              "Log Out",
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            color: Colors.orange[100],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                        )))
               ]);
             }));
   }
 
-  Future<Widget> _getImage(BuildContext context, String imageName) async {
-    Image image;
+  Future<Object> _getImage(BuildContext context, String imageName) async {
+    ImageProvider image;
     await FireStorageService.loadImage(context, imageName).then((value) {
-      image = Image.network(value.toString(), fit: BoxFit.scaleDown);
+      image = NetworkImage(value.toString());
     });
     return image;
   }
