@@ -24,7 +24,9 @@ class _TasksState extends State<Tasks> {
   final imagePicker = ImagePicker();
   PickedFile pickedFile;
 
+  @override
   void initState() {
+    super.initState();
     _getTasksDone();
   }
 
