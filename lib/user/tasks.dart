@@ -39,10 +39,11 @@ class _TasksState extends State<Tasks> {
 
   Future getImage() async {
     final pickedFile = await imagePicker.getImage(source: ImageSource.camera);
-
+    print(pickedFile);
     setState(() {
       if (pickedFile != null) {
         _imageFile = File(pickedFile.path);
+        uploadImageToFirebase();
         print('Your Photo sent');
         if (picNumber == 1) {
           FirebaseFirestore.instance
@@ -73,8 +74,10 @@ class _TasksState extends State<Tasks> {
 
   Future uploadImageToFirebase() async {
     String fileName = basename(_imageFile.path);
+    print(fileName);
     Reference firebaseStorageRef =
         FirebaseStorage.instance.ref().child('tasks/$fileName');
+
     UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then((value) => {
@@ -420,6 +423,8 @@ class _TasksState extends State<Tasks> {
     );
   }
 
+  
+
   _getTasksDone() async {
     var recordData = await FirebaseFirestore.instance
         .collection('users')
@@ -515,19 +520,19 @@ class _TasksState extends State<Tasks> {
         .get();
     var getValue = recordData.data();
     DateTime givenTime1 = getValue['task1_date'].toDate();
-    if (getValue['task1_day_limit'] <
+    if (getValue['task1_day_limit'] <=
         DateTime.now().difference(givenTime1).inDays) {
       task1TimeDone = true;
     }
 
     DateTime givenTime2 = getValue['task2_date'].toDate();
-    if (getValue['task2_day_limit'] <
+    if (getValue['task2_day_limit'] <=
         DateTime.now().difference(givenTime2).inDays) {
       task2TimeDone = true;
     }
 
     DateTime givenTime3 = getValue['task3_date'].toDate();
-    if (getValue['task3_day_limit'] <
+    if (getValue['task3_day_limit'] <=
         DateTime.now().difference(givenTime3).inDays) {
       task3TimeDone = true;
     }
