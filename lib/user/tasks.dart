@@ -96,6 +96,7 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
+    _approveControl();
     return Scaffold(
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
@@ -423,7 +424,22 @@ class _TasksState extends State<Tasks> {
     );
   }
 
-  
+  _approveControl() async {
+    var recordData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get();
+    var getValue = recordData.data();
+    if (getValue['task1_name'] == "") {
+      task1Done = true;
+    }
+    if (getValue['task2_name'] == "") {
+      task2Done = true;
+    }
+    if (getValue['task3_name'] == "") {
+      task3Done = true;
+    }
+  }
 
   _getTasksDone() async {
     var recordData = await FirebaseFirestore.instance
