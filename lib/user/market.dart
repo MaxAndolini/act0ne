@@ -29,17 +29,17 @@ class _MarketState extends State<Market> with SingleTickerProviderStateMixin {
             controller: pageController,
             tabs: [
               Tab(
-                child: Text("CAT"),
+                child: Text('CAT'),
               ),
               Tab(
-                child: Text("DOG"),
+                child: Text('DOG'),
               ),
               Tab(
-                child: Text("TOYS"),
+                child: Text('TOYS'),
               ),
               Tab(
-                child: Text("OTHERS"),
-              ),
+                child: Text('OTHERS'),
+              )
             ]),
         Expanded(
           child: TabBarView(

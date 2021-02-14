@@ -26,12 +26,12 @@ class SignIn extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 20.0),
                   child: Image.asset(
-                    "assets/images/egelogouc.png",
+                    'assets/images/logo.png',
                     height: 70,
                   ),
                 ),
                 Text(
-                  "SIGN IN",
+                  'SIGN IN',
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.height / 30,
                       fontWeight: FontWeight.bold,
@@ -47,10 +47,10 @@ class SignIn extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      _title(context, "E-Mail"),
+                      _title(context, 'E-Mail'),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: TextField(
                             controller: emailController,
                           ),
@@ -61,10 +61,10 @@ class SignIn extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, "Password"),
+                      _title(context, 'Password'),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: TextField(
                             controller: passwordController,
                             obscureText: true,
@@ -77,13 +77,13 @@ class SignIn extends StatelessWidget {
                         width: MediaQuery.of(context).size.width - 130,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
+                        padding: EdgeInsets.only(top: 20.0),
                         child: AnimatedButton(
                           color: Colors.deepOrange[500],
                           height: MediaQuery.of(context).size.height / 17,
                           width: 150,
                           child: Text(
-                            "LOGIN",
+                            'LOGIN',
                             style: TextStyle(
                                 fontSize:
                                     MediaQuery.of(context).size.height / 40,
@@ -106,13 +106,13 @@ class SignIn extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 10.0, right: 5.0),
+                      padding: EdgeInsets.only(top: 10.0, right: 5.0),
                       child: AnimatedButton(
                         color: Colors.deepOrange[500],
                         height: MediaQuery.of(context).size.height / 17,
                         width: 150,
                         child: Text(
-                          "FORGOT PASSWORD",
+                          'FORGOT PASSWORD',
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height / 55,
                               color: Colors.white),
@@ -121,19 +121,19 @@ class SignIn extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
+                      padding: EdgeInsets.only(top: 10.0),
                       child: AnimatedButton(
                         color: Colors.deepOrange[500],
                         height: MediaQuery.of(context).size.height / 17,
                         width: 150,
                         child: Text(
-                          "SIGN UP",
+                          'SIGN UP',
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height / 55,
                               color: Colors.white),
                         ),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, "/signup");
+                          Navigator.pushReplacementNamed(context, '/signUp');
                         },
                       ),
                     ),

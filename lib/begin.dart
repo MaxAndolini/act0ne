@@ -1,4 +1,3 @@
-
 import 'package:act0ne/authentication_service.dart';
 import 'package:act0ne/user/market.dart';
 import 'package:act0ne/user/tasks.dart';
@@ -42,7 +41,7 @@ class _BeginState extends State<Begin> {
     return Scaffold(
         body: FutureBuilder(
             future: FirebaseFirestore.instance
-                .collection("users")
+                .collection('users')
                 .doc(FirebaseAuth.instance.currentUser.uid)
                 .get(),
             builder: (context, snapshot) {
@@ -50,7 +49,7 @@ class _BeginState extends State<Begin> {
                 return new CircularProgressIndicator();
               }
               var document = snapshot.data;
-              return document["admin"] == 0
+              return !document['admin']
                   ? pages[positionNumber]
                   : pages2[positionNumber];
             }),
@@ -62,14 +61,14 @@ class _BeginState extends State<Begin> {
                       end: Alignment.bottomRight,
                       colors: <Color>[Colors.deepOrange[900], Colors.white]))),
           title: Image.asset(
-            "assets/images/egelogouc.png",
+            'assets/images/logo.png',
             fit: BoxFit.cover,
             width: 150,
           ),
           actions: [
             StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection("users")
+                    .collection('users')
                     .doc(FirebaseAuth.instance.currentUser.uid)
                     .snapshots(),
                 builder: (context, snapshot) {
@@ -77,21 +76,21 @@ class _BeginState extends State<Begin> {
                     return new CircularProgressIndicator();
                   }
                   var document = snapshot.data;
-                  return document["admin"] == 0
+                  return !document['admin']
                       ? Container(
                           padding: EdgeInsets.only(right: 8.0),
                           child: Row(
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(right: 8.0),
-                                child: Text(document["token"].toString(),
+                                child: Text(document['token'].toString(),
                                     style: TextStyle(
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black)),
                               ),
                               Image.asset(
-                                "assets/images/icons/token.png",
+                                'assets/images/icons/token.png',
                                 fit: BoxFit.contain,
                                 width: 32,
                               ),
@@ -107,7 +106,7 @@ class _BeginState extends State<Begin> {
                                   .signOut(context);
                             },
                             child: Text(
-                              "Log Out",
+                              'Log Out',
                               style: TextStyle(fontSize: 15),
                             ),
                             color: Colors.deepOrange[400],
@@ -118,7 +117,7 @@ class _BeginState extends State<Begin> {
         ),
         bottomNavigationBar: FutureBuilder(
             future: FirebaseFirestore.instance
-                .collection("users")
+                .collection('users')
                 .doc(FirebaseAuth.instance.currentUser.uid)
                 .get(),
             builder: (context, snapshot) {
@@ -126,7 +125,7 @@ class _BeginState extends State<Begin> {
                 return new CircularProgressIndicator();
               }
               var document = snapshot.data;
-              return document["admin"] == 0
+              return !document['admin']
                   ? BottomNavigationBar(
                       currentIndex: positionNumber,
                       selectedItemColor: Colors.deepOrange[600],
@@ -134,25 +133,25 @@ class _BeginState extends State<Begin> {
                       items: const <BottomNavigationBarItem>[
                         BottomNavigationBarItem(
                           icon: ImageIcon(
-                            AssetImage("assets/images/icons/Home.png"),
+                            AssetImage('assets/images/icons/home.png'),
                           ),
                           label: 'Home',
                         ),
                         BottomNavigationBarItem(
                           icon: ImageIcon(
-                            AssetImage("assets/images/icons/Task.png"),
+                            AssetImage('assets/images/icons/task.png'),
                           ),
                           label: 'Task',
                         ),
                         BottomNavigationBarItem(
                           icon: ImageIcon(
-                            AssetImage("assets/images/icons/Store.png"),
+                            AssetImage('assets/images/icons/store.png'),
                           ),
                           label: 'Store',
                         ),
                         BottomNavigationBarItem(
                           icon: ImageIcon(
-                            AssetImage("assets/images/icons/profile.png"),
+                            AssetImage('assets/images/icons/profile.png'),
                           ),
                           label: 'Profile',
                         ),
@@ -167,16 +166,16 @@ class _BeginState extends State<Begin> {
                       currentIndex: positionNumber,
                       selectedItemColor: Colors.deepOrange[600],
                       type: BottomNavigationBarType.fixed,
-                      items: const <BottomNavigationBarItem>[
+                      items: <BottomNavigationBarItem>[
                         BottomNavigationBarItem(
                           icon: ImageIcon(
-                            AssetImage("assets/images/icons/Home.png"),
+                            AssetImage('assets/images/icons/home.png'),
                           ),
                           label: 'Home',
                         ),
                         BottomNavigationBarItem(
                           icon: ImageIcon(
-                            AssetImage("assets/images/icons/profile.png"),
+                            AssetImage('assets/images/icons/profile.png'),
                           ),
                           label: 'Users',
                         ),

@@ -16,7 +16,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
         body: FutureBuilder(
             future: FirebaseFirestore.instance
-                .collection("users")
+                .collection('users')
                 .doc(FirebaseAuth.instance.currentUser.uid)
                 .get(),
             builder: (context, snapshot) {
@@ -32,7 +32,7 @@ class _ProfileState extends State<Profile> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             FutureBuilder(
-                                future: _getImage(context, document["image"]),
+                                future: _getImage(context, document['image']),
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.done) {
@@ -55,9 +55,9 @@ class _ProfileState extends State<Profile> {
                             Padding(
                                 padding: EdgeInsets.only(top: 10, bottom: 10),
                                 child: Text(
-                                    document["name"] +
-                                        " " +
-                                        document["surname"],
+                                    document['name'] +
+                                        ' ' +
+                                        document['surname'],
                                     style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.width /
@@ -76,7 +76,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                                 Image.asset(
-                                  "assets/images/icons/token.png",
+                                  'assets/images/icons/token.png',
                                   fit: BoxFit.contain,
                                   width: MediaQuery.of(context).size.width / 10,
                                 )
@@ -92,7 +92,7 @@ class _ProfileState extends State<Profile> {
                                         .signOut(context);
                                   },
                                   child: Text(
-                                    "Log Out",
+                                    'Log Out',
                                     style: TextStyle(fontSize: 30),
                                   ),
                                   color: Colors.orange[100],

@@ -14,9 +14,9 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
-  bool task1_done = false;
-  bool task2_done = false;
-  bool task3_done = false;
+  bool task1Done = false;
+  bool task2Done = false;
+  bool task3Done = false;
 
   int picNumber = 0;
   File _imageFile;
@@ -25,9 +25,7 @@ class _TasksState extends State<Tasks> {
   PickedFile pickedFile;
 
   void initState() {
-    _getTask1Done();
-    _getTask2Done();
-    _getTask3Done();
+    _getTasksDone();
   }
 
   Future getImage() async {
@@ -36,13 +34,11 @@ class _TasksState extends State<Tasks> {
     setState(() {
       if (pickedFile != null) {
         _imageFile = File(pickedFile.path);
-        print("Your Photo sent");
+        print('Your Photo sent');
         uploadImageToFirebase();
-        _getTask1Done();
-        _getTask2Done();
-        _getTask3Done();
+        _getTasksDone();
       } else {
-        print("Something went wrong.");
+        print('Something went wrong.');
       }
     });
   }
@@ -50,36 +46,18 @@ class _TasksState extends State<Tasks> {
   Future uploadImageToFirebase() async {
     String fileName = basename(_imageFile.path);
     Reference firebaseStorageRef =
-        FirebaseStorage.instance.ref().child('TaskPhotos/$fileName');
+        FirebaseStorage.instance.ref().child('tasks/$fileName');
     UploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then((value) => {
-          if (picNumber == 1)
+          if (picNumber > 0)
             {
               FirebaseFirestore.instance
-                  .collection("users")
+                  .collection('users')
                   .doc(FirebaseAuth.instance.currentUser.uid)
                   .update({
-                "task1_image": "TaskPhotos/$fileName",
+                'task' + picNumber.toString() + '_image': 'tasks/$fileName',
               }),
-            }
-          else if (picNumber == 2)
-            {
-              FirebaseFirestore.instance
-                  .collection("users")
-                  .doc(FirebaseAuth.instance.currentUser.uid)
-                  .update({
-                "task2_image": "TaskPhotos/$fileName",
-              })
-            }
-          else if (picNumber == 3)
-            {
-              FirebaseFirestore.instance
-                  .collection("users")
-                  .doc(FirebaseAuth.instance.currentUser.uid)
-                  .update({
-                "task3_image": "TaskPhotos/$fileName",
-              })
             }
         });
   }
@@ -132,7 +110,7 @@ class _TasksState extends State<Tasks> {
     return Scaffold(
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('Tasks')
+              .collection('tasks')
               .doc('Q8elnpjjwODUNKwp3uu6')
               .snapshots(),
           builder: (context, snapshot) {
@@ -148,7 +126,7 @@ class _TasksState extends State<Tasks> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Daily Task",
+                    'Daily Task',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 20,
@@ -178,7 +156,7 @@ class _TasksState extends State<Tasks> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  document["task1"],
+                                  document['task1'],
                                   style: TextStyle(
                                     fontSize: 17,
                                   ),
@@ -191,7 +169,7 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: task1_done
+                    onPressed: task1Done
                         ? null
                         : () {
                             setState(() {
@@ -213,7 +191,7 @@ class _TasksState extends State<Tasks> {
               */
                   /* RaisedButton(
                 onPressed: () => _startTimer(),
-                child: Text("You have 24 hours to complete this task"),
+                child: Text('You have 24 hours to complete this task'),
               ),*/
                   /*Text(
                 '$_counter',
@@ -224,13 +202,11 @@ class _TasksState extends State<Tasks> {
               ),*/
 
                   SizedBox(width: 0, height: 100.0),
-                  Text(
-                    "Weekly Task",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Text('Weekly Task',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )),
                   Center(
                     child: Container(
                       decoration: BoxDecoration(
@@ -254,7 +230,7 @@ class _TasksState extends State<Tasks> {
                             Row(
                               children: [
                                 Text(
-                                  document["task2"],
+                                  document['task2'],
                                   style: TextStyle(fontSize: 17),
                                 )
                               ],
@@ -265,7 +241,7 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: task2_done
+                    onPressed: task2Done
                         ? null
                         : () {
                             setState(() {
@@ -277,13 +253,11 @@ class _TasksState extends State<Tasks> {
                     child: Icon(Icons.camera_alt),
                   ),
                   SizedBox(width: 0, height: 100.0),
-                  Text(
-                    "Monthly Tasks",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  Text('Monthly Tasks',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      )),
                   Center(
                     child: Container(
                       decoration: BoxDecoration(
@@ -306,12 +280,10 @@ class _TasksState extends State<Tasks> {
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  document["task3"],
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                  ),
-                                ),
+                                Text(document['task3'],
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                    )),
                               ],
                             ),
                           ],
@@ -320,7 +292,7 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: task3_done
+                    onPressed: task3Done
                         ? null
                         : () {
                             setState(() {
@@ -340,91 +312,63 @@ class _TasksState extends State<Tasks> {
 
   _getTask1() {
     return FirebaseFirestore.instance
-        .collection('Tasks')
+        .collection('tasks')
         .doc('Q8elnpjjwODUNKwp3uu6')
         .get()
         .then((value) {
       FirebaseFirestore.instance
-          .collection("users")
+          .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
-        "task1_name": value.data()["task1"],
-        "task1_token": value.data()["task1_price"],
-        "task1_approve": 1
+        'task1_name': value.data()['task1'],
+        'task1_token': value.data()['task1_price'],
+        'task1_send': true
       });
     });
   }
 
   _getTask2() {
     return FirebaseFirestore.instance
-        .collection('Tasks')
+        .collection('tasks')
         .doc('Q8elnpjjwODUNKwp3uu6')
         .get()
         .then((value) {
       FirebaseFirestore.instance
-          .collection("users")
+          .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
-        "task2_name": value.data()["task2"],
-        "task2_token": value.data()["task2_price"],
-        "task2_approve": 1
+        'task2_name': value.data()['task2'],
+        'task2_token': value.data()['task2_price'],
+        'task2_send': true
       });
     });
   }
 
   _getTask3() {
     return FirebaseFirestore.instance
-        .collection('Tasks')
+        .collection('tasks')
         .doc('Q8elnpjjwODUNKwp3uu6')
         .get()
         .then((value) {
       FirebaseFirestore.instance
-          .collection("users")
+          .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
-        "task3_name": value.data()["task3"],
-        "task3_token": value.data()["task3_price"],
-        "task3_approve": 1
+        'task3_name': value.data()['task3'],
+        'task3_token': value.data()['task3_price'],
+        'task3_send': true
       });
     });
   }
 
-  _getTask1Done() async {
+  _getTasksDone() async {
     var recordData = await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser.uid)
         .get();
-    var getvalue = recordData.data();
-    if (getvalue["task1_approve"] == 1) {
-      task1_done = true;
-    } else if (getvalue["task1_approve"] == 0) {
-      task1_done = false;
-    }
-  }
-
-  _getTask2Done() async {
-    var recordData = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .get();
-    var getvalue = recordData.data();
-    if (getvalue["task2_approve"] == 1) {
-      task2_done = true;
-    } else if (getvalue["task2_approve"] == 0) {
-      task2_done = false;
-    }
-  }
-
-  _getTask3Done() async {
-    var recordData = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .get();
-    var getvalue = recordData.data();
-    if (getvalue["task3_approve"] == 1) {
-      task3_done = true;
-    } else if (getvalue["task3_approve"] == 0) {
-      task3_done = false;
-    }
+    var getValue = recordData.data();
+    if (getValue['task1_send'] != null) task1Done = getValue['task1_send'];
+    if (getValue['task2_send'] != null) task2Done = getValue['task2_send'];
+    if (getValue['task3_send'] != null) task3Done = getValue['task3_send'];
   }
 }

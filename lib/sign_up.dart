@@ -36,19 +36,18 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 20.0),
                   child: Image.asset(
-                    "assets/images/egelogouc.png",
+                    'assets/images/logo.png',
                     height: 70,
                   ),
                 ),
                 Text(
-                  "SIGN UP",
+                  'SIGN UP',
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.height / 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
                 Container(
-                  //BOX AROUND ITEMS
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.deepOrange[100]),
@@ -58,10 +57,10 @@ class _SignUpState extends State<SignUp> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      _title(context, "Name"),
+                      _title(context, 'Name'),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: TextField(
                             controller: nameController,
                           ),
@@ -72,10 +71,10 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, "Surname"),
+                      _title(context, 'Surname'),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: TextField(
                             controller: surnameController,
                           ),
@@ -86,10 +85,10 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, "E-Mail"),
+                      _title(context, 'E-Mail'),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: TextField(
                             controller: emailController,
                           ),
@@ -100,14 +99,14 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, "Birthday"),
+                      _title(context, 'Birthday'),
                       AnimatedButton(
                         color: Colors.white,
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                         child: Text(
                           birthdayController == null
-                              ? ("Change Birthday")
+                              ? ('Change Birthday')
                               : birthdayController,
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height / 55,
@@ -122,17 +121,17 @@ class _SignUpState extends State<SignUp> {
                               onChanged: (date) {}, onConfirm: (date) {
                             setState(() {
                               birthdayController =
-                                  date.toString().split(" ").first;
+                                  date.toString().split(' ').first;
                             });
                           },
                               currentTime: DateTime.now(),
                               locale: LocaleType.en);
                         },
                       ),
-                      _title(context, "Password"),
+                      _title(context, 'Password'),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: TextField(
                             controller: passwordController,
                             obscureText: true,
@@ -144,10 +143,10 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, "Repeat Password"),
+                      _title(context, 'Repeat Password'),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: TextField(
                             controller: password2Controller,
                             obscureText: true,
@@ -160,13 +159,13 @@ class _SignUpState extends State<SignUp> {
                         width: MediaQuery.of(context).size.width - 130,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
+                        padding: EdgeInsets.only(top: 20.0),
                         child: AnimatedButton(
                           color: Colors.deepOrange[500],
                           height: MediaQuery.of(context).size.height / 17,
                           width: 150,
                           child: Text(
-                            "REGISTER",
+                            'REGISTER',
                             style: TextStyle(
                                 fontSize:
                                     MediaQuery.of(context).size.height / 40,
@@ -193,13 +192,13 @@ class _SignUpState extends State<SignUp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 10.0, right: 5.0),
+                      padding: EdgeInsets.only(top: 10.0, right: 5.0),
                       child: AnimatedButton(
                         color: Colors.deepOrange[500],
                         height: MediaQuery.of(context).size.height / 17,
                         width: 150,
                         child: Text(
-                          "TERMS",
+                          'TERMS',
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height / 55,
                               color: Colors.white),
@@ -208,19 +207,19 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
+                      padding: EdgeInsets.only(top: 10.0),
                       child: AnimatedButton(
                         color: Colors.deepOrange[500],
                         height: MediaQuery.of(context).size.height / 17,
                         width: 150,
                         child: Text(
-                          "SIGN IN",
+                          'SIGN IN',
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height / 55,
                               color: Colors.white),
                         ),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, "/signin");
+                          Navigator.pushReplacementNamed(context, '/signIn');
                         },
                       ),
                     ),

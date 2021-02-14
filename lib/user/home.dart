@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
   final List<String> litems = [
-    "The number of stray dogs fed: 100",
-    "The number of stray cats fed: 100",
-    "The number of plastic sent for recyling: 100",
-    "The number of paper sent for recyling: 100",
-    "The number of glass sent for recyling: 100",
-    "The number of metal sent for recyling: 100",
-    "The number of cell sent for recyling: 100",
+    'The number of stray dogs fed: 100',
+    'The number of stray cats fed: 100',
+    'The number of plastic sent for recyling: 100',
+    'The number of paper sent for recyling: 100',
+    'The number of glass sent for recyling: 100',
+    'The number of metal sent for recyling: 100',
+    'The number of cell sent for recyling: 100',
   ];
   final List<String> litems2 = [
-    "The number of stray dogs fed: 100",
-    "The number of stray cats fed: 100",
-    "The number of plastic sent for recyling: 100",
-    "The number of paper sent for recyling: 100",
-    "The number of glass sent for recyling: 100",
-    "The number of metal sent for recyling: 100",
-    "The number of cell sent for recyling: 100",
+    'The number of stray dogs fed: 100',
+    'The number of stray cats fed: 100',
+    'The number of plastic sent for recyling: 100',
+    'The number of paper sent for recyling: 100',
+    'The number of glass sent for recyling: 100',
+    'The number of metal sent for recyling: 100',
+    'The number of cell sent for recyling: 100',
   ];
 
   @override

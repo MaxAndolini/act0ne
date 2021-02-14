@@ -33,7 +33,7 @@ class AuthenticationService {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      Navigator.pushReplacementNamed(aContext, "/begin");
+      Navigator.pushReplacementNamed(aContext, '/begin');
       return 1;
     } on FirebaseAuthException catch (error) {
       scaffold.showSnackBar(
@@ -75,7 +75,7 @@ class AuthenticationService {
     if (email.isEmpty || !EmailValidator.validate(email)) {
       scaffold.showSnackBar(
         new SnackBar(
-          content: new Text('Invalid e-mail!'),
+          content: new Text('E-mail is invalid!!'),
         ),
       );
       return 0;
@@ -94,7 +94,7 @@ class AuthenticationService {
         (password2.isEmpty || password2.length < 6)) {
       scaffold.showSnackBar(
         new SnackBar(
-          content: new Text('Invalid password!'),
+          content: new Text('Password is invalid!'),
         ),
       );
       return 0;
@@ -113,33 +113,33 @@ class AuthenticationService {
       await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {
-        FirebaseFirestore.instance.collection("users").doc(user.user.uid).set({
-          "name": name,
-          "surname": surname,
-          "birthday": birthday,
-          "image": "user.png",
-          "token": 0,
-          "admin": 0,
-          "task1_name": "",
-          "task1_image": "",
-          "task1_token": 0,
-          "task1_approve": 0,
-          "task2_name": "",
-          "task2_image": "",
-          "task2_token": 0,
-          "task2_approve": 0,
-          "task3_name": "",
-          "task3_image": "",
-          "task3_token": 0,
-          "task3_approve": 0,
-          "my_total_tasks": 0,
+        FirebaseFirestore.instance.collection('users').doc(user.user.uid).set({
+          'name': name,
+          'surname': surname,
+          'birthday': birthday,
+          'image': 'user.png',
+          'token': 0,
+          'admin': false,
+          'task1_name': '',
+          'task1_image': '',
+          'task1_token': 0,
+          'task1_send': false,
+          'task2_name': '',
+          'task2_image': '',
+          'task2_token': 0,
+          'task2_send': false,
+          'task3_name': '',
+          'task3_image': '',
+          'task3_token': 0,
+          'task3_send': false,
+          'my_total_tasks': 0,
         }).then((value) {
           scaffold.showSnackBar(
             new SnackBar(
               content: new Text('Successfully signed up!'),
             ),
           );
-          Navigator.pushReplacementNamed(aContext, "/signin");
+          Navigator.pushReplacementNamed(aContext, '/signIn');
         });
       });
       return 1;
@@ -155,6 +155,6 @@ class AuthenticationService {
 
   Future<void> signOut(aContext) async {
     await _firebaseAuth.signOut();
-    Navigator.pushReplacementNamed(aContext, "/signin");
+    Navigator.pushReplacementNamed(aContext, '/signIn');
   }
 }

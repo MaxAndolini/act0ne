@@ -7,21 +7,21 @@ class AUsers extends StatelessWidget {
     List<String> litems = [];
     return Scaffold(
       body: FutureBuilder(
-          future: FirebaseFirestore.instance.collection("users").get(),
+          future: FirebaseFirestore.instance.collection('users').get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
             }
             var document = snapshot.data.docs;
             document.forEach((data) {
-              String variable = data.get("name") +
-                  " " +
-                  data.get("surname") +
-                  " (" +
-                  data.get("birthday") +
-                  "): " +
-                  data.get("token").toString() +
-                  " token";
+              String variable = data.get('name') +
+                  ' ' +
+                  data.get('surname') +
+                  ' (' +
+                  data.get('birthday') +
+                  '): ' +
+                  data.get('token').toString() +
+                  ' token';
 
               litems.add(variable);
             });

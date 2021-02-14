@@ -32,10 +32,10 @@ class _SettingsState extends State<Settings> {
     setState(() {
       if (pickedFile != null) {
         _imageFile = File(pickedFile.path);
-        print("Image selected.");
+        print('Image selected.');
         uploadImageToFirebase();
       } else {
-        print("No image selected.");
+        print('No image selected.');
       }
     });
   }
@@ -48,9 +48,9 @@ class _SettingsState extends State<Settings> {
     TaskSnapshot taskSnapshot = await uploadTask;
     taskSnapshot.ref.getDownloadURL().then(
           (value) => FirebaseFirestore.instance
-              .collection("users")
+              .collection('users')
               .doc(FirebaseAuth.instance.currentUser.uid)
-              .update({"image": 'uploads/$fileName'}),
+              .update({'image': 'uploads/$fileName'}),
         );
   }
 
@@ -62,7 +62,7 @@ class _SettingsState extends State<Settings> {
           onPressed: () {
             pickImage(true);
           },
-          child: Text("Change Avatar",
+          child: Text('Change Avatar',
               style:
                   TextStyle(fontSize: MediaQuery.of(context).size.height / 35)),
           color: Colors.blue[100],
@@ -77,7 +77,7 @@ class _SettingsState extends State<Settings> {
       backgroundColor: Colors.white,
       body: FutureBuilder(
           future: FirebaseFirestore.instance
-              .collection("users")
+              .collection('users')
               .doc(FirebaseAuth.instance.currentUser.uid)
               .get(),
           builder: (context, snapshot) {
@@ -87,9 +87,9 @@ class _SettingsState extends State<Settings> {
             var document = snapshot.data;
 
             if (control == false) {
-              nameController.text = document["name"];
-              surnameController.text = document["surname"];
-              birthdayController = document["birthday"];
+              nameController.text = document['name'];
+              surnameController.text = document['surname'];
+              birthdayController = document['birthday'];
             }
 
             return new Container(
@@ -112,7 +112,7 @@ class _SettingsState extends State<Settings> {
                         child: Row(
                           children: [
                             Text(
-                              "Name:",
+                              'Name:',
                               style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.height / 37,
@@ -139,7 +139,7 @@ class _SettingsState extends State<Settings> {
                         child: Row(
                           children: [
                             Text(
-                              "Surname:",
+                              'Surname:',
                               style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.height / 37,
@@ -166,7 +166,7 @@ class _SettingsState extends State<Settings> {
                         child: Row(
                           children: [
                             Text(
-                              "Birthday:",
+                              'Birthday:',
                               style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.height / 37,
@@ -181,7 +181,7 @@ class _SettingsState extends State<Settings> {
                               width: MediaQuery.of(context).size.width / 2,
                               child: Text(
                                 birthdayController == null
-                                    ? ("Change Birthday")
+                                    ? ('Change Birthday')
                                     : birthdayController,
                                 style: TextStyle(
                                     fontSize:
@@ -200,7 +200,7 @@ class _SettingsState extends State<Settings> {
                                   setState(() {
                                     control = true;
                                     birthdayController =
-                                        date.toString().split(" ").first;
+                                        date.toString().split(' ').first;
                                   });
                                 },
                                     currentTime: DateTime.now(),
@@ -229,18 +229,16 @@ class _SettingsState extends State<Settings> {
                             width: MediaQuery.of(context).size.height / 2,
                             child: RaisedButton(
                               onPressed: () {
-                                DocumentReference docref = FirebaseFirestore
-                                    .instance
-                                    .collection("users")
-                                    .doc(FirebaseAuth.instance.currentUser.uid);
-
-                                docref.update({
-                                  "name": nameController.text,
-                                  "surname": surnameController.text,
-                                  "birthday": birthdayController
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser.uid)
+                                    .update({
+                                  'name': nameController.text,
+                                  'surname': surnameController.text,
+                                  'birthday': birthdayController
                                 });
                               },
-                              child: Text("Save Changes",
+                              child: Text('Save Changes',
                                   style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height /

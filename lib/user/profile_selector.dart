@@ -29,13 +29,13 @@ class _ProfileSelectorState extends State<ProfileSelector>
             controller: pageController,
             tabs: [
               Tab(
-                child: Text("Profile"),
+                child: Text('Profile'),
               ),
               Tab(
-                child: Text("Settings"),
+                child: Text('Settings'),
               ),
               Tab(
-                child: Text("About Us"),
+                child: Text('About Us'),
               ),
             ]),
         Expanded(

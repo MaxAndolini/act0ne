@@ -1,7 +1,7 @@
 import 'package:act0ne/authentication_service.dart';
 import 'package:act0ne/begin.dart';
-import 'package:act0ne/signin.dart';
-import 'package:act0ne/signup.dart';
+import 'package:act0ne/sign_in.dart';
+import 'package:act0ne/sign_up.dart';
 import 'package:act0ne/splash.dart';
 import 'package:act0ne/user/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,10 +36,10 @@ class Main extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: AuthenticationWrapper(),
         routes: {
-          "/begin": (_) => new Begin(),
-          "/signin": (_) => new SignIn(),
-          "/signup": (_) => new SignUp(),
-          "/home": (_) => new Home(),
+          '/begin': (_) => new Begin(),
+          '/signIn': (_) => new SignIn(),
+          '/signUp': (_) => new SignUp(),
+          '/home': (_) => new Home(),
         },
       ),
     );

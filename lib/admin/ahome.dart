@@ -9,7 +9,7 @@ class AHome extends StatelessWidget {
     List<int> tokenList = [];
     return Scaffold(
       body: FutureBuilder(
-          future: FirebaseFirestore.instance.collection("users").get(),
+          future: FirebaseFirestore.instance.collection('users').get(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
@@ -17,22 +17,22 @@ class AHome extends StatelessWidget {
             var document = snapshot.data.docs;
             document.forEach((data) {
               String variable =
-                  data.get("name") + " " + data.get("surname") + ": ";
+                  data.get('name') + ' ' + data.get('surname') + ': ';
 
-              if (data.get("task1_approve") == 1) {
-                nameList.add(variable + data.get("task1_name"));
-                imageList.add(data.get("task1_image"));
-                tokenList.add(data.get("task1_token"));
+              if (data.get('task1_send')) {
+                nameList.add(variable + data.get('task1_name'));
+                imageList.add(data.get('task1_image'));
+                tokenList.add(data.get('task1_token'));
               }
-              if (data.get("task2_approve") == 1) {
-                nameList.add(variable + data.get("task2_name"));
-                imageList.add(data.get("task2_image"));
-                tokenList.add(data.get("task2_token"));
+              if (data.get('task2_send')) {
+                nameList.add(variable + data.get('task2_name'));
+                imageList.add(data.get('task2_image'));
+                tokenList.add(data.get('task2_token'));
               }
-              if (data.get("task3_approve") == 1) {
-                nameList.add(variable + data.get("task3_name"));
-                imageList.add(data.get("task3_image"));
-                tokenList.add(data.get("task3_token"));
+              if (data.get('task3_send')) {
+                nameList.add(variable + data.get('task3_name'));
+                imageList.add(data.get('task3_image'));
+                tokenList.add(data.get('task3_token'));
               }
             });
 
@@ -100,7 +100,7 @@ class AHome extends StatelessWidget {
                                   top: MediaQuery.of(context).size.height / 60,
                                   bottom:
                                       MediaQuery.of(context).size.height / 60),
-                              child: Text("REVIEW",
+                              child: Text('REVIEW',
                                   style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.width / 22,
@@ -110,7 +110,7 @@ class AHome extends StatelessWidget {
                             padding: EdgeInsets.only(bottom: 20.0),
                             height: MediaQuery.of(context).size.height / 13,
                             child: Text(
-                              name + " : " + price.toString(),
+                              name + ' : ' + price.toString(),
                               maxLines: 3,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -123,18 +123,13 @@ class AHome extends StatelessWidget {
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.done) {
+                                  var imageData = snapshot.data;
                                   if (snapshot.data == null)
-                                    ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Center(
-                                            child:
-                                                CircularProgressIndicator()));
-                                  else
-                                    return ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image(image: snapshot.data));
+                                    imageData = AssetImage(
+                                        'assets/images/icons/error.png');
+                                  return ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image(image: imageData));
                                 }
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
@@ -152,12 +147,12 @@ class AHome extends StatelessWidget {
                                   padding: EdgeInsets.only(right: 4.0),
                                   child: RaisedButton(
                                     onPressed: () => {},
-                                    child: Text("ACCEPT"),
+                                    child: Text('ACCEPT'),
                                     color: Colors.lightGreenAccent,
                                   )),
                               RaisedButton(
                                 onPressed: () => {},
-                                child: Text("REJECT"),
+                                child: Text('REJECT'),
                                 color: Colors.redAccent,
                               )
                             ],
