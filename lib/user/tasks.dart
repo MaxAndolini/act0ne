@@ -14,11 +14,21 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
+  bool task1_done = false;
+  bool task2_done = false;
+  bool task3_done = false;
+
   int picNumber = 0;
   File _imageFile;
 
   final imagePicker = ImagePicker();
   PickedFile pickedFile;
+
+  void initState() {
+    _getTask1Done();
+    _getTask2Done();
+    _getTask3Done();
+  }
 
   Future getImage() async {
     final pickedFile = await imagePicker.getImage(source: ImageSource.camera);
@@ -28,6 +38,9 @@ class _TasksState extends State<Tasks> {
         _imageFile = File(pickedFile.path);
         print("Your Photo sent");
         uploadImageToFirebase();
+        _getTask1Done();
+        _getTask2Done();
+        _getTask3Done();
       } else {
         print("Something went wrong.");
       }
@@ -126,7 +139,9 @@ class _TasksState extends State<Tasks> {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
             }
+
             var document = snapshot.data;
+
             return ListView(children: [
               Column(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -176,13 +191,15 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        picNumber = 1;
-                      });
-                      _getTask1();
-                      getImage();
-                    },
+                    onPressed: task1_done
+                        ? null
+                        : () {
+                            setState(() {
+                              picNumber = 1;
+                            });
+                            _getTask1();
+                            getImage();
+                          },
                     child: Icon(Icons.camera_alt),
                   ),
 
@@ -248,13 +265,15 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        picNumber = 2;
-                      });
-                      _getTask2();
-                      getImage();
-                    },
+                    onPressed: task2_done
+                        ? null
+                        : () {
+                            setState(() {
+                              picNumber = 2;
+                            });
+                            _getTask2();
+                            getImage();
+                          },
                     child: Icon(Icons.camera_alt),
                   ),
                   SizedBox(width: 0, height: 100.0),
@@ -301,13 +320,15 @@ class _TasksState extends State<Tasks> {
                     ),
                   ),
                   RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        picNumber = 3;
-                      });
-                      _getTask3();
-                      getImage();
-                    },
+                    onPressed: task3_done
+                        ? null
+                        : () {
+                            setState(() {
+                              picNumber = 3;
+                            });
+                            _getTask3();
+                            getImage();
+                          },
                     child: Icon(Icons.camera_alt),
                   ),
                 ],
@@ -366,5 +387,44 @@ class _TasksState extends State<Tasks> {
         "task3_approve": 1
       });
     });
+  }
+
+  _getTask1Done() async {
+    var recordData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get();
+    var getvalue = recordData.data();
+    if (getvalue["task1_approve"] == 1) {
+      task1_done = true;
+    } else if (getvalue["task1_approve"] == 0) {
+      task1_done = false;
+    }
+  }
+
+  _getTask2Done() async {
+    var recordData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get();
+    var getvalue = recordData.data();
+    if (getvalue["task2_approve"] == 1) {
+      task2_done = true;
+    } else if (getvalue["task2_approve"] == 0) {
+      task2_done = false;
+    }
+  }
+
+  _getTask3Done() async {
+    var recordData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get();
+    var getvalue = recordData.data();
+    if (getvalue["task3_approve"] == 1) {
+      task3_done = true;
+    } else if (getvalue["task3_approve"] == 0) {
+      task3_done = false;
+    }
   }
 }
