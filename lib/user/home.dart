@@ -57,7 +57,7 @@ class Home extends StatelessWidget {
                   ),
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
-                          .collection('tasks')
+                          .collection('users')
                           .doc(FirebaseAuth.instance.currentUser.uid)
                           .snapshots(),
                       builder: (context, snapshot) {
@@ -65,7 +65,7 @@ class Home extends StatelessWidget {
                           return Center(child: new CircularProgressIndicator());
                         }
                         var document = snapshot.data;
-                        var tasks = document['task'].reversed.toList();
+                        var tasks = document['tasks'].reversed.toList();
                         return ListView.builder(
                             itemExtent: 40,
                             scrollDirection: Axis.vertical,

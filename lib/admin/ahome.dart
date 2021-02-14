@@ -192,18 +192,6 @@ class AHome extends StatelessWidget {
                                               });
 
                                               FirebaseFirestore.instance
-                                                  .collection('tasks')
-                                                  .doc(documentID)
-                                                  .update({
-                                                'task': FieldValue.arrayUnion([
-                                                  (name.split(': ').last +
-                                                      ' : (' +
-                                                      price.toString() +
-                                                      ')')
-                                                ])
-                                              });
-
-                                              FirebaseFirestore.instance
                                                   .collection('users')
                                                   .doc(documentID)
                                                   .update({
@@ -221,8 +209,12 @@ class AHome extends StatelessWidget {
                                                 'task' +
                                                     type.toString() +
                                                     '_sent': false,
-                                                'total_tasks':
-                                                    FieldValue.increment(1)
+                                                'tasks': FieldValue.arrayUnion([
+                                                  (name.split(': ').last +
+                                                      ' : (' +
+                                                      price.toString() +
+                                                      ')')
+                                                ])
                                               }).then((value) => {
                                                         Navigator.pop(context),
                                                         scaffold.currentState

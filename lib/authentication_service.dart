@@ -123,16 +123,22 @@ class AuthenticationService {
           'task1_name': '',
           'task1_image': '',
           'task1_token': 0,
+          'task1_date': Timestamp.fromDate(DateTime.now()),
+          'task1_day_limit': 0,
           'task1_sent': false,
           'task2_name': '',
           'task2_image': '',
           'task2_token': 0,
+          'task2_date': Timestamp.fromDate(DateTime.now()),
+          'task2_day_limit': 0,
           'task2_sent': false,
           'task3_name': '',
           'task3_image': '',
           'task3_token': 0,
+          'task3_date': Timestamp.fromDate(DateTime.now()),
+          'task3_day_limit': 0,
           'task3_sent': false,
-          'total_tasks': 0,
+          'tasks': FieldValue.arrayUnion([]),
         }).then((value) {
           scaffold.showSnackBar(
             new SnackBar(

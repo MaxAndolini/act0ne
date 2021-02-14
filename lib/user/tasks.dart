@@ -258,7 +258,8 @@ class _TasksState extends State<Tasks> {
                                                     .size
                                                     .width /
                                                 18),
-                                      ),Padding(
+                                      ),
+                                      Padding(
                                         padding: EdgeInsets.only(left: 10),
                                         child: Row(
                                           mainAxisAlignment:
@@ -357,7 +358,7 @@ class _TasksState extends State<Tasks> {
                                                     .width /
                                                 18,
                                           )),
-                                          Padding(
+                                      Padding(
                                         padding: EdgeInsets.only(left: 10),
                                         child: Row(
                                           mainAxisAlignment:
@@ -439,19 +440,18 @@ class _TasksState extends State<Tasks> {
           .doc('Q8elnpjjwODUNKwp3uu6')
           .get();
       var getValue = recordData.data();
-
       FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
-        'task1_name': getValue['task' + randomNumber.toString()],
-        'task1_token': getValue['task' + randomNumber.toString() + '_price'],
-        'task1_image': '',
-        'task1_sent': false,
         'task1_id': randomNumber,
+        'task1_name': getValue['task' + randomNumber.toString()],
+        'task1_image': '',
+        'task1_token': getValue['task' + randomNumber.toString() + '_price'],
+        'task1_date': Timestamp.fromDate(DateTime.now()),
         'task1_day_limit':
             getValue['task' + randomNumber.toString() + '_day_limit'],
-        'task1_date': Timestamp.fromDate(DateTime.now()),
+        'task1_sent': false
       });
       task1Done = false;
       task1TimeDone = false;
@@ -469,14 +469,14 @@ class _TasksState extends State<Tasks> {
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
-        'task2_name': getValue['task' + randomNumber.toString()],
-        'task2_token': getValue['task' + randomNumber.toString() + '_price'],
-        'task2_image': '',
-        'task2_sent': false,
         'task2_id': randomNumber,
+        'task2_name': getValue['task' + randomNumber.toString()],
+        'task2_image': '',
+        'task2_token': getValue['task' + randomNumber.toString() + '_price'],
+        'task2_date': Timestamp.fromDate(DateTime.now()),
         'task2_day_limit':
             getValue['task' + randomNumber.toString() + '_day_limit'],
-        'task2_date': Timestamp.fromDate(DateTime.now()),
+        'task2_sent': false
       });
       task2Done = false;
       task2TimeDone = false;
@@ -494,14 +494,14 @@ class _TasksState extends State<Tasks> {
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
           .update({
-        'task3_name': getValue['task' + randomNumber.toString()],
-        'task3_token': getValue['task' + randomNumber.toString() + '_price'],
-        'task3_image': '',
-        'task3_sent': false,
         'task3_id': randomNumber,
+        'task3_name': getValue['task' + randomNumber.toString()],
+        'task3_image': '',
+        'task3_token': getValue['task' + randomNumber.toString() + '_price'],
+        'task3_date': Timestamp.fromDate(DateTime.now()),
         'task3_day_limit':
             getValue['task' + randomNumber.toString() + '_day_limit'],
-        'task3_date': Timestamp.fromDate(DateTime.now()),
+        'task3_sent': false
       });
       task3Done = false;
       task3TimeDone = false;
