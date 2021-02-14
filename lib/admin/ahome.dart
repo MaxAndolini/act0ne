@@ -186,7 +186,7 @@ class AHome extends StatelessWidget {
                                                 'task' +
                                                         value.data()['task' +
                                                             type.toString() +
-                                                            '_id'] +
+                                                            '_id'].toString() +
                                                         '_total':
                                                     FieldValue.increment(1)
                                               });

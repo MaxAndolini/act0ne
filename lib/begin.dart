@@ -1,4 +1,5 @@
 import 'package:act0ne/authentication_service.dart';
+import 'package:act0ne/sign_in.dart';
 import 'package:act0ne/user/market.dart';
 import 'package:act0ne/user/tasks.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -49,6 +50,11 @@ class _BeginState extends State<Begin> {
                 return new CircularProgressIndicator();
               }
               var document = snapshot.data;
+              if (!document.exists)
+                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                  context.read<AuthenticationService>().signOut(context);
+                  Navigator.pushReplacementNamed(context, '/signIn');
+                });
               return !document['admin']
                   ? pages[positionNumber]
                   : pages2[positionNumber];
