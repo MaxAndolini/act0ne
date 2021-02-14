@@ -104,7 +104,6 @@ class _TasksState extends State<Tasks> {
               return Center(child: new CircularProgressIndicator());
             }
             _getRandomTask();
-            
 
             var document = snapshot.data;
             return ListView(children: [
@@ -155,9 +154,42 @@ class _TasksState extends State<Tasks> {
                                       Text(
                                         document['task1_name'],
                                         style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width / 18,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              18,
                                         ),
                                       ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 4.0),
+                                                child: Text(
+                                                  document['task1_token']
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              40),
+                                                )),
+                                            Image.asset(
+                                              'assets/images/icons/token.png',
+                                              fit: BoxFit.contain,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  20,
+                                            ),
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -221,7 +253,40 @@ class _TasksState extends State<Tasks> {
                                     children: [
                                       Text(
                                         document['task2_name'],
-                                        style: TextStyle(fontSize: MediaQuery.of(context).size.width / 18),
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                18),
+                                      ),Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 4.0),
+                                                child: Text(
+                                                  document['task2_token']
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              40),
+                                                )),
+                                            Image.asset(
+                                              'assets/images/icons/token.png',
+                                              fit: BoxFit.contain,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  20,
+                                            ),
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -287,8 +352,41 @@ class _TasksState extends State<Tasks> {
                                     children: [
                                       Text(document['task3_name'],
                                           style: TextStyle(
-                                            fontSize: MediaQuery.of(context).size.width / 18,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                18,
                                           )),
+                                          Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                                padding:
+                                                    EdgeInsets.only(right: 4.0),
+                                                child: Text(
+                                                  document['task3_token']
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              40),
+                                                )),
+                                            Image.asset(
+                                              'assets/images/icons/token.png',
+                                              fit: BoxFit.contain,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  20,
+                                            ),
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -341,7 +439,7 @@ class _TasksState extends State<Tasks> {
           .doc('Q8elnpjjwODUNKwp3uu6')
           .get();
       var getValue = recordData.data();
-     
+
       FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
