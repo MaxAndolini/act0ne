@@ -10,7 +10,8 @@ class Toys extends StatefulWidget {
 
 class _ToysState extends State<Toys> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController adressController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +26,8 @@ class _ToysState extends State<Toys> {
               return Center(child: new CircularProgressIndicator());
             }
             var document = snapshot.data;
+            nameController.text = "";
+            adressController.text = "";
             return Container(
                 child: ListView(children: [
               Column(
@@ -194,6 +197,7 @@ class _ToysState extends State<Toys> {
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold))),
                           TextField(
+                              controller: nameController,
                               keyboardType: TextInputType.multiline,
                               maxLines: null,
                               decoration:
@@ -214,6 +218,7 @@ class _ToysState extends State<Toys> {
                             padding: EdgeInsets.only(
                                 bottom: MediaQuery.of(context).size.width / 22),
                             child: TextField(
+                              controller: adressController,
                               keyboardType: TextInputType.multiline,
                               maxLines: null,
                               decoration:
@@ -221,7 +226,8 @@ class _ToysState extends State<Toys> {
                             ),
                           ),
                           RaisedButton(
-                            onPressed: () => _buyItem(name, price),
+                            onPressed: () => _buyItem(name, price,
+                                nameController.text, adressController.text),
                             child: Text("BUY"),
                             color: Colors.green[100],
                           )
@@ -232,8 +238,31 @@ class _ToysState extends State<Toys> {
         });
   }
 
-  _buyItem(String name, String price) {
-    int getPrice = int.parse(price);
+  _buyItem(String orderName, String orderPrice, String name, String adress) {
+    FirebaseFirestore.instance
+        .collection("Orders")
+        .doc("tImH8cjhBGx4XT3AfJfx")
+        .get()
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection("Orders")
+          .doc("tImH8cjhBGx4XT3AfJfx")
+          .update({
+        'total_order_number': (value.data()["total_order_number"] + 1),
+      });
+      FirebaseFirestore.instance
+          .collection("Orders")
+          .doc("tImH8cjhBGx4XT3AfJfx")
+          .update({
+        'buyer_name' + (value.data()["total_order_number"] + 1).toString(): name,
+        'adress' + (value.data()["total_order_number"] + 1).toString(): adress,
+        'order_name' + (value.data()["total_order_number"] + 1).toString(): orderName,
+        'order_price' + (value.data()["total_order_number"] + 1).toString():
+            orderPrice,
+      });
+    });
+
+    int getPrice = int.parse(orderPrice);
     return FirebaseFirestore.instance
         .collection("users")
         .doc(FirebaseAuth.instance.currentUser.uid)
@@ -245,7 +274,8 @@ class _ToysState extends State<Toys> {
             .doc(FirebaseAuth.instance.currentUser.uid)
             .update({"token": (value.data()["token"] - getPrice)});
         _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text('The item(' + name + ') is ordered successfully!!'),
+          content:
+              Text('The item(' + orderName + ') is ordered successfully!!'),
         ));
       } else {
         _scaffoldKey.currentState.showSnackBar(SnackBar(
