@@ -324,7 +324,7 @@ class _TasksState extends State<Tasks> {
           .update({
         'task1_name': value.data()['task1'],
         'task1_token': value.data()['task1_price'],
-        'task1_send': true
+        'task1_sent': true
       });
     });
   }
@@ -341,7 +341,7 @@ class _TasksState extends State<Tasks> {
           .update({
         'task2_name': value.data()['task2'],
         'task2_token': value.data()['task2_price'],
-        'task2_send': true
+        'task2_sent': true
       });
     });
   }
@@ -358,7 +358,7 @@ class _TasksState extends State<Tasks> {
           .update({
         'task3_name': value.data()['task3'],
         'task3_token': value.data()['task3_price'],
-        'task3_send': true
+        'task3_sent': true
       });
     });
   }
@@ -369,8 +369,8 @@ class _TasksState extends State<Tasks> {
         .doc(FirebaseAuth.instance.currentUser.uid)
         .get();
     var getValue = recordData.data();
-    if (getValue['task1_send'] != null) task1Done = getValue['task1_send'];
-    if (getValue['task2_send'] != null) task2Done = getValue['task2_send'];
-    if (getValue['task3_send'] != null) task3Done = getValue['task3_send'];
+    if (getValue['task1_sent'] != null) task1Done = getValue['task1_sent'];
+    if (getValue['task2_sent'] != null) task2Done = getValue['task2_sent'];
+    if (getValue['task3_sent'] != null) task3Done = getValue['task3_sent'];
   }
 }

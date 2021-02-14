@@ -19,17 +19,17 @@ class AHome extends StatelessWidget {
               String variable =
                   data.get('name') + ' ' + data.get('surname') + ': ';
 
-              if (data.get('task1_send')) {
+              if (data.get('task1_sent')) {
                 nameList.add(variable + data.get('task1_name'));
                 imageList.add(data.get('task1_image'));
                 tokenList.add(data.get('task1_token'));
               }
-              if (data.get('task2_send')) {
+              if (data.get('task2_sent')) {
                 nameList.add(variable + data.get('task2_name'));
                 imageList.add(data.get('task2_image'));
                 tokenList.add(data.get('task2_token'));
               }
-              if (data.get('task3_send')) {
+              if (data.get('task3_sent')) {
                 nameList.add(variable + data.get('task3_name'));
                 imageList.add(data.get('task3_image'));
                 tokenList.add(data.get('task3_token'));

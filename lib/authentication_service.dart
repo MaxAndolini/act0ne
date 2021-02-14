@@ -123,15 +123,15 @@ class AuthenticationService {
           'task1_name': '',
           'task1_image': '',
           'task1_token': 0,
-          'task1_send': false,
+          'task1_sent': false,
           'task2_name': '',
           'task2_image': '',
           'task2_token': 0,
-          'task2_send': false,
+          'task2_sent': false,
           'task3_name': '',
           'task3_image': '',
           'task3_token': 0,
-          'task3_send': false,
+          'task3_sent': false,
           'my_total_tasks': 0,
         }).then((value) {
           scaffold.showSnackBar(
