@@ -104,7 +104,7 @@ class _TasksState extends State<Tasks> {
               return Center(child: new CircularProgressIndicator());
             }
             _getRandomTask();
-            print(task1Done);
+            
 
             var document = snapshot.data;
             return ListView(children: [
@@ -112,162 +112,208 @@ class _TasksState extends State<Tasks> {
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 20,
+                  ),
                   Text(
                     'Daily Task',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: MediaQuery.of(context).size.width / 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepOrange[300]),
                   ),
-                  Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.cyan,
-                          borderRadius: BorderRadiusDirectional.circular(6.0),
-                          shape: BoxShape.rectangle),
-                      height: 50,
-                      width: 275,
-                      padding: EdgeInsets.all(5.00),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadiusDirectional.circular(6.0),
-                            shape: BoxShape.rectangle),
-                        height: 50,
-                        width: 275,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: <Widget>[
-                                Text(
-                                  document['task1_name'],
-                                  style: TextStyle(
-                                    fontSize: 17,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.deepOrange[300],
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(6.0),
+                                shape: BoxShape.rectangle),
+                            height: MediaQuery.of(context).size.height / 16,
+                            width: MediaQuery.of(context).size.width / 1.42,
+                            padding: EdgeInsets.all(5.00),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(6.0),
+                                  shape: BoxShape.rectangle),
+                              height: MediaQuery.of(context).size.height / 16,
+                              width: MediaQuery.of(context).size.width / 1.42,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        document['task1_name'],
+                                        style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width / 18,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: RaisedButton(
+                            onPressed: task1Done
+                                ? null
+                                : () {
+                                    setState(() {
+                                      picNumber = 1;
+                                    });
+                                    getImage();
+                                  },
+                            child: Icon(Icons.camera_alt),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  RaisedButton(
-                    onPressed: task1Done
-                        ? null
-                        : () {
-                            setState(() {
-                              picNumber = 1;
-                            });
-                            getImage();
-                          },
-                    child: Icon(Icons.camera_alt),
-                  ),
-                  SizedBox(width: 0, height: 100.0),
+                  SizedBox(
+                      width: 0,
+                      height: MediaQuery.of(context).size.height / 16),
                   Text('Weekly Task',
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.cyan,
-                          borderRadius: BorderRadiusDirectional.circular(6.0),
-                          shape: BoxShape.rectangle),
-                      height: 50,
-                      width: 275,
-                      padding: EdgeInsets.all(5.00),
-                      child: Container(
-                        height: 50,
-                        width: 275,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadiusDirectional.circular(6.0),
-                            shape: BoxShape.rectangle),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  document['task2_name'],
-                                  style: TextStyle(fontSize: 17),
-                                )
-                              ],
+                          fontSize: MediaQuery.of(context).size.width / 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.cyan)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.cyan,
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(6.0),
+                                shape: BoxShape.rectangle),
+                            height: MediaQuery.of(context).size.height / 16,
+                            width: MediaQuery.of(context).size.width / 1.42,
+                            padding: EdgeInsets.all(5.00),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 16,
+                              width: MediaQuery.of(context).size.width / 1.42,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(6.0),
+                                  shape: BoxShape.rectangle),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        document['task2_name'],
+                                        style: TextStyle(fontSize: MediaQuery.of(context).size.width / 18),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: RaisedButton(
+                            onPressed: task2Done
+                                ? null
+                                : () {
+                                    setState(() {
+                                      picNumber = 2;
+                                    });
+
+                                    getImage();
+                                  },
+                            child: Icon(Icons.camera_alt),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  RaisedButton(
-                    onPressed: task2Done
-                        ? null
-                        : () {
-                            setState(() {
-                              picNumber = 2;
-                            });
-
-                            getImage();
-                          },
-                    child: Icon(Icons.camera_alt),
-                  ),
-                  SizedBox(width: 0, height: 100.0),
-                  Text('Monthly Tasks',
+                  SizedBox(
+                      width: 0,
+                      height: MediaQuery.of(context).size.height / 16),
+                  Text('Monthly Task',
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.cyan,
-                          borderRadius: BorderRadiusDirectional.circular(6.0),
-                          shape: BoxShape.rectangle),
-                      height: 50,
-                      width: 275,
-                      padding: EdgeInsets.all(5.00),
-                      child: Container(
-                        height: 50,
-                        width: 275,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadiusDirectional.circular(6.0),
-                            shape: BoxShape.rectangle),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(document['task3_name'],
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                    )),
-                              ],
+                          fontSize: MediaQuery.of(context).size.width / 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green[300])),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.green[300],
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(6.0),
+                                shape: BoxShape.rectangle),
+                            height: MediaQuery.of(context).size.height / 16,
+                            width: MediaQuery.of(context).size.width / 1.42,
+                            padding: EdgeInsets.all(5.00),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 16,
+                              width: MediaQuery.of(context).size.width / 1.42,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(6.0),
+                                  shape: BoxShape.rectangle),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(document['task3_name'],
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context).size.width / 18,
+                                          )),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  RaisedButton(
-                    onPressed: task3Done
-                        ? null
-                        : () {
-                            setState(() {
-                              picNumber = 3;
-                            });
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: RaisedButton(
+                            onPressed: task3Done
+                                ? null
+                                : () {
+                                    setState(() {
+                                      picNumber = 3;
+                                    });
 
-                            getImage();
-                          },
-                    child: Icon(Icons.camera_alt),
-                  ),
+                                    getImage();
+                                  },
+                            child: Icon(Icons.camera_alt),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ]);
@@ -295,7 +341,7 @@ class _TasksState extends State<Tasks> {
           .doc('Q8elnpjjwODUNKwp3uu6')
           .get();
       var getValue = recordData.data();
-      print(getValue['task' + randomNumber.toString()]);
+     
       FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
@@ -304,6 +350,7 @@ class _TasksState extends State<Tasks> {
         'task1_token': getValue['task' + randomNumber.toString() + '_price'],
         'task1_image': '',
         'task1_sent': false,
+        'task1_id': randomNumber,
         'task1_day_limit':
             getValue['task' + randomNumber.toString() + '_day_limit'],
         'task1_date': Timestamp.fromDate(DateTime.now()),
@@ -320,7 +367,6 @@ class _TasksState extends State<Tasks> {
           .doc('Q8elnpjjwODUNKwp3uu6')
           .get();
       var getValue = recordData.data();
-      print(getValue['task' + randomNumber.toString()]);
       FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
@@ -329,6 +375,7 @@ class _TasksState extends State<Tasks> {
         'task2_token': getValue['task' + randomNumber.toString() + '_price'],
         'task2_image': '',
         'task2_sent': false,
+        'task2_id': randomNumber,
         'task2_day_limit':
             getValue['task' + randomNumber.toString() + '_day_limit'],
         'task2_date': Timestamp.fromDate(DateTime.now()),
@@ -345,7 +392,6 @@ class _TasksState extends State<Tasks> {
           .doc('Q8elnpjjwODUNKwp3uu6')
           .get();
       var getValue = recordData.data();
-      print(getValue['task' + randomNumber.toString()]);
       FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser.uid)
@@ -354,6 +400,7 @@ class _TasksState extends State<Tasks> {
         'task3_token': getValue['task' + randomNumber.toString() + '_price'],
         'task3_image': '',
         'task3_sent': false,
+        'task3_id': randomNumber,
         'task3_day_limit':
             getValue['task' + randomNumber.toString() + '_day_limit'],
         'task3_date': Timestamp.fromDate(DateTime.now()),
