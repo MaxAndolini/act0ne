@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +15,10 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
+  bool task1_time_done = false;
+  bool task2_time_done = false;
+  bool task3_time_done = false;
+
   bool task1Done = false;
   bool task2Done = false;
   bool task3Done = false;
@@ -28,6 +33,7 @@ class _TasksState extends State<Tasks> {
   void initState() {
     super.initState();
     _getTasksDone();
+    _getRandomTask();
   }
 
   Future getImage() async {
@@ -64,64 +70,20 @@ class _TasksState extends State<Tasks> {
         });
   }
 
-/*
-  Random random = Random();
-
-  List<Task> dailyTasksList = [
-    Task.withdailyTasks("Give cup of food"),
-    Task.withdailyTasks("Give some love"),
-    Task.withdailyTasks("Play with animals"),
-  ];
-
-  List<Task> weeklyTasksList = [
-    Task.withweeklyTasks("Visit animal shelter"),
-    Task.withweeklyTasks("Make goods for animals"),
-    Task.withweeklyTasks("Visit animal shelter"),
-    Task.withweeklyTasks("Watch film about animals"),
-  ];
-
-  List<Task> monthlyTasksList = [
-    Task.withmonthlyTasks("Donate the animal foundation "),
-    Task.withmonthlyTasks("Construct a animal shelter"),
-    Task.withmonthlyTasks("Adopt a animal"),
-  ];
-*/
-
-/*
-  int _counter = 10;
-  Timer _timer;
-
-  void _startTimer() {
-    _counter =  TimeOfDay.hoursPerDay;
-    if (_timer != null) {
-      _timer.cancel();
-    }
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_counter > 0) {
-          _counter--;
-        } else {
-          _timer.cancel();
-        }
-      });
-    });
-  }
-*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('tasks')
-              .doc('Q8elnpjjwODUNKwp3uu6')
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser.uid)
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
             }
-
+            _getRandomTask();
             var document = snapshot.data;
-
             return ListView(children: [
               Column(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -158,7 +120,7 @@ class _TasksState extends State<Tasks> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  document['task1'],
+                                  document['task1_name'],
                                   style: TextStyle(
                                     fontSize: 17,
                                   ),
@@ -182,27 +144,6 @@ class _TasksState extends State<Tasks> {
                           },
                     child: Icon(Icons.camera_alt),
                   ),
-
-                  //(_counter > 0)
-                  //  ? Text('')
-                  /* Text(
-                'Lets try to new task',
-                style: TextStyle(color: Colors.amber),
-
-              ),
-              */
-                  /* RaisedButton(
-                onPressed: () => _startTimer(),
-                child: Text('You have 24 hours to complete this task'),
-              ),*/
-                  /*Text(
-                '$_counter',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                ),
-              ),*/
-
                   SizedBox(width: 0, height: 100.0),
                   Text('Weekly Task',
                       style: TextStyle(
@@ -232,7 +173,7 @@ class _TasksState extends State<Tasks> {
                             Row(
                               children: [
                                 Text(
-                                  document['task2'],
+                                  document['task2_name'],
                                   style: TextStyle(fontSize: 17),
                                 )
                               ],
@@ -282,7 +223,7 @@ class _TasksState extends State<Tasks> {
                           children: [
                             Row(
                               children: [
-                                Text(document['task3'],
+                                Text(document['task3_name'],
                                     style: TextStyle(
                                       fontSize: 17,
                                     )),
@@ -372,5 +313,108 @@ class _TasksState extends State<Tasks> {
     if (getValue['task1_sent'] != null) task1Done = getValue['task1_sent'];
     if (getValue['task2_sent'] != null) task2Done = getValue['task2_sent'];
     if (getValue['task3_sent'] != null) task3Done = getValue['task3_sent'];
+  }
+
+  _getRandomTask() async {
+
+    _timeControl();
+
+    if (task1_time_done) {
+      Random random = new Random();
+      int randomNumber = random.nextInt(8) + 1;
+      var recordData = await FirebaseFirestore.instance
+          .collection('tasks')
+          .doc('Q8elnpjjwODUNKwp3uu6')
+          .get();
+      var getValue = recordData.data();
+      print(getValue['task' + randomNumber.toString()]);
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .update({
+        'task1_name': getValue['task' + randomNumber.toString()],
+        'task1_token': getValue['task' + randomNumber.toString() + '_price'],
+        'task1_image': '',
+        'task1_sent': false,
+        'task1_day_limit':
+            getValue['task' + randomNumber.toString() + '_day_limit'],
+        'task1_date': Timestamp.fromDate(DateTime.now()),
+      });
+      task1_time_done = false;
+    }
+
+    if (task2_time_done) {
+      Random random = new Random();
+      int randomNumber = random.nextInt(8) + 1;
+      var recordData = await FirebaseFirestore.instance
+          .collection('tasks')
+          .doc('Q8elnpjjwODUNKwp3uu6')
+          .get();
+      var getValue = recordData.data();
+      print(getValue['task' + randomNumber.toString()]);
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .update({
+        'task2_name': getValue['task' + randomNumber.toString()],
+        'task2_token': getValue['task' + randomNumber.toString() + '_price'],
+        'task2_image': '',
+        'task2_sent': false,
+        'task2_day_limit':
+            getValue['task' + randomNumber.toString() + '_day_limit'],
+        'task2_date': Timestamp.fromDate(DateTime.now()),
+      });
+      task2_time_done = false;
+    }
+
+    if (task3_time_done) {
+      Random random = new Random();
+      int randomNumber = random.nextInt(8) + 1;
+      var recordData = await FirebaseFirestore.instance
+          .collection('tasks')
+          .doc('Q8elnpjjwODUNKwp3uu6')
+          .get();
+      var getValue = recordData.data();
+      print(getValue['task' + randomNumber.toString()]);
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .update({
+        'task3_name': getValue['task' + randomNumber.toString()],
+        'task3_token': getValue['task' + randomNumber.toString() + '_price'],
+        'task3_image': '',
+        'task3_sent': false,
+        'task3_day_limit':
+            getValue['task' + randomNumber.toString() + '_day_limit'],
+        'task3_date': Timestamp.fromDate(DateTime.now()),
+      });
+      task3_time_done = false;
+    }
+  }
+
+  _timeControl() async {
+    var recordData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get();
+    var getValue = recordData.data();
+    DateTime givenTime1 = getValue['task1_date'].toDate();
+    if (getValue['task1_day_limit'] <
+        DateTime.now().difference(givenTime1).inDays) {
+      task1_time_done = true;
+    }
+
+    DateTime givenTime2 = getValue['task2_date'].toDate();
+    if (getValue['task2_day_limit'] <
+        DateTime.now().difference(givenTime2).inDays) {
+      task2_time_done = true;
+    }
+
+    DateTime givenTime3 = getValue['task3_date'].toDate();
+    if (getValue['task3_day_limit'] <
+        DateTime.now().difference(givenTime3).inDays) {
+      task3_time_done = true;
+    }
+    
   }
 }
