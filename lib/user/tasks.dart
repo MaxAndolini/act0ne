@@ -15,9 +15,9 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
-  bool task1_time_done = false;
-  bool task2_time_done = false;
-  bool task3_time_done = false;
+  bool task1TimeDone = false;
+  bool task2TimeDone = false;
+  bool task3TimeDone = false;
 
   bool task1Done = false;
   bool task2Done = false;
@@ -33,6 +33,7 @@ class _TasksState extends State<Tasks> {
   void initState() {
     super.initState();
     _getTasksDone();
+    _timeControl();
     _getRandomTask();
   }
 
@@ -43,8 +44,27 @@ class _TasksState extends State<Tasks> {
       if (pickedFile != null) {
         _imageFile = File(pickedFile.path);
         print('Your Photo sent');
-        uploadImageToFirebase();
-        _getTasksDone();
+        if (picNumber == 1) {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser.uid)
+              .update({'task1_sent': true});
+          task1Done = true;
+        }
+        if (picNumber == 2) {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser.uid)
+              .update({'task2_sent': true});
+          task2Done = true;
+        }
+        if (picNumber == 3) {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser.uid)
+              .update({'task3_sent': true});
+          task3Done = true;
+        }
       } else {
         print('Something went wrong.');
       }
@@ -65,6 +85,7 @@ class _TasksState extends State<Tasks> {
                   .doc(FirebaseAuth.instance.currentUser.uid)
                   .update({
                 'task' + picNumber.toString() + '_image': 'tasks/$fileName',
+                'task' + picNumber.toString() + '_sent': true
               }),
             }
         });
@@ -83,6 +104,8 @@ class _TasksState extends State<Tasks> {
               return Center(child: new CircularProgressIndicator());
             }
             _getRandomTask();
+            print(task1Done);
+
             var document = snapshot.data;
             return ListView(children: [
               Column(
@@ -139,7 +162,6 @@ class _TasksState extends State<Tasks> {
                             setState(() {
                               picNumber = 1;
                             });
-                            _getTask1();
                             getImage();
                           },
                     child: Icon(Icons.camera_alt),
@@ -190,7 +212,7 @@ class _TasksState extends State<Tasks> {
                             setState(() {
                               picNumber = 2;
                             });
-                            _getTask2();
+
                             getImage();
                           },
                     child: Icon(Icons.camera_alt),
@@ -241,7 +263,7 @@ class _TasksState extends State<Tasks> {
                             setState(() {
                               picNumber = 3;
                             });
-                            _getTask3();
+
                             getImage();
                           },
                     child: Icon(Icons.camera_alt),
@@ -251,57 +273,6 @@ class _TasksState extends State<Tasks> {
             ]);
           }),
     );
-  }
-
-  _getTask1() {
-    return FirebaseFirestore.instance
-        .collection('tasks')
-        .doc('Q8elnpjjwODUNKwp3uu6')
-        .get()
-        .then((value) {
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser.uid)
-          .update({
-        'task1_name': value.data()['task1'],
-        'task1_token': value.data()['task1_price'],
-        'task1_sent': true
-      });
-    });
-  }
-
-  _getTask2() {
-    return FirebaseFirestore.instance
-        .collection('tasks')
-        .doc('Q8elnpjjwODUNKwp3uu6')
-        .get()
-        .then((value) {
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser.uid)
-          .update({
-        'task2_name': value.data()['task2'],
-        'task2_token': value.data()['task2_price'],
-        'task2_sent': true
-      });
-    });
-  }
-
-  _getTask3() {
-    return FirebaseFirestore.instance
-        .collection('tasks')
-        .doc('Q8elnpjjwODUNKwp3uu6')
-        .get()
-        .then((value) {
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser.uid)
-          .update({
-        'task3_name': value.data()['task3'],
-        'task3_token': value.data()['task3_price'],
-        'task3_sent': true
-      });
-    });
   }
 
   _getTasksDone() async {
@@ -316,10 +287,7 @@ class _TasksState extends State<Tasks> {
   }
 
   _getRandomTask() async {
-
-    _timeControl();
-
-    if (task1_time_done) {
+    if (task1TimeDone) {
       Random random = new Random();
       int randomNumber = random.nextInt(8) + 1;
       var recordData = await FirebaseFirestore.instance
@@ -340,10 +308,11 @@ class _TasksState extends State<Tasks> {
             getValue['task' + randomNumber.toString() + '_day_limit'],
         'task1_date': Timestamp.fromDate(DateTime.now()),
       });
-      task1_time_done = false;
+      task1Done = false;
+      task1TimeDone = false;
     }
 
-    if (task2_time_done) {
+    if (task2TimeDone) {
       Random random = new Random();
       int randomNumber = random.nextInt(8) + 1;
       var recordData = await FirebaseFirestore.instance
@@ -364,10 +333,11 @@ class _TasksState extends State<Tasks> {
             getValue['task' + randomNumber.toString() + '_day_limit'],
         'task2_date': Timestamp.fromDate(DateTime.now()),
       });
-      task2_time_done = false;
+      task2Done = false;
+      task2TimeDone = false;
     }
 
-    if (task3_time_done) {
+    if (task3TimeDone) {
       Random random = new Random();
       int randomNumber = random.nextInt(8) + 1;
       var recordData = await FirebaseFirestore.instance
@@ -388,7 +358,8 @@ class _TasksState extends State<Tasks> {
             getValue['task' + randomNumber.toString() + '_day_limit'],
         'task3_date': Timestamp.fromDate(DateTime.now()),
       });
-      task3_time_done = false;
+      task3Done = false;
+      task3TimeDone = false;
     }
   }
 
@@ -401,20 +372,19 @@ class _TasksState extends State<Tasks> {
     DateTime givenTime1 = getValue['task1_date'].toDate();
     if (getValue['task1_day_limit'] <
         DateTime.now().difference(givenTime1).inDays) {
-      task1_time_done = true;
+      task1TimeDone = true;
     }
 
     DateTime givenTime2 = getValue['task2_date'].toDate();
     if (getValue['task2_day_limit'] <
         DateTime.now().difference(givenTime2).inDays) {
-      task2_time_done = true;
+      task2TimeDone = true;
     }
 
     DateTime givenTime3 = getValue['task3_date'].toDate();
     if (getValue['task3_day_limit'] <
         DateTime.now().difference(givenTime3).inDays) {
-      task3_time_done = true;
+      task3TimeDone = true;
     }
-    
   }
 }
