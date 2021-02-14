@@ -132,7 +132,7 @@ class AuthenticationService {
           'task3_image': '',
           'task3_token': 0,
           'task3_sent': false,
-          'my_total_tasks': 0,
+          'total_tasks': 0,
         }).then((value) {
           scaffold.showSnackBar(
             new SnackBar(

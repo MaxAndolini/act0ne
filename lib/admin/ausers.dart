@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 class AUsers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> litems = [];
     return Scaffold(
-      body: FutureBuilder(
-          future: FirebaseFirestore.instance.collection('users').get(),
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('users').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
             }
             var document = snapshot.data.docs;
+
+            List<String> listItems = [];
+
             document.forEach((data) {
               String variable = data.get('name') +
                   ' ' +
@@ -23,7 +25,7 @@ class AUsers extends StatelessWidget {
                   data.get('token').toString() +
                   ' token';
 
-              litems.add(variable);
+              listItems.add(variable);
             });
 
             return CustomScrollView(
@@ -51,9 +53,9 @@ class AUsers extends StatelessWidget {
                               alignment: Alignment.centerLeft,
                               margin: EdgeInsets.all(5.0),
                               padding: EdgeInsets.only(left: 10.0),
-                              child: new Text(litems[index]),
+                              child: new Text(listItems[index]),
                             ),
-                        itemCount: litems.length),
+                        itemCount: listItems.length),
                   ),
                 ),
               ],

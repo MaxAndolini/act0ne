@@ -162,11 +162,15 @@ class Functions {
                             ),
                           ),
                           RaisedButton(
-                            onPressed: () => buyItem(scaffold, name, price,
-                                nameController.text, addressController.text),
-                            child: Text('BUY'),
-                            color: Colors.green[100],
-                          )
+                              child: Text('BUY'),
+                              color: Colors.green[100],
+                              onPressed: () => buyItem(
+                                  scaffold,
+                                  context,
+                                  name,
+                                  price,
+                                  nameController.text,
+                                  addressController.text))
                         ],
                       )
                     ],
@@ -174,19 +178,13 @@ class Functions {
         });
   }
 
-  buyItem(
-      scaffold, String orderName, int orderPrice, String name, String address) {
+  buyItem(scaffold, BuildContext context, String orderName, int orderPrice,
+      String name, String address) {
     FirebaseFirestore.instance
         .collection('orders')
         .doc('tImH8cjhBGx4XT3AfJfx')
         .get()
         .then((value) {
-      FirebaseFirestore.instance
-          .collection('orders')
-          .doc('tImH8cjhBGx4XT3AfJfx')
-          .update({
-        'total_order_number': (value.data()['total_order_number'] + 1),
-      });
       FirebaseFirestore.instance
           .collection('orders')
           .doc('tImH8cjhBGx4XT3AfJfx')
@@ -199,6 +197,7 @@ class Functions {
             orderName,
         'order_price' + (value.data()['total_order_number'] + 1).toString():
             orderPrice,
+        'total_order_number': FieldValue.increment(1)
       });
     });
     return FirebaseFirestore.instance
@@ -206,15 +205,20 @@ class Functions {
         .doc(FirebaseAuth.instance.currentUser.uid)
         .get()
         .then((value) {
+      Navigator.pop(context);
       if (value.data()['token'] - orderPrice >= 0) {
         FirebaseFirestore.instance
             .collection('users')
             .doc(FirebaseAuth.instance.currentUser.uid)
-            .update({'token': (value.data()['token'] - orderPrice)});
-        scaffold.currentState.showSnackBar(SnackBar(
-          content:
-              Text('The item(' + orderName + ') is ordered successfully!!'),
-        ));
+            .update({'token': (value.data()['token'] - orderPrice)}).then(
+                (value) => {
+                      Navigator.pop(context),
+                      scaffold.currentState.showSnackBar(SnackBar(
+                        content: Text('The item(' +
+                            orderName +
+                            ') is ordered successfully!!'),
+                      ))
+                    });
       } else {
         scaffold.currentState.showSnackBar(SnackBar(
           content: Text('You dont have enough money!'),

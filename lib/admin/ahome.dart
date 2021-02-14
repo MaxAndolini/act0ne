@@ -5,33 +5,44 @@ import 'package:flutter/material.dart';
 class AHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> nameList = [], imageList = [];
-    List<int> tokenList = [];
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
+
     return Scaffold(
-      body: FutureBuilder(
-          future: FirebaseFirestore.instance.collection('users').get(),
+      key: _scaffoldKey,
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('users').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: new CircularProgressIndicator());
             }
+            List<String> documentIDList = [], nameList = [], imageList = [];
+            List<int> typeList = [], tokenList = [];
+
             var document = snapshot.data.docs;
             document.forEach((data) {
               String variable =
                   data.get('name') + ' ' + data.get('surname') + ': ';
 
               if (data.get('task1_sent')) {
+                documentIDList.add(data.documentID);
                 nameList.add(variable + data.get('task1_name'));
                 imageList.add(data.get('task1_image'));
+                typeList.add(1);
                 tokenList.add(data.get('task1_token'));
               }
               if (data.get('task2_sent')) {
+                documentIDList.add(data.documentID);
                 nameList.add(variable + data.get('task2_name'));
                 imageList.add(data.get('task2_image'));
+                typeList.add(2);
                 tokenList.add(data.get('task2_token'));
               }
               if (data.get('task3_sent')) {
+                documentIDList.add(data.documentID);
                 nameList.add(variable + data.get('task3_name'));
                 imageList.add(data.get('task3_image'));
+                typeList.add(3);
                 tokenList.add(data.get('task3_token'));
               }
             });
@@ -63,8 +74,14 @@ class AHome extends StatelessWidget {
                                 color: Colors.orangeAccent,
                                 child: Text(nameList[index]),
                                 onPressed: () {
-                                  _showDialog(context, nameList[index],
-                                      tokenList[index], imageList[index]);
+                                  _showDialog(
+                                      _scaffoldKey,
+                                      context,
+                                      documentIDList[index],
+                                      nameList[index],
+                                      tokenList[index],
+                                      typeList[index],
+                                      imageList[index]);
                                 },
                               ),
                             ),
@@ -77,7 +94,8 @@ class AHome extends StatelessWidget {
     );
   }
 
-  _showDialog(BuildContext context, String name, int price, String imageName) {
+  _showDialog(scaffold, BuildContext context, String documentID, String name,
+      int price, int type, String imageName) {
     return showDialog(
         context: context,
         builder: (context) {
@@ -146,15 +164,110 @@ class AHome extends StatelessWidget {
                               Padding(
                                   padding: EdgeInsets.only(right: 4.0),
                                   child: RaisedButton(
-                                    onPressed: () => {},
-                                    child: Text('ACCEPT'),
-                                    color: Colors.lightGreenAccent,
-                                  )),
+                                      child: Text('ACCEPT'),
+                                      color: Colors.lightGreenAccent,
+                                      onPressed: () => {
+                                            FirebaseFirestore.instance
+                                                .collection('users')
+                                                .doc(documentID)
+                                                .get()
+                                                .then((value) {
+                                              FirebaseStorage.instance
+                                                  .ref()
+                                                  .child(value.data()['task' +
+                                                      type.toString() +
+                                                      '_image'])
+                                                  .delete();
+
+                                              FirebaseFirestore.instance
+                                                  .collection('tasks')
+                                                  .doc('Q8elnpjjwODUNKwp3uu6')
+                                                  .update({
+                                                'task' +
+                                                        value.data()['task' +
+                                                            type.toString() +
+                                                            '_id'] +
+                                                        '_total':
+                                                    FieldValue.increment(1)
+                                              });
+
+                                              FirebaseFirestore.instance
+                                                  .collection('tasks')
+                                                  .doc(documentID)
+                                                  .update({
+                                                'task': FieldValue.arrayUnion([
+                                                  (name.split(': ').last +
+                                                      ' : (' +
+                                                      price.toString() +
+                                                      ')')
+                                                ])
+                                              });
+
+                                              FirebaseFirestore.instance
+                                                  .collection('users')
+                                                  .doc(documentID)
+                                                  .update({
+                                                'token':
+                                                    FieldValue.increment(price),
+                                                'task' +
+                                                    type.toString() +
+                                                    '_name': '',
+                                                'task' +
+                                                    type.toString() +
+                                                    '_image': '',
+                                                'task' +
+                                                    type.toString() +
+                                                    '_token': 0,
+                                                'task' +
+                                                    type.toString() +
+                                                    '_sent': false,
+                                                'total_tasks':
+                                                    FieldValue.increment(1)
+                                              }).then((value) => {
+                                                        Navigator.pop(context),
+                                                        scaffold.currentState
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'The task(' +
+                                                                        name +
+                                                                        ') is accepted!')))
+                                                      });
+                                            })
+                                          })),
                               RaisedButton(
-                                onPressed: () => {},
-                                child: Text('REJECT'),
-                                color: Colors.redAccent,
-                              )
+                                  child: Text('REJECT'),
+                                  color: Colors.redAccent,
+                                  onPressed: () => FirebaseFirestore.instance
+                                          .collection('users')
+                                          .doc(documentID)
+                                          .get()
+                                          .then((value) {
+                                        FirebaseStorage.instance
+                                            .ref()
+                                            .child(value.data()['task' +
+                                                type.toString() +
+                                                '_image'])
+                                            .delete();
+                                        FirebaseFirestore.instance
+                                            .collection('users')
+                                            .doc(documentID)
+                                            .update({
+                                          'task' + type.toString() + '_image':
+                                              '',
+                                          'task' + type.toString() + '_token':
+                                              0,
+                                          'task' + type.toString() + '_sent':
+                                              false
+                                        }).then((value2) => {
+                                                  Navigator.pop(context),
+                                                  scaffold.currentState
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                              'The task(' +
+                                                                  name +
+                                                                  ') is rejected!')))
+                                                });
+                                      }))
                             ],
                           )
                         ],
