@@ -82,11 +82,11 @@ class _TasksState extends State<Tasks> {
                                     decoration: BoxDecoration(
                                         color: Colors.deepOrange[300],
                                         borderRadius:
-                                            BorderRadiusDirectional.circular(
-                                                6.0),
+                                        BorderRadiusDirectional.circular(
+                                            6.0),
                                         shape: BoxShape.rectangle),
                                     height:
-                                        MediaQuery.of(context).size.height / 16,
+                                    MediaQuery.of(context).size.height / 16,
                                     width: MediaQuery.of(context).size.width /
                                         1.42,
                                     padding: EdgeInsets.all(5.00),
@@ -94,64 +94,64 @@ class _TasksState extends State<Tasks> {
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadiusDirectional
-                                                    .circular(6.0),
+                                            BorderRadiusDirectional
+                                                .circular(6.0),
                                             shape: BoxShape.rectangle),
                                         height:
-                                            MediaQuery.of(context).size.height /
-                                                16,
+                                        MediaQuery.of(context).size.height /
+                                            16,
                                         width:
-                                            MediaQuery.of(
-                                                        context)
-                                                    .size
-                                                    .width /
-                                                1.42,
+                                        MediaQuery.of(
+                                            context)
+                                            .size
+                                            .width /
+                                            1.42,
                                         child: Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                                   children: <Widget>[
                                                     Text(document['task1_name'],
                                                         style: TextStyle(
                                                             fontSize: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
+                                                                context)
+                                                                .size
+                                                                .width /
                                                                 18)),
                                                     Padding(
                                                         padding:
-                                                            EdgeInsets.only(
-                                                                left: 10),
+                                                        EdgeInsets.only(
+                                                            left: 10),
                                                         child: Row(
                                                             mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
+                                                            MainAxisAlignment
+                                                                .center,
                                                             children: [
                                                               Padding(
                                                                   padding: EdgeInsets
                                                                       .only(
-                                                                          right:
-                                                                              4.0),
+                                                                      right:
+                                                                      4.0),
                                                                   child: Text(
                                                                       document[
-                                                                              'task1_token']
+                                                                      'task1_token']
                                                                           .toString(),
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                              MediaQuery.of(context).size.height / 40))),
+                                                                          MediaQuery.of(context).size.height / 40))),
                                                               Image.asset(
                                                                   'assets/images/icons/token.png',
                                                                   fit: BoxFit
                                                                       .contain,
                                                                   width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
+                                                                      context)
+                                                                      .size
+                                                                      .width /
                                                                       20)
                                                             ]))
                                                   ])
@@ -181,77 +181,77 @@ class _TasksState extends State<Tasks> {
                                     decoration: BoxDecoration(
                                         color: Colors.cyan,
                                         borderRadius:
-                                            BorderRadiusDirectional.circular(
-                                                6.0),
+                                        BorderRadiusDirectional.circular(
+                                            6.0),
                                         shape: BoxShape.rectangle),
                                     height:
-                                        MediaQuery.of(context).size.height / 16,
+                                    MediaQuery.of(context).size.height / 16,
                                     width: MediaQuery.of(context).size.width /
                                         1.42,
                                     padding: EdgeInsets.all(5.00),
                                     child: Container(
                                         height:
-                                            MediaQuery.of(context).size.height /
-                                                16,
+                                        MediaQuery.of(context).size.height /
+                                            16,
                                         width:
-                                            MediaQuery.of(context).size.width /
-                                                1.42,
+                                        MediaQuery.of(context).size.width /
+                                            1.42,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadiusDirectional.circular(
-                                                    6.0),
+                                            BorderRadiusDirectional.circular(
+                                                6.0),
                                             shape: BoxShape.rectangle),
                                         child: Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                                   children: [
                                                     Text(
                                                       document['task2_name'],
                                                       style: TextStyle(
                                                           fontSize: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
+                                                              context)
+                                                              .size
+                                                              .width /
                                                               18),
                                                     ),
                                                     Padding(
                                                         padding:
-                                                            EdgeInsets.only(
-                                                                left: 10),
+                                                        EdgeInsets.only(
+                                                            left: 10),
                                                         child: Row(
                                                             mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
+                                                            MainAxisAlignment
+                                                                .center,
                                                             children: [
                                                               Padding(
                                                                   padding: EdgeInsets
                                                                       .only(
-                                                                          right:
-                                                                              4.0),
+                                                                      right:
+                                                                      4.0),
                                                                   child: Text(
                                                                     document[
-                                                                            'task2_token']
+                                                                    'task2_token']
                                                                         .toString(),
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                            MediaQuery.of(context).size.height /
-                                                                                40),
+                                                                        MediaQuery.of(context).size.height /
+                                                                            40),
                                                                   )),
                                                               Image.asset(
                                                                   'assets/images/icons/token.png',
                                                                   fit: BoxFit
                                                                       .contain,
                                                                   width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
+                                                                      context)
+                                                                      .size
+                                                                      .width /
                                                                       20)
                                                             ]))
                                                   ])
@@ -284,75 +284,75 @@ class _TasksState extends State<Tasks> {
                                     decoration: BoxDecoration(
                                         color: Colors.green[300],
                                         borderRadius:
-                                            BorderRadiusDirectional.circular(
-                                                6.0),
+                                        BorderRadiusDirectional.circular(
+                                            6.0),
                                         shape: BoxShape.rectangle),
                                     height:
-                                        MediaQuery.of(context).size.height / 16,
+                                    MediaQuery.of(context).size.height / 16,
                                     width: MediaQuery.of(context).size.width /
                                         1.42,
                                     padding: EdgeInsets.all(5.00),
                                     child: Container(
                                         height:
-                                            MediaQuery.of(context).size.height /
-                                                16,
+                                        MediaQuery.of(context).size.height /
+                                            16,
                                         width:
-                                            MediaQuery.of(context).size.width /
-                                                1.42,
+                                        MediaQuery.of(context).size.width /
+                                            1.42,
                                         decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadiusDirectional.circular(
-                                                    6.0),
+                                            BorderRadiusDirectional.circular(
+                                                6.0),
                                             shape: BoxShape.rectangle),
                                         child: Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                                   children: [
                                                     Text(document['task3_name'],
                                                         style: TextStyle(
                                                             fontSize: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
+                                                                context)
+                                                                .size
+                                                                .width /
                                                                 18)),
                                                     Padding(
                                                         padding:
-                                                            EdgeInsets.only(
-                                                                left: 10),
+                                                        EdgeInsets.only(
+                                                            left: 10),
                                                         child: Row(
                                                             mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
+                                                            MainAxisAlignment
+                                                                .center,
                                                             children: [
                                                               Padding(
                                                                   padding: EdgeInsets
                                                                       .only(
-                                                                          right:
-                                                                              4.0),
+                                                                      right:
+                                                                      4.0),
                                                                   child: Text(
                                                                     document[
-                                                                            'task3_token']
+                                                                    'task3_token']
                                                                         .toString(),
                                                                     style: TextStyle(
                                                                         fontSize:
-                                                                            MediaQuery.of(context).size.height /
-                                                                                40),
+                                                                        MediaQuery.of(context).size.height /
+                                                                            40),
                                                                   )),
                                                               Image.asset(
                                                                   'assets/images/icons/token.png',
                                                                   fit: BoxFit
                                                                       .contain,
                                                                   width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
+                                                                      context)
+                                                                      .size
+                                                                      .width /
                                                                       20)
                                                             ]))
                                                   ])
@@ -383,21 +383,21 @@ class _TasksState extends State<Tasks> {
             .child('tasks/$fileName')
             .putFile(imageFile) as TaskSnapshot;
         taskSnapshot.ref.getDownloadURL().then((value) => {
-              FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(FirebaseAuth.instance.currentUser.uid)
-                  .update({
-                'task' + task.toString() + '_image': 'tasks/$fileName',
-                'task' + task.toString() + '_sent': true
-              }),
-              scaffold.currentState.showSnackBar(
-                  SnackBar(content: Text('The task submitted successfully!!'))),
-              setState(() {
-                if (task == 1) task1Done = true;
-                if (task == 2) task2Done = true;
-                if (task == 3) task3Done = true;
-              })
-            });
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser.uid)
+              .update({
+            'task' + task.toString() + '_image': 'tasks/$fileName',
+            'task' + task.toString() + '_sent': true
+          }),
+          scaffold.currentState.showSnackBar(
+              SnackBar(content: Text('The task submitted successfully!!'))),
+          setState(() {
+            if (task == 1) task1Done = true;
+            if (task == 2) task2Done = true;
+            if (task == 3) task3Done = true;
+          })
+        });
       } catch (error) {
         scaffold.currentState.showSnackBar(
             SnackBar(content: Text('The task could not be sent!')));
@@ -422,13 +422,13 @@ class _TasksState extends State<Tasks> {
           .update({
         'task' + task.toString() + '_id': randomNumber,
         'task' + task.toString() + '_name':
-            value.data()['task' + randomNumber.toString()],
+        value.data()['task' + randomNumber.toString()],
         'task' + task.toString() + '_image': '',
         'task' + task.toString() + '_token':
-            value.data()['task' + randomNumber.toString() + '_price'],
+        value.data()['task' + randomNumber.toString() + '_price'],
         'task' + task.toString() + '_date': Timestamp.fromDate(DateTime.now()),
         'task' + task.toString() + '_day_limit':
-            value.data()['task' + randomNumber.toString() + '_day_limit'],
+        value.data()['task' + randomNumber.toString() + '_day_limit'],
         'task' + task.toString() + '_sent': false
       });
       setState(() {
