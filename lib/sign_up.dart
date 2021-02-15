@@ -57,7 +57,7 @@ class _SignUpState extends State<SignUp> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      _title(context, 'Name'),
+                      title(context, 'Name'),
                       Container(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
@@ -71,7 +71,7 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, 'Surname'),
+                      title(context, 'Surname'),
                       Container(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
@@ -85,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, 'E-Mail'),
+                      title(context, 'E-Mail'),
                       Container(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
@@ -99,7 +99,7 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, 'Birthday'),
+                      title(context, 'Birthday'),
                       AnimatedButton(
                         color: Colors.white,
                         height: MediaQuery.of(context).size.height / 23,
@@ -128,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                               locale: LocaleType.en);
                         },
                       ),
-                      _title(context, 'Password'),
+                      title(context, 'Password'),
                       Container(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
@@ -143,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, 'Repeat Password'),
+                      title(context, 'Repeat Password'),
                       Container(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
@@ -233,15 +233,12 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  _title(BuildContext context, String title) {
+  title(BuildContext context, String title) {
     return Padding(
-      padding: EdgeInsets.only(top: 10.0, bottom: 6.0),
-      child: Text(
-        title,
-        style: TextStyle(
-            fontSize: MediaQuery.of(context).size.height / 50,
-            fontWeight: FontWeight.bold),
-      ),
-    );
+        padding: EdgeInsets.only(top: 10.0, bottom: 6.0),
+        child: Text(title,
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.height / 50,
+                fontWeight: FontWeight.bold)));
   }
 }

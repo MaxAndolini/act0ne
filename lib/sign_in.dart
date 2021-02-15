@@ -47,7 +47,7 @@ class SignIn extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      _title(context, 'E-Mail'),
+                      title(context, 'E-Mail'),
                       Container(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
@@ -61,7 +61,7 @@ class SignIn extends StatelessWidget {
                         height: MediaQuery.of(context).size.height / 23,
                         width: MediaQuery.of(context).size.width - 130,
                       ),
-                      _title(context, 'Password'),
+                      title(context, 'Password'),
                       Container(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
@@ -147,15 +147,12 @@ class SignIn extends StatelessWidget {
     );
   }
 
-  _title(BuildContext context, String title) {
+  title(BuildContext context, String title) {
     return Padding(
-      padding: EdgeInsets.only(top: 10.0, bottom: 6.0),
-      child: Text(
-        title,
-        style: TextStyle(
-            fontSize: MediaQuery.of(context).size.height / 50,
-            fontWeight: FontWeight.bold),
-      ),
-    );
+        padding: EdgeInsets.only(top: 10.0, bottom: 6.0),
+        child: Text(title,
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.height / 50,
+                fontWeight: FontWeight.bold)));
   }
 }
