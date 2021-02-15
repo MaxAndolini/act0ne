@@ -1,53 +1,71 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /*Map<String, double> dataMap = {
-      "Flutter": 5,
-      "React": 3,
-      "Xamarin": 2,
-      "Ionic": 2,
-    };
-
     List<Color> colorList = [
       Colors.red,
       Colors.green,
       Colors.blue,
       Colors.yellow,
-    ];*/
-
+      Colors.orange,
+      Colors.purple,
+      Colors.pink,
+      Colors.brown,
+      Colors.grey
+    ];
     return Scaffold(
         body: CustomScrollView(slivers: [
       title(context, 'General Achievements'),
-      /*PieChart(
-        dataMap: dataMap,
-        animationDuration: Duration(milliseconds: 800),
-        chartLegendSpacing: 32,
-        chartRadius: MediaQuery.of(context).size.width / 3.2,
-        colorList: colorList,
-        initialAngleInDegree: 0,
-        chartType: ChartType.ring,
-        ringStrokeWidth: 32,
-        centerText: "HYBRID",
-        legendOptions: LegendOptions(
-          showLegendsInRow: false,
-          legendPosition: LegendPosition.right,
-          showLegends: true,
-          legendShape: BoxShape.circle,
-          legendTextStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        chartValuesOptions: ChartValuesOptions(
-          showChartValueBackground: true,
-          showChartValues: true,
-          showChartValuesInPercentage: false,
-          showChartValuesOutside: false,
-        ),
-      ),*/
+      SliverToBoxAdapter(
+          child: Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('tasks')
+                      .doc('Q8elnpjjwODUNKwp3uu6')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(child: new CircularProgressIndicator());
+                    }
+                    var document = snapshot.data;
+                    Map<String, double> dataMap = {
+                      "Task 1": document['task1_total'].toDouble(),
+                      "Task 2": document['task2_total'].toDouble(),
+                      "Task 3": document['task3_total'].toDouble(),
+                      "Task 4": document['task4_total'].toDouble(),
+                      "Task 5": document['task5_total'].toDouble(),
+                      "Task 6": document['task6_total'].toDouble(),
+                      "Task 7": document['task7_total'].toDouble(),
+                      "Task 8": document['task8_total'].toDouble(),
+                      "Task 9": document['task9_total'].toDouble(),
+                    };
+                    return PieChart(
+                        dataMap: dataMap,
+                        animationDuration: Duration(milliseconds: 800),
+                        chartLegendSpacing: 32,
+                        chartRadius: MediaQuery.of(context).size.width / 1.7,
+                        colorList: colorList,
+                        initialAngleInDegree: 0,
+                        chartType: ChartType.disc,
+                        ringStrokeWidth: 32,
+                        legendOptions: LegendOptions(
+                            showLegendsInRow: false,
+                            legendPosition: LegendPosition.right,
+                            showLegends: true,
+                            legendShape: BoxShape.circle,
+                            legendTextStyle:
+                                TextStyle(fontWeight: FontWeight.bold)),
+                        chartValuesOptions: ChartValuesOptions(
+                            showChartValueBackground: true,
+                            showChartValues: true,
+                            showChartValuesInPercentage: true,
+                            showChartValuesOutside: false));
+                  }))),
       title(context, 'My Achievements'),
       SliverToBoxAdapter(
           child: Container(
