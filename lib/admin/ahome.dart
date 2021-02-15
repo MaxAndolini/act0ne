@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> scaffoldKey =
-        new GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
     return Scaffold(
         key: scaffoldKey,
@@ -215,7 +215,12 @@ class AHome extends StatelessWidget {
                                                       '_sent': false,
                                                   'tasks':
                                                       FieldValue.arrayUnion([
-                                                    (name.split(': ').last +
+                                                    ('[' +
+                                                        DateFormat('yMd')
+                                                            .format(DateTime
+                                                                .now()) +
+                                                        '] ' +
+                                                        name.split(': ').last +
                                                         ' : (' +
                                                         price.toString() +
                                                         ')')
