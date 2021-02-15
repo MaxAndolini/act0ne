@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 class Functions {
   listBuyItem(scaffold, BuildContext context, String name, int price,
-      String imageName) {
+      String imageName, Color color) {
     return InkWell(
       onTap: () => showBuyDialog(scaffold, context, name, price),
       child: Container(
         padding: EdgeInsets.all(10.0),
         width: MediaQuery.of(context).size.width / 3,
         height: MediaQuery.of(context).size.height / 2.8,
-        decoration: BoxDecoration(color: Colors.deepOrange[100]),
+        decoration: BoxDecoration(color: color),
         child: Column(
           children: [
             Container(

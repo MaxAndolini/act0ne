@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pie_chart/pie_chart.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -35,7 +34,7 @@ class Home extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) => Container(
                               decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: Colors.green[200],
                                 border: Border.all(width: 2.0),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
