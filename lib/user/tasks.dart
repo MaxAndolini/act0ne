@@ -374,34 +374,31 @@ class _TasksState extends State<Tasks> {
   Future getImage(scaffold, int task) async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
     if (pickedFile != null) {
-      try {
-        File imageFile = File(pickedFile.path);
-        String fileName = basename(imageFile.path);
-        TaskSnapshot taskSnapshot = await FirebaseStorage.instance
-            .ref()
-            .child('tasks/$fileName')
-            .putFile(imageFile);
-        taskSnapshot.ref.getDownloadURL().then((value) => {
-              FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(FirebaseAuth.instance.currentUser.uid)
-                  .update({
-                'task' + task.toString() + '_image': 'tasks/$fileName',
-                'task' + task.toString() + '_sent': true
-              }).catchError((error) => scaffold.currentState.showSnackBar(
-                      SnackBar(content: Text('The image could not be sent!')))),
-              scaffold.currentState.showSnackBar(
-                  SnackBar(content: Text('The task submitted successfully!!'))),
-              setState(() {
-                if (task == 1) task1Done = true;
-                if (task == 2) task2Done = true;
-                if (task == 3) task3Done = true;
-              })
-            });
-      } catch (error) {
-        scaffold.currentState.showSnackBar(
-            SnackBar(content: Text('The task could not be sent!')));
-      }
+      File imageFile = File(pickedFile.path);
+      String fileName = basename(imageFile.path);
+      TaskSnapshot taskSnapshot = await FirebaseStorage.instance
+          .ref()
+          .child('tasks/$fileName')
+          .putFile(imageFile);
+      taskSnapshot.ref.getDownloadURL().then((value) {
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser.uid)
+            .update({
+          'task' + task.toString() + '_image': 'tasks/$fileName',
+          'task' + task.toString() + '_sent': true
+        }).then((value) {
+          scaffold.currentState.showSnackBar(
+              SnackBar(content: Text('The task submitted successfully!!')));
+          setState(() {
+            if (task == 1) task1Done = true;
+            if (task == 2) task2Done = true;
+            if (task == 3) task3Done = true;
+          });
+        }).catchError((error) => scaffold.currentState.showSnackBar(
+                SnackBar(content: Text('The image could not be sent!'))));
+      }).catchError((error) => scaffold.currentState.showSnackBar(
+          SnackBar(content: Text('The task could not be sent!'))));
     } else
       scaffold.currentState
           .showSnackBar(SnackBar(content: Text('The task could not be sent!')));

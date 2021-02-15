@@ -166,49 +166,50 @@ class Functions {
 
   buyItem(scaffold, BuildContext context, String orderName, int orderPrice,
       String name, String address) async {
-    await FirebaseFirestore.instance
-        .collection('market_orders')
-        .doc('XdZPDnc7ouywfZHmHmjM')
-        .get()
-        .then((value) {
-      String number = (value.data()['total_order_number'] + 1).toString();
-      FirebaseFirestore.instance
+    if (name.length > 5 && address.length > 5) {
+      Navigator.pop(context);
+      await FirebaseFirestore.instance
           .collection('market_orders')
           .doc('XdZPDnc7ouywfZHmHmjM')
-          .set({
-        'buyer_name' + number: name,
-        'address' + number: address,
-        'order_name' + number: orderName,
-        'order_price' + number: orderPrice,
-        'total_order_number': FieldValue.increment(1)
+          .get()
+          .then((value) {
+        String number = (value.data()['total_order_number'] + 1).toString();
+        FirebaseFirestore.instance
+            .collection('market_orders')
+            .doc('XdZPDnc7ouywfZHmHmjM')
+            .update({
+          'buyer_name' + number: name,
+          'address' + number: address,
+          'order_name' + number: orderName,
+          'order_price' + number: orderPrice,
+          'total_order_number': FieldValue.increment(1)
+        }).catchError((error) => scaffold.currentState.showSnackBar(
+                SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
       }).catchError((error) => scaffold.currentState.showSnackBar(
               SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
-    }).catchError((error) => scaffold.currentState.showSnackBar(
-            SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .get()
-        .then((value) {
-      Navigator.pop(context);
-      if ((value.data()['token'] - orderPrice) > 0) {
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser.uid)
-            .update({'token': (value.data()['token'] - orderPrice)})
-            .then((value) => {
-                  scaffold.currentState.showSnackBar(SnackBar(
-                      content: Text('The item(' +
-                          orderName +
-                          ') is ordered successfully!!')))
-                })
-            .catchError((error) => scaffold.currentState.showSnackBar(
-                SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
-      } else
-        scaffold.currentState.showSnackBar(
-            SnackBar(content: Text('You dont have enough money!')));
-    }).catchError((error) => scaffold.currentState.showSnackBar(
-            SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .get()
+          .then((value) {
+        if ((value.data()['token'] - orderPrice) > 0) {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser.uid)
+              .update({'token': (value.data()['token'] - orderPrice)})
+              .then((value) => scaffold.currentState.showSnackBar(SnackBar(
+                  content: Text('The item(' +
+                      orderName +
+                      ') is ordered successfully!!'))))
+              .catchError((error) => scaffold.currentState.showSnackBar(
+                  SnackBar(
+                      content: Text('Failed to buy: ' + orderName + '!'))));
+        } else
+          scaffold.currentState.showSnackBar(
+              SnackBar(content: Text('You dont have enough money!')));
+      }).catchError((error) => scaffold.currentState.showSnackBar(
+              SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
+    }
   }
 
   Future<Object> getImage(BuildContext context, String imageName) async {
