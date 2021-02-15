@@ -34,15 +34,15 @@ class Home extends StatelessWidget {
                     }
                     var document = snapshot.data;
                     Map<String, double> dataMap = {
-                      "Task 1": document['task1_total'].toDouble(),
-                      "Task 2": document['task2_total'].toDouble(),
-                      "Task 3": document['task3_total'].toDouble(),
-                      "Task 4": document['task4_total'].toDouble(),
-                      "Task 5": document['task5_total'].toDouble(),
-                      "Task 6": document['task6_total'].toDouble(),
-                      "Task 7": document['task7_total'].toDouble(),
-                      "Task 8": document['task8_total'].toDouble(),
-                      "Task 9": document['task9_total'].toDouble(),
+                      "Feed a dog": document['task1_total'].toDouble(),
+                      "Feed 10 cats": document['task2_total'].toDouble(),
+                      "Donate to a shelter": document['task3_total'].toDouble(),
+                      "Give a cup of food": document['task4_total'].toDouble(),
+                      "Feed a cat": document['task5_total'].toDouble(),
+                      "Play with animals": document['task6_total'].toDouble(),
+                      "Visit animal shelter": document['task7_total'].toDouble(),
+                      "Make animals happy": document['task8_total'].toDouble(),
+                      "Build animal shelter": document['task9_total'].toDouble(),
                     };
                     return PieChart(
                         dataMap: dataMap,
