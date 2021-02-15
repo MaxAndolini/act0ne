@@ -74,186 +74,189 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: FutureBuilder(
-          future: FirebaseFirestore.instance
-              .collection('users')
-              .doc(FirebaseAuth.instance.currentUser.uid)
-              .get(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return Center(child: new CircularProgressIndicator());
-            }
-            var document = snapshot.data;
+        backgroundColor: Colors.white,
+        body: FutureBuilder(
+            future: FirebaseFirestore.instance
+                .collection('users')
+                .doc(FirebaseAuth.instance.currentUser.uid)
+                .get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: new CircularProgressIndicator());
+              }
+              var document = snapshot.data;
 
-            if (control == false) {
-              nameController.text = document['name'];
-              surnameController.text = document['surname'];
-              birthdayController = document['birthday'];
-            }
+              if (control == false) {
+                nameController.text = document['name'];
+                surnameController.text = document['surname'];
+                birthdayController = document['birthday'];
+              }
 
-            return new Container(
-              height: MediaQuery.of(context).size.height / 1.4,
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: ListView(children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(3.0),
-                        padding: EdgeInsets.all(15.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Name:',
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 37,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Container(
-                                width: MediaQuery.of(context).size.height / 3.6,
-                                padding: EdgeInsets.only(left: 10.0),
-                                child: TextField(
-                                  controller: nameController,
-                                  style: TextStyle(fontSize: 20),
-                                ))
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(3.0),
-                        padding: EdgeInsets.all(15.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Surname:',
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 37,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Container(
-                                width: MediaQuery.of(context).size.height / 3.6,
-                                padding: EdgeInsets.only(left: 10.0),
-                                child: TextField(
-                                  controller: surnameController,
-                                  style: TextStyle(fontSize: 20),
-                                ))
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 40,
-                      ),
-                      Container(
-                        margin: EdgeInsets.all(3.0),
-                        padding: EdgeInsets.all(15.0),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Birthday:',
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height / 37,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 50,
-                            ),
-                            AnimatedButton(
-                              color: Colors.white,
-                              height: MediaQuery.of(context).size.height / 23,
-                              width: MediaQuery.of(context).size.width / 2,
-                              child: Text(
-                                birthdayController == null
-                                    ? ('Change Birthday')
-                                    : birthdayController,
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height / 40,
-                                    color: Colors.black),
+              return new Container(
+                  height: MediaQuery.of(context).size.height / 1.4,
+                  child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: ListView(children: [
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 10),
+                              Container(
+                                  margin: EdgeInsets.all(3.0),
+                                  padding: EdgeInsets.all(15.0),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black)),
+                                  child: Row(children: [
+                                    Text('Name:',
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                37,
+                                            fontWeight: FontWeight.bold)),
+                                    Container(
+                                        width:
+                                            MediaQuery.of(context).size.height /
+                                                3.6,
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: TextField(
+                                            controller: nameController,
+                                            style: TextStyle(fontSize: 20)))
+                                  ])),
+                              SizedBox(
+                                height: 10,
                               ),
-                              onPressed: () {
-                                DatePicker.showDatePicker(context,
-                                    showTitleActions: true,
-                                    minTime: DateTime(1900, 1, 1),
-                                    maxTime: DateTime(
-                                        DateTime.now().year - 18,
-                                        DateTime.now().month,
-                                        DateTime.now().day),
-                                    onChanged: (date) {}, onConfirm: (date) {
-                                  setState(() {
-                                    control = true;
-                                    birthdayController =
-                                        date.toString().split(' ').first;
-                                  });
-                                },
-                                    currentTime: DateTime.now(),
-                                    locale: LocaleType.en);
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 20,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [uploadImageButton(context)],
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 20,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.height / 2,
-                            child: RaisedButton(
-                              onPressed: () {
-                                FirebaseFirestore.instance
-                                    .collection('users')
-                                    .doc(FirebaseAuth.instance.currentUser.uid)
-                                    .update({
-                                  'name': nameController.text,
-                                  'surname': surnameController.text,
-                                  'birthday': birthdayController
-                                });
-                              },
-                              child: Text('Save Changes',
-                                  style: TextStyle(
-                                      fontSize:
+                              Container(
+                                  margin: EdgeInsets.all(3.0),
+                                  padding: EdgeInsets.all(15.0),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black)),
+                                  child: Row(children: [
+                                    Text('Surname:',
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                37,
+                                            fontWeight: FontWeight.bold)),
+                                    Container(
+                                        width:
+                                            MediaQuery.of(context).size.height /
+                                                3.6,
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: TextField(
+                                            controller: surnameController,
+                                            style: TextStyle(fontSize: 20)))
+                                  ])),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height / 40,
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(3.0),
+                                padding: EdgeInsets.all(15.0),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black)),
+                                child: Row(
+                                  children: [
+                                    Text('Birthday:',
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                37,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                50),
+                                    AnimatedButton(
+                                      color: Colors.white,
+                                      height:
                                           MediaQuery.of(context).size.height /
-                                              30)),
-                              color: Colors.orange[100],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ]),
-              ),
-            );
-          }),
-    );
+                                              23,
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
+                                      child: Text(
+                                          birthdayController == null
+                                              ? ('Change Birthday')
+                                              : birthdayController,
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  40,
+                                              color: Colors.black)),
+                                      onPressed: () {
+                                        DatePicker.showDatePicker(context,
+                                            showTitleActions: true,
+                                            minTime: DateTime(1900, 1, 1),
+                                            maxTime: DateTime(
+                                                DateTime.now().year - 18,
+                                                DateTime.now().month,
+                                                DateTime.now().day),
+                                            onChanged: (date) {},
+                                            onConfirm: (date) {
+                                          setState(() {
+                                            control = true;
+                                            birthdayController = date
+                                                .toString()
+                                                .split(' ')
+                                                .first;
+                                          });
+                                        },
+                                            currentTime: DateTime.now(),
+                                            locale: LocaleType.en);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height / 20),
+                              Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                          uploadImageButton(context)
+                                        ])),
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                20),
+                                    SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.height /
+                                                2,
+                                        child: RaisedButton(
+                                            onPressed: () {
+                                              FirebaseFirestore.instance
+                                                  .collection('users')
+                                                  .doc(FirebaseAuth
+                                                      .instance.currentUser.uid)
+                                                  .update({
+                                                'name': nameController.text,
+                                                'surname':
+                                                    surnameController.text,
+                                                'birthday': birthdayController
+                                              });
+                                            },
+                                            child: Text('Save Changes',
+                                                style: TextStyle(
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height /
+                                                            30)),
+                                            color: Colors.orange[100]))
+                                  ])
+                            ])
+                      ])));
+            }));
   }
 }

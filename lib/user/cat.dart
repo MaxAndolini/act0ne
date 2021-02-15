@@ -40,7 +40,7 @@ class _CatState extends State<Cat> {
                           document['price1'],
                           document['photo1'],
                           Colors.deepOrange[100]),
-                          
+
                       //Second Item
                       func.listBuyItem(
                           _scaffoldKey,

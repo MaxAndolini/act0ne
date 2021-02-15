@@ -373,15 +373,14 @@ class _TasksState extends State<Tasks> {
 
   Future getImage(scaffold, int task) async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
-    print(pickedFile);
     if (pickedFile != null) {
       try {
         File imageFile = File(pickedFile.path);
         String fileName = basename(imageFile.path);
-        TaskSnapshot taskSnapshot = FirebaseStorage.instance
+        TaskSnapshot taskSnapshot = await FirebaseStorage.instance
             .ref()
             .child('tasks/$fileName')
-            .putFile(imageFile) as TaskSnapshot;
+            .putFile(imageFile);
         taskSnapshot.ref.getDownloadURL().then((value) => {
               FirebaseFirestore.instance
                   .collection('users')

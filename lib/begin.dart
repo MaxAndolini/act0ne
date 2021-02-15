@@ -1,5 +1,4 @@
 import 'package:act0ne/authentication_service.dart';
-import 'package:act0ne/sign_in.dart';
 import 'package:act0ne/user/market.dart';
 import 'package:act0ne/user/tasks.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
