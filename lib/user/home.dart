@@ -34,15 +34,15 @@ class Home extends StatelessWidget {
                     }
                     var document = snapshot.data;
                     Map<String, double> dataMap = {
-                      "Task 1": document['task1_total'].toDouble(),
-                      "Task 2": document['task2_total'].toDouble(),
-                      "Task 3": document['task3_total'].toDouble(),
-                      "Task 4": document['task4_total'].toDouble(),
-                      "Task 5": document['task5_total'].toDouble(),
-                      "Task 6": document['task6_total'].toDouble(),
-                      "Task 7": document['task7_total'].toDouble(),
-                      "Task 8": document['task8_total'].toDouble(),
-                      "Task 9": document['task9_total'].toDouble(),
+                      document['task1']: document['task1_total'].toDouble(),
+                      document['task2']: document['task2_total'].toDouble(),
+                      document['task3']: document['task3_total'].toDouble(),
+                      document['task4']: document['task4_total'].toDouble(),
+                      document['task5']: document['task5_total'].toDouble(),
+                      document['task6']: document['task6_total'].toDouble(),
+                      document['task7']: document['task7_total'].toDouble(),
+                      document['task8']: document['task8_total'].toDouble(),
+                      document['task9']: document['task9_total'].toDouble(),
                     };
                     return PieChart(
                         dataMap: dataMap,

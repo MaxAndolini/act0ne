@@ -10,8 +10,7 @@ class AuthenticationService {
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  Future<int> signIn(
-      {scaffold, aContext, String email, String password}) async {
+  Future<int> signIn(scaffold, context, String email, String password) async {
     if (email.isEmpty || !EmailValidator.validate(email)) {
       scaffold.currentState
           .showSnackBar(new SnackBar(content: new Text('Invalid e-mail!')));
@@ -29,7 +28,7 @@ class AuthenticationService {
         .then((value) {
       scaffold.currentState.showSnackBar(
           new SnackBar(content: new Text('Successfully signed in!')));
-      Navigator.pushReplacementNamed(aContext, '/begin');
+      Navigator.pushReplacementNamed(context, '/begin');
       return 1;
     }).catchError((error) => scaffold.currentState
             .showSnackBar(SnackBar(content: Text(error.message))));
@@ -37,15 +36,8 @@ class AuthenticationService {
     return 0;
   }
 
-  Future<int> signUp(
-      {scaffold,
-      aContext,
-      String name,
-      String surname,
-      String email,
-      String birthday,
-      String password,
-      String password2}) async {
+  Future<int> signUp(scaffold, context, String name, String surname,
+      String email, String birthday, String password, String password2) async {
     if (name.isEmpty || name.length < 3) {
       scaffold.currentState
           .showSnackBar(new SnackBar(content: new Text('Name is invalid!')));
@@ -115,7 +107,7 @@ class AuthenticationService {
       }).then((value) {
         scaffold.currentState.showSnackBar(
             new SnackBar(content: new Text('Successfully signed up!')));
-        Navigator.pushReplacementNamed(aContext, '/signIn');
+        Navigator.pushReplacementNamed(context, '/signIn');
         return 1;
       }).catchError((error) => scaffold.currentState
           .showSnackBar(SnackBar(content: Text(error.message))));
@@ -125,8 +117,8 @@ class AuthenticationService {
     return 0;
   }
 
-  Future<void> signOut(aContext) async {
+  Future<void> signOut(context) async {
     await _firebaseAuth.signOut();
-    Navigator.pushReplacementNamed(aContext, '/signIn');
+    Navigator.pushReplacementNamed(context, '/signIn');
   }
 }
