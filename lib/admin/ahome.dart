@@ -173,68 +173,65 @@ class AHome extends StatelessWidget {
                                                     type.toString() +
                                                     '_image'])
                                                 .delete()
-                                                .then((value2) {
-                                              FirebaseFirestore.instance
-                                                  .collection('tasks')
-                                                  .doc('Q8elnpjjwODUNKwp3uu6')
-                                                  .update({
-                                                'task' +
-                                                        value
-                                                            .data()['task' +
-                                                                type.toString() +
-                                                                '_id']
-                                                            .toString() +
-                                                        '_total':
-                                                    FieldValue.increment(1)
-                                              }).catchError((error) => scaffold
-                                                      .currentState
-                                                      .showSnackBar(SnackBar(
-                                                          content: Text(
-                                                              'Total tasks could not be increased!'))));
-                                              FirebaseFirestore.instance
-                                                  .collection('users')
-                                                  .doc(documentID)
-                                                  .update({
-                                                    'token':
-                                                        FieldValue.increment(
-                                                            price),
-                                                    'task' +
-                                                        type.toString() +
-                                                        '_name': '',
-                                                    'task' +
-                                                        type.toString() +
-                                                        '_image': '',
-                                                    'task' +
-                                                        type.toString() +
-                                                        '_token': 0,
-                                                    'task' +
-                                                        type.toString() +
-                                                        '_sent': false,
-                                                    'tasks':
-                                                        FieldValue.arrayUnion([
-                                                      (name.split(': ').last +
-                                                          ' : (' +
-                                                          price.toString() +
-                                                          ')')
-                                                    ])
-                                                  })
-                                                  .then((value3) => scaffold
-                                                      .currentState
-                                                      .showSnackBar(SnackBar(
-                                                          content: Text(
-                                                              'The task(' +
-                                                                  name +
-                                                                  ') is accepted!'))))
-                                                  .catchError((error) => scaffold
-                                                      .currentState
-                                                      .showSnackBar(SnackBar(
-                                                          content: Text(
-                                                              'The user\'s data could not be updated!'))));
-                                            }).catchError((error) => scaffold
+                                                .catchError((error) => scaffold
                                                     .currentState
                                                     .showSnackBar(SnackBar(
                                                         content: Text(
                                                             'The user\'s task picture could not be deleted!'))));
+                                            FirebaseFirestore.instance
+                                                .collection('tasks')
+                                                .doc('Q8elnpjjwODUNKwp3uu6')
+                                                .update({
+                                              'task' +
+                                                      value
+                                                          .data()['task' +
+                                                              type.toString() +
+                                                              '_id']
+                                                          .toString() +
+                                                      '_total':
+                                                  FieldValue.increment(1)
+                                            }).catchError((error) => scaffold
+                                                    .currentState
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                            'Total tasks could not be increased!'))));
+                                            FirebaseFirestore.instance
+                                                .collection('users')
+                                                .doc(documentID)
+                                                .update({
+                                                  'token': FieldValue.increment(
+                                                      price),
+                                                  'task' +
+                                                      type.toString() +
+                                                      '_name': '',
+                                                  'task' +
+                                                      type.toString() +
+                                                      '_image': '',
+                                                  'task' +
+                                                      type.toString() +
+                                                      '_token': 0,
+                                                  'task' +
+                                                      type.toString() +
+                                                      '_sent': false,
+                                                  'tasks':
+                                                      FieldValue.arrayUnion([
+                                                    (name.split(': ').last +
+                                                        ' : (' +
+                                                        price.toString() +
+                                                        ')')
+                                                  ])
+                                                })
+                                                .then((value2) => scaffold
+                                                    .currentState
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text('The task(' +
+                                                            name +
+                                                            ') is accepted!'))))
+                                                .catchError((error) => scaffold
+                                                    .currentState
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                            'The user\'s data could not be updated!'))));
                                           }).catchError((error) => scaffold
                                                   .currentState
                                                   .showSnackBar(SnackBar(
@@ -257,34 +254,33 @@ class AHome extends StatelessWidget {
                                                 type.toString() +
                                                 '_image'])
                                             .delete()
-                                            .then((value2) {
-                                          FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(documentID)
-                                              .update({
-                                                'task' +
-                                                    type.toString() +
-                                                    '_image': '',
-                                                'task' +
-                                                    type.toString() +
-                                                    '_sent': false
-                                              })
-                                              .then((value3) => scaffold
-                                                  .currentState
-                                                  .showSnackBar(SnackBar(
-                                                      content: Text('The task(' +
-                                                          name +
-                                                          ') is rejected!'))))
-                                              .catchError((error) => scaffold
-                                                  .currentState
-                                                  .showSnackBar(SnackBar(
-                                                      content: Text(
-                                                          'The user\'s data could not be updated!'))));
-                                        }).catchError((error) => scaffold
+                                            .catchError((error) => scaffold
                                                 .currentState
                                                 .showSnackBar(SnackBar(
                                                     content: Text(
                                                         'The user\'s task picture could not be deleted!'))));
+                                        FirebaseFirestore.instance
+                                            .collection('users')
+                                            .doc(documentID)
+                                            .update({
+                                              'task' +
+                                                  type.toString() +
+                                                  '_image': '',
+                                              'task' +
+                                                  type.toString() +
+                                                  '_sent': false
+                                            })
+                                            .then((value2) => scaffold
+                                                .currentState
+                                                .showSnackBar(SnackBar(
+                                                    content: Text('The task(' +
+                                                        name +
+                                                        ') is rejected!'))))
+                                            .catchError((error) => scaffold
+                                                .currentState
+                                                .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        'The user\'s data could not be updated!'))));
                                       }).catchError((error) => scaffold
                                               .currentState
                                               .showSnackBar(SnackBar(
