@@ -8,13 +8,13 @@ class Toys extends StatefulWidget {
 }
 
 class _ToysState extends State<Toys> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final func = new Functions();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('market_items')
@@ -34,7 +34,7 @@ class _ToysState extends State<Toys> {
                     Row(children: [
                       //First Item
                       func.listBuyItem(
-                          _scaffoldKey,
+                          scaffoldKey,
                           context,
                           document['toy_item1'],
                           document['price1'],
@@ -43,7 +43,7 @@ class _ToysState extends State<Toys> {
 
                       //Second Item
                       func.listBuyItem(
-                          _scaffoldKey,
+                          scaffoldKey,
                           context,
                           document['toy_item2'],
                           document['price2'],
@@ -52,7 +52,7 @@ class _ToysState extends State<Toys> {
 
                       //Third Item
                       func.listBuyItem(
-                          _scaffoldKey,
+                          scaffoldKey,
                           context,
                           document['toy_item3'],
                           document['price3'],
@@ -62,7 +62,7 @@ class _ToysState extends State<Toys> {
                     Row(children: [
                       //Fourth Item
                       func.listBuyItem(
-                          _scaffoldKey,
+                          scaffoldKey,
                           context,
                           document['toy_item4'],
                           document['price4'],
@@ -71,7 +71,7 @@ class _ToysState extends State<Toys> {
 
                       //Fifth Item
                       func.listBuyItem(
-                          _scaffoldKey,
+                          scaffoldKey,
                           context,
                           document['toy_item5'],
                           document['price5'],
@@ -80,7 +80,7 @@ class _ToysState extends State<Toys> {
 
                       //Sixth Item
                       func.listBuyItem(
-                          _scaffoldKey,
+                          scaffoldKey,
                           context,
                           document['toy_item6'],
                           document['price6'],
@@ -90,7 +90,7 @@ class _ToysState extends State<Toys> {
                     Row(children: [
                       //Seventh Item
                       func.listBuyItem(
-                          _scaffoldKey,
+                          scaffoldKey,
                           context,
                           document['toy_item7'],
                           document['price7'],

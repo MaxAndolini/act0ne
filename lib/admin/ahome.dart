@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 class AHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey =
+    final GlobalKey<ScaffoldState> scaffoldKey =
         new GlobalKey<ScaffoldState>();
 
     return Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         body: CustomScrollView(slivers: [
           title(context, 'Tasks'),
           SliverToBoxAdapter(
@@ -77,7 +77,7 @@ class AHome extends StatelessWidget {
                                     color: Colors.orangeAccent,
                                     child: Text(nameList[index]),
                                     onPressed: () => showReviewDialog(
-                                        _scaffoldKey,
+                                        scaffoldKey,
                                         context,
                                         documentIDList[index],
                                         nameList[index],

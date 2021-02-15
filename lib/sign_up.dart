@@ -16,12 +16,12 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController password2Controller = TextEditingController();
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       backgroundColor: Colors.deepOrange[900],
       body: Center(
         child: Container(
@@ -173,7 +173,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           onPressed: () {
                             context.read<AuthenticationService>().signUp(
-                                  scaffold: _scaffoldKey.currentState,
+                                  scaffold: scaffoldKey.currentState,
                                   aContext: context,
                                   name: nameController.text,
                                   surname: surnameController.text,

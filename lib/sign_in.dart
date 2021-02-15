@@ -6,12 +6,12 @@ import 'package:provider/provider.dart';
 class SignIn extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       backgroundColor: Colors.deepOrange[900],
       body: Center(
         child: Container(
@@ -91,7 +91,7 @@ class SignIn extends StatelessWidget {
                           ),
                           onPressed: () {
                             context.read<AuthenticationService>().signIn(
-                                  scaffold: _scaffoldKey.currentState,
+                                  scaffold: scaffoldKey.currentState,
                                   aContext: context,
                                   email: emailController.text,
                                   password: passwordController.text,

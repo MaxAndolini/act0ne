@@ -14,14 +14,14 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   bool task1Done = false, task2Done = false, task3Done = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('users')
@@ -159,7 +159,7 @@ class _TasksState extends State<Tasks> {
                                 child: RaisedButton(
                                     onPressed: task1Done
                                         ? null
-                                        : () => getImage(_scaffoldKey, 1),
+                                        : () => getImage(scaffoldKey, 1),
                                     child: Icon(Icons.camera_alt)))
                           ])),
                       SizedBox(
@@ -259,7 +259,7 @@ class _TasksState extends State<Tasks> {
                               child: RaisedButton(
                                 onPressed: task2Done
                                     ? null
-                                    : () => getImage(_scaffoldKey, 2),
+                                    : () => getImage(scaffoldKey, 2),
                                 child: Icon(Icons.camera_alt),
                               ),
                             )
@@ -360,7 +360,7 @@ class _TasksState extends State<Tasks> {
                                 child: RaisedButton(
                                   onPressed: task3Done
                                       ? null
-                                      : () => getImage(_scaffoldKey, 3),
+                                      : () => getImage(scaffoldKey, 3),
                                   child: Icon(Icons.camera_alt),
                                 ))
                           ]))
