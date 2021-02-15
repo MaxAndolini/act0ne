@@ -178,10 +178,7 @@ class Functions {
             .collection('market_orders')
             .doc('XdZPDnc7ouywfZHmHmjM')
             .update({
-          'buyer_name' + number: name,
-          'address' + number: address,
-          'order_name' + number: orderName,
-          'order_price' + number: orderPrice,
+          'order' + number: order(orderName, orderPrice, name, address),
           'total_order_number': FieldValue.increment(1)
         }).catchError((error) => scaffold.currentState.showSnackBar(
                 SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
@@ -210,6 +207,15 @@ class Functions {
       }).catchError((error) => scaffold.currentState.showSnackBar(
               SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
     }
+  }
+
+  Map order(String orderName, int orderPrice, String name, String address) {
+    return {
+      'buyer_name': name,
+      'address': address,
+      'order_name': orderName,
+      'order_price': orderPrice
+    };
   }
 
   Future<Object> getImage(BuildContext context, String imageName) async {
