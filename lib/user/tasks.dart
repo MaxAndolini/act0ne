@@ -45,19 +45,22 @@ class _TasksState extends State<Tasks> {
               if (document['task3_name'] == 'Accepted!') task3Done = true;
 
               if (document['task1_day_limit'] <=
-                  DateTime.now()
-                      .difference(document['task1_date'].toDate())
-                      .inDays) getRandomTask(1);
+                      DateTime.now()
+                          .difference(document['task1_date'].toDate())
+                          .inDays &&
+                  !document['task1_sent']) getRandomTask(1);
 
               if (document['task2_day_limit'] <=
-                  DateTime.now()
-                      .difference(document['task2_date'].toDate())
-                      .inDays) getRandomTask(2);
+                      DateTime.now()
+                          .difference(document['task2_date'].toDate())
+                          .inDays &&
+                  !document['task2_sent']) getRandomTask(2);
 
               if (document['task3_day_limit'] <=
-                  DateTime.now()
-                      .difference(document['task3_date'].toDate())
-                      .inDays) getRandomTask(3);
+                      DateTime.now()
+                          .difference(document['task3_date'].toDate())
+                          .inDays &&
+                  !document['task3_sent']) getRandomTask(3);
 
               return ListView(children: [
                 Column(
