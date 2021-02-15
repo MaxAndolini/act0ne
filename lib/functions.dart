@@ -181,8 +181,10 @@ class Functions {
         'order_name' + number: orderName,
         'order_price' + number: orderPrice,
         'total_order_number': FieldValue.increment(1)
-      });
-    });
+      }).catchError((error) => scaffold.currentState.showSnackBar(
+              SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
+    }).catchError((error) => scaffold.currentState.showSnackBar(
+            SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
     await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser.uid)
@@ -193,18 +195,20 @@ class Functions {
         FirebaseFirestore.instance
             .collection('users')
             .doc(FirebaseAuth.instance.currentUser.uid)
-            .update({'token': (value.data()['token'] - orderPrice)}).then(
-                (value) => {
-                      scaffold.currentState.showSnackBar(SnackBar(
-                          content: Text('The item(' +
-                              orderName +
-                              ') is ordered successfully!!')))
-                    });
-      } else {
+            .update({'token': (value.data()['token'] - orderPrice)})
+            .then((value) => {
+                  scaffold.currentState.showSnackBar(SnackBar(
+                      content: Text('The item(' +
+                          orderName +
+                          ') is ordered successfully!!')))
+                })
+            .catchError((error) => scaffold.currentState.showSnackBar(
+                SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
+      } else
         scaffold.currentState.showSnackBar(
             SnackBar(content: Text('You dont have enough money!')));
-      }
-    });
+    }).catchError((error) => scaffold.currentState.showSnackBar(
+            SnackBar(content: Text('Failed to buy: ' + orderName + '!'))));
   }
 
   Future<Object> getImage(BuildContext context, String imageName) async {

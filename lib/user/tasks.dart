@@ -388,7 +388,8 @@ class _TasksState extends State<Tasks> {
                   .update({
                 'task' + task.toString() + '_image': 'tasks/$fileName',
                 'task' + task.toString() + '_sent': true
-              }),
+              }).catchError((error) => scaffold.currentState.showSnackBar(
+                      SnackBar(content: Text('The image could not be sent!')))),
               scaffold.currentState.showSnackBar(
                   SnackBar(content: Text('The task submitted successfully!!'))),
               setState(() {
@@ -398,14 +399,12 @@ class _TasksState extends State<Tasks> {
               })
             });
       } catch (error) {
-        print(error);
         scaffold.currentState.showSnackBar(
             SnackBar(content: Text('The task could not be sent!')));
       }
-    } else {
+    } else
       scaffold.currentState
           .showSnackBar(SnackBar(content: Text('The task could not be sent!')));
-    }
   }
 
   getRandomTask(int task) async {
