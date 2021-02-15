@@ -189,7 +189,7 @@ class Functions {
           .doc(FirebaseAuth.instance.currentUser.uid)
           .get()
           .then((value) {
-        if ((value.data()['token'] - orderPrice) > 0) {
+        if ((value.data()['token'] - orderPrice) >= 0) {
           FirebaseFirestore.instance
               .collection('users')
               .doc(FirebaseAuth.instance.currentUser.uid)
