@@ -203,7 +203,7 @@ class AHome extends StatelessWidget {
                                                       price),
                                                   'task' +
                                                       type.toString() +
-                                                      '_name': '',
+                                                      '_name': 'Accepted!',
                                                   'task' +
                                                       type.toString() +
                                                       '_image': '',

@@ -40,9 +40,9 @@ class _TasksState extends State<Tasks> {
               if (document['task3_sent'] != null)
                 task3Done = document['task3_sent'];
 
-              if (document['task1_name'].isEmpty) task1Done = true;
-              if (document['task2_name'].isEmpty) task2Done = true;
-              if (document['task3_name'].isEmpty) task3Done = true;
+              if (document['task1_name'] == 'Accepted!') task1Done = true;
+              if (document['task2_name'] == 'Accepted!') task2Done = true;
+              if (document['task3_name'] == 'Accepted!') task3Done = true;
 
               if (document['task1_day_limit'] <=
                   DateTime.now()
@@ -371,12 +371,6 @@ class _TasksState extends State<Tasks> {
 
   Future getImage(scaffold, int task) async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
-    setState(() {
-      if (task == 1) task1Done = true;
-      if (task == 2) task2Done = true;
-      if (task == 3) task3Done = true;
-    });
-    bool task1Wait = false, task2Wait = false, task3Wait = false;
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
       String fileName = basename(imageFile.path);
@@ -394,9 +388,11 @@ class _TasksState extends State<Tasks> {
         }).then((value) {
           scaffold.currentState.showSnackBar(
               SnackBar(content: Text('The task submitted successfully!!')));
-          if (task == 1) task1Wait = true;
-          if (task == 2) task2Wait = true;
-          if (task == 3) task3Wait = true;
+          setState(() {
+            if (task == 1) task1Done = true;
+            if (task == 2) task2Done = true;
+            if (task == 3) task3Done = true;
+          });
         }).catchError((error) => scaffold.currentState.showSnackBar(
                 SnackBar(content: Text('The image could not be sent!'))));
       }).catchError((error) => scaffold.currentState.showSnackBar(
@@ -404,11 +400,6 @@ class _TasksState extends State<Tasks> {
     } else
       scaffold.currentState
           .showSnackBar(SnackBar(content: Text('The task could not be sent!')));
-    setState(() {
-      if (task == 1) task1Done = task1Wait;
-      if (task == 2) task2Done = task2Wait;
-      if (task == 3) task3Done = task3Wait;
-    });
   }
 
   getRandomTask(int task) async {
