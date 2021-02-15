@@ -16,9 +16,7 @@ class Tasks extends StatefulWidget {
 class _TasksState extends State<Tasks> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  bool task1Done = false;
-  bool task2Done = false;
-  bool task3Done = false;
+  bool task1Done = false, task2Done = false, task3Done = false;
 
   @override
   Widget build(BuildContext context) {
@@ -373,6 +371,12 @@ class _TasksState extends State<Tasks> {
 
   Future getImage(scaffold, int task) async {
     final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
+    setState(() {
+      if (task == 1) task1Done = true;
+      if (task == 2) task2Done = true;
+      if (task == 3) task3Done = true;
+    });
+    bool task1Wait = false, task2Wait = false, task3Wait = false;
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
       String fileName = basename(imageFile.path);
@@ -390,11 +394,9 @@ class _TasksState extends State<Tasks> {
         }).then((value) {
           scaffold.currentState.showSnackBar(
               SnackBar(content: Text('The task submitted successfully!!')));
-          setState(() {
-            if (task == 1) task1Done = true;
-            if (task == 2) task2Done = true;
-            if (task == 3) task3Done = true;
-          });
+          if (task == 1) task1Wait = true;
+          if (task == 2) task2Wait = true;
+          if (task == 3) task3Wait = true;
         }).catchError((error) => scaffold.currentState.showSnackBar(
                 SnackBar(content: Text('The image could not be sent!'))));
       }).catchError((error) => scaffold.currentState.showSnackBar(
@@ -402,6 +404,11 @@ class _TasksState extends State<Tasks> {
     } else
       scaffold.currentState
           .showSnackBar(SnackBar(content: Text('The task could not be sent!')));
+    setState(() {
+      if (task == 1) task1Done = task1Wait;
+      if (task == 2) task2Done = task2Wait;
+      if (task == 3) task3Done = task3Wait;
+    });
   }
 
   getRandomTask(int task) async {
