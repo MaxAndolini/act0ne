@@ -216,7 +216,7 @@ class AHome extends StatelessWidget {
                                                   'tasks':
                                                       FieldValue.arrayUnion([
                                                     ('[' +
-                                                        DateFormat('yMd')
+                                                        DateFormat('dd/MM/yyyy')
                                                             .format(DateTime
                                                                 .now()) +
                                                         '] ' +
